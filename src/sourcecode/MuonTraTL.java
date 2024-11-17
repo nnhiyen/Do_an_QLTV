@@ -1,6 +1,5 @@
 package DoAn_QLTV_main.src.sourcecode;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class MuonTraTL {
@@ -65,7 +64,7 @@ public class MuonTraTL {
         return nguoiDung;
     }
 
-    public void nhap(List<NguoiDung> danhSachNguoiDung) {
+    public void nhap(NguoiDung[] danhSachNguoiDung) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nhập mã tài liệu: ");
         this.maTL = scanner.nextLine();
@@ -96,6 +95,8 @@ public class MuonTraTL {
     public void xuat() {
         if (this.nguoiDung != null) {
             System.out.println(this);
+        } else {
+            System.out.println("Thông tin người dùng không hợp lệ. Không thể xuất thông tin mượn trả tài liệu.");
         }
     }
 
