@@ -54,13 +54,30 @@ public class DsTacGia{
             }
         }
      }
-      public void timkiemTG(String maTG){
-        for(int i=0; i<soluongTG; i++){
+     public void timkiemTGtheoma(String maTG){
+    	 boolean found = false;
+    	 for(int i=0; i<soluongTG; i++){
             if(dsTG[i].getMaTG().equals(maTG)){
                 dsTG[i].xuat();
-                break;
+                found = true;
             }
         }
+    	 if (!found) {
+             System.out.println("Khong tim thay tac gia voi ma: " + maTG);
+         }
+      }
+     
+     public void timkiemTGtheoten(String tenTG){
+    	 boolean found = false;
+    	 for(int i=0; i<soluongTG; i++){
+            if(dsTG[i].getTenTG().equals(tenTG)){
+                dsTG[i].xuat();
+                found = true;
+            }
+        }
+    	 if (!found) {
+             System.out.println("Khong tim thay tac gia voi ten: " + tenTG);
+         }
       }
     public void xuat_ds(){
         for(int i=0; i<soluongTG; i++){
