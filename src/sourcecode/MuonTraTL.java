@@ -7,17 +7,17 @@ public class MuonTraTL {
     private String ngayMuon;
     private String ngayTra;
     private int soLuong;
-    private String maNguoiDung; // Chỉ lưu mã người dùng
+    private String tenNguoiDung; // Chỉ lưu tên người dùng
     private NguoiDung nguoiDung; // Thông tin người dùng (sau khi tìm thấy)
 
     public MuonTraTL() {}
 
-    public MuonTraTL(String maTL, String ngayMuon, String ngayTra, int soLuong, String maNguoiDung) {
+    public MuonTraTL(String maTL, String ngayMuon, String ngayTra, int soLuong, String tenNguoiDung) {
         this.maTL = maTL;
         this.ngayMuon = ngayMuon;
         this.ngayTra = ngayTra;
         this.soLuong = soLuong;
-        this.maNguoiDung = maNguoiDung;
+        this.tenNguoiDung = tenNguoiDung;
     }
 
     public String getMaTL() {
@@ -52,19 +52,19 @@ public class MuonTraTL {
         this.soLuong = soLuong;
     }
 
-    public String getMaNguoiDung() {
-        return maNguoiDung;
+    public String getTenNguoiDung() {
+        return tenNguoiDung;
     }
 
-    public void setMaNguoiDung(String maNguoiDung) {
-        this.maNguoiDung = maNguoiDung;
+    public void setTenNguoiDung(String tenNguoiDung) {
+        this.tenNguoiDung = tenNguoiDung;
     }
 
     public NguoiDung getNguoiDung() {
         return nguoiDung;
     }
 
-    public void nhap(NguoiDung[] danhSachNguoiDung) {
+    public void nhap(DSNguoiDung dsNguoiDung) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nhập mã tài liệu: ");
         this.maTL = scanner.nextLine();
@@ -76,19 +76,14 @@ public class MuonTraTL {
         this.soLuong = scanner.nextInt();
         scanner.nextLine(); // Đọc ký tự newline sau khi nhập số
 
-        System.out.print("Nhập mã người dùng: ");
-        this.maNguoiDung = scanner.nextLine();
+        System.out.print("Nhập tên người dùng: ");
+        this.tenNguoiDung = scanner.nextLine();
 
-        // Tìm kiếm thông tin người dùng dựa trên mã người dùng
-        for (NguoiDung nd : danhSachNguoiDung) {
-            if (nd.getTen().equalsIgnoreCase(this.maNguoiDung)) {
-                this.nguoiDung = nd;
-                break;
-            }
-        }
+        // Tìm kiếm thông tin người dùng dựa trên tên người dùng
+        this.nguoiDung = dsNguoiDung.timKiemNguoiDung(this.tenNguoiDung);
 
         if (this.nguoiDung == null) {
-            System.out.println("Không tìm thấy người dùng với mã: " + this.maNguoiDung);
+            System.out.println("Không tìm thấy người dùng với tên: " + this.tenNguoiDung);
         }
     }
 
