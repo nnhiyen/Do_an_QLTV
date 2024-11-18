@@ -1,4 +1,13 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package DoAn_QLTV_main.src.sourcecode;
+
+/**
+ *
+ * @author Luong Thanh Tuan
+ */
 
 import java.util.Scanner;
 
@@ -6,16 +15,15 @@ public class NhaXuatBan {
     private String maNXB;
     private String tenNXB;
 
-    // Constructor mặc định
+    Scanner sc = new Scanner(System.in);
+
     public NhaXuatBan() {}
 
-    // Constructor đầy đủ
     public NhaXuatBan(String maNXB, String tenNXB) {
         this.maNXB = maNXB;
         this.tenNXB = tenNXB;
     }
 
-    // Getter và Setter
     public String getMaNXB() {
         return maNXB;
     }
@@ -28,26 +36,21 @@ public class NhaXuatBan {
         return tenNXB;
     }
 
-    public void setTenNXB(String tenNXB) {
+    public void setTenNCC(String tenNXB) {
         this.tenNXB = tenNXB;
     }
 
-    // Nhập thông tin nhà xuất bản
+
     public void nhap() {
-        Scanner sc = new Scanner(System.in);
         System.out.print("Nhập mã nhà xuất bản: ");
         maNXB = sc.nextLine();
         System.out.print("Nhập tên nhà xuất bản: ");
         tenNXB = sc.nextLine();
-    }
 
-    // Xuất thông tin nhà xuất bản
-    public void xuat() {
-        System.out.println(toString());
     }
 
     @Override
     public String toString() {
-        return "Mã NXB: " + maNXB + ", Tên NXB: " + tenNXB;
+        return maNXB + ", " + tenNXB;
     }
 }
