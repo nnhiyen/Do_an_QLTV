@@ -1,3 +1,5 @@
+package DoAn_QLTV_main.src.sourcecode;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -5,6 +7,11 @@ import java.io.IOException;
 public class DsMuonTraTL {
     private MuonTraTL[] dsMT;
     private int soLuongMuonTra;
+
+    public DsMuonTraTL(int kichThuoc) {
+        dsMT = new MuonTraTL[kichThuoc];
+        soLuongMuonTra = 0;
+    }
 
     public void setDsMT(MuonTraTL[] dsMT) {
         this.dsMT = dsMT;
@@ -22,25 +29,27 @@ public class DsMuonTraTL {
         return soLuongMuonTra;
     }
 
-    public DsMuonTraTL(int kichThuoc) {
-        dsMT = new MuonTraTL[kichThuoc];
-        soLuongMuonTra = 0;
-        docDuLieuTuFile();
-    }
-
-    private void docDuLieuTuFile() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("duLieuMuonTra.txt"))) {
+    public void docDuLieuTuFile(DSNguoiDung dsNguoiDung) {
+        String tenFile = "duLieuMuonTra.txt"; // Đọc dữ liệu từ file cố định
+        try (BufferedReader reader = new BufferedReader(new FileReader(tenFile))) {
             String line;
             while ((line = reader.readLine()) != null && soLuongMuonTra < dsMT.length) {
                 String[] data = line.split(",");
-                if (data.length == 4) {
-                    MuonTraTL muonTraTL = new MuonTraTL(data[0], data[1], data[2], Integer.parseInt(data[3]));
-                    dsMT[soLuongMuonTra] = muonTraTL;
-                    soLuongMuonTra++;
+                if (data.length == 5) {
+                    String maTL = data[0];
+                    String ngayMuon = data[1];
+                    String ngayTra = data[2];
+                    int soLuong = Integer.parseInt(data[3]);
+                    String tenNguoiDung = data[4];
+
+                    MuonTraTL muonTraTL = new MuonTraTL(maTL, ngayMuon, ngayTra, soLuong, tenNguoiDung);
+                    // Tìm kiếm thông tin người dùng và cập nhật vào đối tượng MuonTraTL
+                    muonTraTL.setNguoiDung(dsNguoiDung.timKiemNguoiDung(tenNguoiDung));
+                    themMuon(muonTraTL);
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Không thể đọc file: " + e.getMessage());
         }
     }
 
