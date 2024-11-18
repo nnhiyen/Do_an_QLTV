@@ -1,13 +1,18 @@
 package DoAn_QLTV_main.src.sourcecode;
 import java.util.Scanner;
 public abstract class NguoiDung {
-    protected String ten;
-    protected String khoa;
-    protected int namHoc;
+    private String ten;
+    private String khoa;
+    private int namSinh;
     public static Scanner sc = new Scanner(System.in);
     // Constructor mặc định
     public NguoiDung() {}
-
+    // Constructor property
+    public NguoiDung(String ten, String khoa, int namSinh){
+        this.ten=ten;
+        this.khoa=khoa;
+        this.namSinh=namSinh;
+    }
     // Getter và Setter
     public String getTen() {
         return ten;
@@ -25,30 +30,48 @@ public abstract class NguoiDung {
         this.khoa = khoa;
     }
 
-    public int getNamHoc() {
-        return namHoc;
+    public int getNamSinh() {
+        return namSinh;
     }
 
-    public void setNamHoc(int namHoc) {
-        this.namHoc = namHoc;
+    public void setNamSinh(int namSinh) {
+        this.namSinh = namSinh;
+    }
+    
+    
+    // test
+    private boolean isDeleted; // Thêm thuộc tính này
+
+    // Constructor, getter, setter
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
     // Phương thức nhập thông tin chung
     public void nhap() {
         System.out.print("Nhập tên: ");
-        ten = sc.nextLine();
+        ten = checkLoi.checkChuoiRong();
         System.out.print("Nhập khoa: ");
-        khoa = sc.nextLine();
-        System.out.print("Nhập năm học: ");
-        namHoc = sc.nextInt();
+        khoa = checkLoi.checkChuoiRong();
+        System.out.println("Nhập năm sinh:");
+        namSinh = checkLoi.checkNamSinh();
     }
 
     // Phương thức toString
     @Override
     public String toString() {
-        return "Tên: " + ten + ", Khoa: " + khoa + ", Năm học: " + namHoc;
+        return "Tên: " + ten + ", Khoa: " + khoa + ", Năm sinh: " + namSinh;
     }
 
     // Phương thức trừu tượng
-    public abstract void xuat();
+    public abstract String maNguoiDung();
+    
+    public void xuat(){
+        System.out.println("Thông tin người dùng " + toString());
+    }  
 }
