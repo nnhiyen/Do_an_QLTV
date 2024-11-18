@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class DsMuonTraTL {
     private MuonTraTL[] dsMT;
     private int soLuongMuonTra;
@@ -21,6 +25,23 @@ public class DsMuonTraTL {
     public DsMuonTraTL(int kichThuoc) {
         dsMT = new MuonTraTL[kichThuoc];
         soLuongMuonTra = 0;
+        docDuLieuTuFile();
+    }
+
+    private void docDuLieuTuFile() {
+        try (BufferedReader reader = new BufferedReader(new FileReader("duLieuMuonTra.txt"))) {
+            String line;
+            while ((line = reader.readLine()) != null && soLuongMuonTra < dsMT.length) {
+                String[] data = line.split(",");
+                if (data.length == 4) {
+                    MuonTraTL muonTraTL = new MuonTraTL(data[0], data[1], data[2], Integer.parseInt(data[3]));
+                    dsMT[soLuongMuonTra] = muonTraTL;
+                    soLuongMuonTra++;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void themMuon(MuonTraTL muonTraTL) {
@@ -49,20 +70,5 @@ public class DsMuonTraTL {
         for (int i = 0; i < soLuongMuonTra; i++) {
             dsMT[i].xuat();
         }
-    }
-
-    public static void main(String[] args) {
-        DsMuonTraTL dsMuonTraTL = new DsMuonTraTL(10);
-
-        MuonTraTL muon1 = new MuonTraTL("TL001", "2024-11-01", "2024-11-10", 2);
-        MuonTraTL muon2 = new MuonTraTL("TL002", "2024-11-05", "2024-11-15", 1);
-        dsMuonTraTL.themMuon(muon1);
-        dsMuonTraTL.themMuon(muon2);
-
-        dsMuonTraTL.hienThiDanhSach();
-
-        dsMuonTraTL.xoaMuon("TL001");
-
-        dsMuonTraTL.hienThiDanhSach();
     }
 }
