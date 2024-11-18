@@ -1,0 +1,3 @@
+Mã phiếu: PN001, Mã tài liệu: TL001, Số lượng: 10, Giá tiền: 50000.0, Thành tiền: 500000.0
+Mã phiếu: PN002, Mã tài liệu: TL002, Số lượng: 5, Giá tiền: 100000.0, Thành tiền: 500000.0
+Mã phiếu: PN003, Mã tài liệu: TL003, Số lượng: 20, Giá tiền: 25000.0, Thành tiền: 500000.0
