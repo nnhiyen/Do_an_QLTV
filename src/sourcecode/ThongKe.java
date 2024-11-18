@@ -1,13 +1,16 @@
-public class ThongKe {
-    private NguoiDung[] dsND;
-    private TaiLieu[] dsTL;
-    private PhieuNhap[] dsPN;
-    private MuonTraTL[] dsMuon;
-    private int soLuongND;
-    private int soLuongTL;
-    private int soLuongPN;
-    private int soLuongMuon;
+package DoAn_QLTV_main.src.sourcecode;
 
+public class ThongKe {
+    private NguoiDung[] dsND; // Danh sách người dùng
+    private TaiLieu[] dsTL; // Danh sách tài liệu
+    private PhieuNhap[] dsPN; // Danh sách phiếu nhập
+    private MuonTraTL[] dsMuon; // Danh sách mượn trả tài liệu
+    private int soLuongND; // Số lượng người dùng hiện tại
+    private int soLuongTL; // Số lượng tài liệu hiện tại
+    private int soLuongPN; // Số lượng phiếu nhập hiện tại
+    private int soLuongMuon; // Số lượng mượn trả tài liệu hiện tại
+
+    // Constructor khởi tạo kích thước cho các danh sách
     public ThongKe(int kichThuocND, int kichThuocTL, int kichThuocPN, int kichThuocMuon) {
         dsND = new NguoiDung[kichThuocND];
         dsTL = new TaiLieu[kichThuocTL];
@@ -19,6 +22,7 @@ public class ThongKe {
         soLuongMuon = 0;
     }
 
+    // Phương thức thống kê số người dùng đã mượn tài liệu
     public void soNgMuonTL() {
         int count = 0;
         for (int i = 0; i < soLuongND; i++) {
@@ -29,6 +33,7 @@ public class ThongKe {
         System.out.println("Số người dùng mượn tài liệu: " + count);
     }
 
+    // Phương thức thống kê số tài liệu hiện đang được mượn
     public void soTLChoMuon() {
         int count = 0;
         for (int i = 0; i < soLuongMuon; i++) {
@@ -39,26 +44,31 @@ public class ThongKe {
         System.out.println("Số tài liệu cho mượn: " + count);
     }
 
+    // Phương thức thống kê tổng số tài liệu đã nhập
     public void soTLNhap() {
         int count = 0;
         for (int i = 0; i < soLuongPN; i++) {
-            count += dsPN[i].getTongTien();
+            count += dsPN[i].getTongTien(); // Giả định `getTongTien` trả về số lượng tài liệu nhập
         }
         System.out.println("Số tài liệu nhập: " + count);
     }
 
+    // Phương thức in ra tổng số phiếu nhập
     public void tongPN() {
         System.out.println("Tổng số phiếu nhập: " + soLuongPN);
     }
 
+    // Phương thức in ra tổng số người dùng
     public void tongND() {
         System.out.println("Tổng số người dùng: " + soLuongND);
     }
 
+    // Phương thức in ra tổng số tài liệu
     public void tongTL() {
         System.out.println("Tổng số tài liệu: " + soLuongTL);
     }
 
+    // Phương thức thêm người dùng vào danh sách
     public void themNguoiDung(NguoiDung nguoiDung) {
         if (soLuongND < dsND.length) {
             dsND[soLuongND] = nguoiDung;
@@ -68,6 +78,7 @@ public class ThongKe {
         }
     }
 
+    // Phương thức thêm tài liệu vào danh sách
     public void themTaiLieu(TaiLieu taiLieu) {
         if (soLuongTL < dsTL.length) {
             dsTL[soLuongTL] = taiLieu;
@@ -77,6 +88,7 @@ public class ThongKe {
         }
     }
 
+    // Phương thức thêm phiếu nhập vào danh sách
     public void themPhieuNhap(PhieuNhap phieuNhap) {
         if (soLuongPN < dsPN.length) {
             dsPN[soLuongPN] = phieuNhap;
@@ -86,6 +98,7 @@ public class ThongKe {
         }
     }
 
+    // Phương thức thêm mượn trả tài liệu vào danh sách
     public void themMuon(MuonTraTL muonTraTL) {
         if (soLuongMuon < dsMuon.length) {
             dsMuon[soLuongMuon] = muonTraTL;
@@ -96,7 +109,6 @@ public class ThongKe {
     }
 
     // Các phương thức getter và setter cho các thuộc tính
-
     public NguoiDung[] getDsND() {
         return dsND;
     }
@@ -127,5 +139,37 @@ public class ThongKe {
 
     public void setDsMuon(MuonTraTL[] dsMuon) {
         this.dsMuon = dsMuon;
+    }
+
+    public int getSoLuongND() {
+        return soLuongND;
+    }
+
+    public void setSoLuongND(int soLuongND) {
+        this.soLuongND = soLuongND;
+    }
+
+    public int getSoLuongTL() {
+        return soLuongTL;
+    }
+
+    public void setSoLuongTL(int soLuongTL) {
+        this.soLuongTL = soLuongTL;
+    }
+
+    public int getSoLuongPN() {
+        return soLuongPN;
+    }
+
+    public void setSoLuongPN(int soLuongPN) {
+        this.soLuongPN = soLuongPN;
+    }
+
+    public int getSoLuongMuon() {
+        return soLuongMuon;
+    }
+
+    public void setSoLuongMuon(int soLuongMuon) {
+        this.soLuongMuon = soLuongMuon;
     }
 }
