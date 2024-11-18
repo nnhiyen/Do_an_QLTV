@@ -80,10 +80,17 @@ public class MuonTraTL {
         this.tenNguoiDung = scanner.nextLine();
 
         // Tìm kiếm thông tin người dùng dựa trên tên người dùng
-        this.nguoiDung = dsNguoiDung.timKiemNguoiDung(this.tenNguoiDung);
+        NguoiDung[] nguoiDungs = dsNguoiDung.timKiemNguoiDungTheoTen(this.tenNguoiDung);
 
-        if (this.nguoiDung == null) {
+        if (nguoiDungs == null || nguoiDungs.length == 0) {
             System.out.println("Không tìm thấy người dùng với tên: " + this.tenNguoiDung);
+        } else if (nguoiDungs.length == 1) {
+            this.nguoiDung = nguoiDungs[0];
+        } else {
+            System.out.println("Có nhiều người dùng với tên: " + this.tenNguoiDung);
+            System.out.print("Vui lòng nhập mã giảng viên hoặc mã sinh viên: ");
+            String maNguoiDung = scanner.nextLine();
+            this.nguoiDung = dsNguoiDung.timKiemNguoiDungTheoMa(maNguoiDung);
         }
     }
 
