@@ -1,3 +1,5 @@
+package DoAn_QLTV_main.src.sourcecode;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -22,7 +24,7 @@ public class DsThongKe {
         while ((line = reader.readLine()) != null && soLuongTK < dsTK.length) {
             String[] data = line.split(",");
             if (data.length == 1) { // Assuming there's only one piece of data needed to initialize ThongKe
-                ThongKe thongKe = new ThongKe(data[0]); // Adjust constructor as per actual data
+                ThongKe thongKe = new ThongKe(); // Adjust constructor as per actual data
                 dsTK[soLuongTK] = thongKe;
                 soLuongTK++;
             }
