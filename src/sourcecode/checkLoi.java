@@ -8,21 +8,130 @@ import java.util.Scanner;
  *
  * @author Luong Thanh Tuan
  */
-public class Menu implements IMenu {
-    @Override
-    public void menuQLND() {
-        System.out.println("1. Thêm người dùng");
-        System.out.println("2. Sửa thông tin người dùng");
-        System.out.println("3. Xóa người dùng");
-        System.out.println("4. Tìm kiếm người dùng");
-        System.out.println("5. Hiển thị danh sách người dùng");
-        System.out.println("0. Thoát");
+public class checkLoi {
+    static Scanner sc = new Scanner(System.in);
+    
+    // kiểm tra năm sinh
+    public static int checkNamSinh(){
+        int input = -1;
+        while(true){
+            try {
+                input = Integer.parseInt(sc.nextLine().trim()); // ???
+                if(input >=1964 && input <= 2006){
+                    break;
+                } else{
+                    System.out.println("Năm sinh phải từ 1964 đến 2006. Vui lòng nhập lại.");
+                }
+            }catch (NumberFormatException e){
+                System.out.println("Dữ liệu không hợp lệ. Vui lòng nhập một số nguyên.");
+            }
+        }
+        return input;
     }
-
-    // Phương thức để chọn các chức năng
-    public int luaChon() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Chọn chức năng: ");
-        return sc.nextInt();
+    
+    public static String checkChuoiRong(){
+        String input;
+        while(true){
+            input = sc.nextLine();
+            if(input.trim().isEmpty()){
+                System.out.println("Không được để trống, vui lòng nhập lại.");
+            } else {
+                break;
+            }
+        }
+        return input;
+    }
+    
+    
+    public static String checkMaSV() {
+        String maSV;
+        while (true) {
+            maSV = sc.nextLine();
+            maSV = maSV.toUpperCase();
+            if(maSV.matches("SV" + "[0-9]{3}")){
+                return maSV;
+            }else if(maSV.isEmpty()){
+                System.err.println("Mã sinh viên không được để trống. Vui lòng nhập lại.");
+            }else {
+                System.err.println("Mã sai định dạng. Ví dụ: SV001");
+            }
+            System.out.print("Mời nhập lại: ");
+        }
+    }
+    
+    public static String checkMaGV() {
+        String maGV;
+        while (true) {
+            maGV = sc.nextLine();
+            maGV = maGV.toUpperCase();
+            // Kiểm tra độ dài mã sinh viên
+            if (maGV.matches("GV" + "[0-9]{3}")) {
+                return maGV;
+            }else if(maGV.isEmpty()) {
+                System.err.println("Mã giảng viên không được để trống. Vui lòng nhập lại.");
+            }else {
+                System.err.println("Mã sai định dạng. Ví dụ: GV001");
+            }
+            System.out.print("Mời nhập lại: ");
+        }
+    }
+    
+    public static int checkSoNguyen(){
+        int input;
+        while(true){
+            try{
+                input = Integer.parseInt(sc.nextLine());
+                return input;
+            } catch (NumberFormatException exception){
+                System.out.println("Kiểu dữ liệu không hợp lệ!");
+            }
+            System.out.print("Mời nhập lại: ");
+        }
+    }
+    
+    public static String checkMaNXB(){
+        String input;
+        while(true){
+            input =sc.nextLine(); // bỏ đi khoảng trắng khi dùng String
+            input = input.toUpperCase();
+            if(input.matches("CC" + "[0-9]{3}")){
+                return input;
+            }else {
+                System.err.println("Mã sai định dạng. Ví dụ: CC001");
+            }
+            System.out.print("Mời nhập lại");
+        }
+    }
+    
+//    public static String checkMaSV(){
+//        chỉnh lại nếu như muốn xét mã như NXB
+//    }
+    public static String checkMaTaiLieu(){
+        String input;
+        while(true){
+            input = sc.nextLine();
+            input = input.toUpperCase();
+            if(input.matches("TL" + "[0-9]{3}")){
+                return input;
+            }else {
+                System.err.println("Mã sai định dạng. Ví dụ: TL001");
+            }
+            System.out.print("Mời nhập lại");
+        }
+    }
+    
+    public static int checkSoLuong(){
+        int input;
+        while(true){
+            input = sc.nextInt();
+            if(input <=0){
+                System.err.println("Số lượng không hợp lệ");
+            } else if(input >= 100) {
+                System.err.println("Số lượng quá lớn");
+            } else {
+                return input;
+            }
+            System.out.print("Mời nhập lại: ");
+        }
     }
 }
