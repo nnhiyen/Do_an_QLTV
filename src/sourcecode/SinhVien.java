@@ -1,39 +1,47 @@
 package DoAn_QLTV_main.src.sourcecode;
 
 public class SinhVien extends NguoiDung {
-    private String maSinhVien;
+    private String maSV;
 
     // Constructor mặc định
-    public SinhVien() {}
-
+    public SinhVien() { super();}
+    // Constructor property
+    public SinhVien(String ten, String khoa, int namSinh, String maSV){
+        super(ten, khoa, namSinh);
+        this.maSV=maSV;
+    }
     // Getter và Setter
-    public String getMaSinhVien() {
-        return maSinhVien;
+    public String getMaSV() {
+        return maSV;
     }
 
-    public void setMaSinhVien(String maSinhVien) {
-        this.maSinhVien = maSinhVien;
+    public void setMaSV(String maSV) {
+        this.maSV= maSV;
     }
 
     // Phương thức nhập thông tin Sinh Viên
     @Override
     public void nhap() {
         super.nhap(); // Gọi phương thức nhập của lớp cha
-        sc.nextLine();
         System.out.print("Nhập mã sinh viên: ");
-        maSinhVien = sc.nextLine();
+        maSV = checkLoi.checkMaSV();
     }
 
-    // Phương thức xuất thông tin
+    @Override
+    public String maNguoiDung(){
+        return  maSV;
+    }
+    
     @Override
     public void xuat() {
-        System.out.println("Thông tin sinh viên: " + toString());
+        String sv_format = "| %-18s | %-14s | %-4s | %-6d |%n";
+    System.out.format(sv_format, getMaSV(), getTen(), getKhoa(), getNamSinh());
     }
-
-    // Phương thức toString
+    
     @Override
     public String toString() {
-        return super.toString() + ", Mã sinh viên: " + maSinhVien;
+    return "Tên: " + getTen() + ", Khoa: " + getKhoa() + ", Năm sinh: " + getNamSinh() + ", Mã sinh viên: " + maNguoiDung();
     }
-}
 
+
+}
