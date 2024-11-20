@@ -5,19 +5,17 @@ import java.util.Scanner;
 public class TaiLieu{
 	    private String maTL;
 	    private String tenTL;
-	    private String theLoai;
-		private String maTG;
-		private String tenTG;
+	    private TheLoai theLoai;
+	    private TacGia tacGia;
 		private String tenNXB;
 
 		public TaiLieu(){}
 
-	    public TaiLieu(String maTL, String tenTL, String theLoai, String maTG, String tenTG, String tenNXB){
+	    public TaiLieu(String maTL, String tenTL, TheLoai theLoai, TacGia tacGia, String tenNXB){
 	        this.maTL = maTL;
 	        this.tenTL = tenTL;
 	        this.theLoai = theLoai;
-			this.maTG = maTG;
-			this.tenTG = tenTG;
+	        this.tacGia = tacGia;
 			this.tenNXB = tenNXB;
 	    }
 
@@ -27,12 +25,9 @@ public class TaiLieu{
 	        maTL = scanner.nextLine();
 	        System.out.print("Nhap ten tai lieu: ");
 	        tenTL = scanner.nextLine();
-	        System.out.print("Nhap the loai: ");
-	        theLoai = scanner.nextLine();
-			System.out.print("Nhap ma tac gia: ");
-			maTG = scanner.nextLine();
-			System.out.print("Nhap ten tac gia: ");
-			tenTG = scanner.nextLine();
+	        theLoai = new TheLoai();
+	        tacGia = new TacGia();
+	        tacGia.nhap();
 			System.out.print("Nhap ten nha xuat ban: ");
 			tenNXB = scanner.nextLine();
 	    }
@@ -40,18 +35,16 @@ public class TaiLieu{
 	    public String toString(){
 	        return "Ma tai lieu: " + maTL + "\n" +
 	               "Ten tai lieu: " + tenTL + "\n" +
-	               "The loai: " + theLoai + "\n" +
-				   "Ma tac gia: " + maTG + "\n" +
-				   "Ten tac gia: " + tenTG + "\n" +
+	               "The loai: " + theLoai.toString() + "\n" +
+				   "Tac gia:" + tacGia.toString() + "\n" +
 				   "Ten nha xuat ban: " + tenNXB ;
 	    }
 
 	    public void xuat(){
 	        System.out.println("Ma tai lieu: " + maTL);
 			System.out.println("Ten tai lieu: "+ tenTL);
-			System.out.println("The loai: "+ theLoai);
-			System.out.println("Ma tac gia: " + maTG);
-			System.out.println("Ten tac gia: " + tenTG);
+			theLoai.xuat();
+			tacGia.xuat();
 			System.out.println("Ten nha xuat ban: " + tenNXB);
 	    }
 
@@ -69,25 +62,18 @@ public class TaiLieu{
 	        this.tenTL = tenTL;
 	    }
 
-	    public String getTheLoai(){
+	    public TheLoai getTheLoai() {
 	        return theLoai;
 	    }
-	    public void setTheLoai(String theLoai){
-	        this.theLoai = theLoai;
+	    public void setTheLoai(TheLoai theLoai) {
+	        this.theLoai= theLoai;
 	    }
-
-		public String getMaTG(){
-	        return maTG;
+	    
+	    public TacGia getTacGia() {
+	        return tacGia;
 	    }
-	    public void setMaTG(String maTG){
-	        this.maTG = maTG;
-	    }
-
-		public String getTenTG(){
-	        return tenTG;
-	    }
-	    public void setTenTG(String tenTG){
-	        this.tenTG = tenTG;
+	    public void setTacGia(TacGia tacGia) {
+	        this.tacGia = tacGia;
 	    }
 
 		public String getTenNXB(){
