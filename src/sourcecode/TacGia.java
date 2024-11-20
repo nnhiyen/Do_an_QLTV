@@ -10,16 +10,15 @@ class TacGia{
     private String maTG;
     private Date ngaySinh;
     private String diaChi;
-    private DsTaiLieu[] dsTaiLieu;
+    private DsTaiLieu dsTaiLieu;
 
-    public TacGia() {}
+    public TacGia(){}
 
-    public TacGia(String tenTG, String maTG, Date ngaySinh, String diaChi, int kichThuoc){
+    public TacGia(String tenTG, String maTG, Date ngaySinh, String diaChi){
         this.tenTG = tenTG;
         this.maTG = maTG;
         this.ngaySinh = ngaySinh;
         this.diaChi = diaChi;
-        this.dsTaiLieu = new DsTaiLieu[kichThuoc];
     }
 
     public void nhap(){
@@ -42,12 +41,8 @@ class TacGia{
 
         System.out.print("Nhap dia chi tac gia: ");
         diaChi = scanner.nextLine();
-        
-        System.out.print("Nhap so luong toi da: ");
-        int kichThuoc = Integer.parseInt(scanner.nextLine());
-        dsTaiLieu = new DsTaiLieu[kichThuoc];
     }
-
+    @Override
     public String toString(){
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         return "Ten tac gia: " + tenTG + "\n" +
@@ -63,21 +58,15 @@ class TacGia{
         System.out.println("Ngay sinh: " + (ngaySinh != null ? formatter.format(ngaySinh) : "Khong co"));
         System.out.println("Dia chi tac gia: " + diaChi);
         System.out.println("Danh sach tac pham cua tac gia " + tenTG + ": ");
-        if (dsTaiLieu != null){
-            for (DsTaiLieu taiLieu : dsTaiLieu){
-                if (taiLieu != null){
-                    taiLieu.xuat_ds();
-                }
-            }
-        } else{
-            System.out.println("Khong co tai lieu nao.");
+        if (dsTaiLieu.getSoLuongTaiLieu() == 0) {
+            System.out.println("Không có tài liệu nào.");
+        } else {
+            dsTaiLieu.xuat_ds();
         }
     }
-
-    public DsTaiLieu[] getDSTaiLieu(){
-        return dsTaiLieu;
+    public void themTaiLieu(TaiLieu taiLieu) {
+        dsTaiLieu.themTL(taiLieu);
     }
-    
     public String getTenTG(){
         return tenTG;
     }
