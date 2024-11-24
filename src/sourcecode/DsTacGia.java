@@ -49,7 +49,7 @@ public class DsTacGia{
 		        dsTG[i].setDiaChi(scanner.nextLine());
 		        found = true;
                 ghiDuLieuRaFile("tacgia.txt");
-		        break;
+		        return;
             }
         }
      }
@@ -65,7 +65,7 @@ public class DsTacGia{
                 soluongTG--;
                 found = true;
                 ghiDuLieuRaFile("tacgia.txt");
-                break;
+                return;
             }
         }
      }
