@@ -9,6 +9,7 @@ public class ThongKe {
     private int soLuongTL; // Số lượng tài liệu hiện tại
     private int soLuongPN; // Số lượng phiếu nhập hiện tại
     private int soLuongMuon; // Số lượng mượn trả tài liệu hiện tại
+    private boolean daXoa; // Trạng thái đã xóa
 
     // Constructor khởi tạo kích thước cho các danh sách
     public ThongKe(int kichThuocND, int kichThuocTL, int kichThuocPN, int kichThuocMuon) {
@@ -20,6 +21,7 @@ public class ThongKe {
         soLuongTL = 0;
         soLuongPN = 0;
         soLuongMuon = 0;
+        this.daXoa = false; // Mặc định không bị xóa
     }
 
     // Phương thức thống kê số người dùng đã mượn tài liệu
