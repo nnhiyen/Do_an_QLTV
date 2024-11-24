@@ -44,7 +44,7 @@ public class DsMuonTraTL {
 
                     MuonTraTL muonTraTL = new MuonTraTL(maTL, ngayMuon, ngayTra, soLuong, tenNguoiDung);
                     // Tìm kiếm thông tin người dùng và cập nhật vào đối tượng MuonTraTL
-                    muonTraTL.setNguoiDung(dsNguoiDung.timKiemNguoiDung(tenNguoiDung));
+                    muonTraTL.setNguoiDung(dsNguoiDung.timKiemNguoiDungTheoTen(tenNguoiDung)[0]);
                     themMuon(muonTraTL);
                 }
             }
@@ -65,11 +65,16 @@ public class DsMuonTraTL {
     public void xoaMuon(String maTL) {
         for (int i = 0; i < soLuongMuonTra; i++) {
             if (dsMT[i].getMaTL().equals(maTL)) {
-                for (int j = i; j < soLuongMuonTra - 1; j++) {
-                    dsMT[j] = dsMT[j + 1];
-                }
-                dsMT[soLuongMuonTra - 1] = null;
-                soLuongMuonTra--;
+                dsMT[i].setDaXoa(true); // Đánh dấu mục này là đã xóa
+                break;
+            }
+        }
+    }
+
+    public void khoiPhucMuon(String maTL) {
+        for (int i = 0; i < soLuongMuonTra; i++) {
+            if (dsMT[i].getMaTL().equals(maTL)) {
+                dsMT[i].setDaXoa(false); // Khôi phục mục này
                 break;
             }
         }
@@ -77,7 +82,25 @@ public class DsMuonTraTL {
 
     public void hienThiDanhSach() {
         for (int i = 0; i < soLuongMuonTra; i++) {
-            dsMT[i].xuat();
+            if (!dsMT[i].isDaXoa()) {
+                dsMT[i].xuat();
+            }
+        }
+    }
+
+    public void hienThiDanhSachXoa() {
+        System.out.println("Danh sách mượn trả đã xóa tạm thời:");
+        boolean hasDeleted = false; 
+        
+        for (int i = 0; i < soLuongMuonTra; i++) {
+            if (dsMT[i].isDaXoa()) {
+                dsMT[i].xuat();
+                hasDeleted = true;
+            }
+        }
+        
+        if (!hasDeleted) {
+            System.out.println("Không có mục nào đã xóa tạm thời.");
         }
     }
 }
