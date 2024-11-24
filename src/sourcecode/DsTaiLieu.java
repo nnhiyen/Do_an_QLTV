@@ -36,7 +36,7 @@ public class DsTaiLieu{
 
                 System.out.printf("Nhap ten tac gia moi: ");
                 dsTL[i].setTenTG(scanner.nextLine());
-                break;
+                return;
             }
         }
     }
@@ -49,7 +49,7 @@ public class DsTaiLieu{
                 }
                 dsTL[soluongTL- 1]= null;
                 soluongTL--;
-                break;
+                return;
             }
         }
     }
@@ -88,84 +88,7 @@ public class DsTaiLieu{
                 found = true;
             }
         }
-import java.util.Scanner;
-import java.util.Arrays;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-
-public class DsTaiLieu{
-    private TaiLieu[] dsTL;
-    private int soluongTL;
-    
-    public DsTaiLieu(int kichThuoc){
-        dsTL = new TaiLieu[kichThuoc];
-        soluongTL = 0;
-    }
-    
-    public void themTL(TaiLieu tl){
-        if (soluongTL < dsTL.length){
-        	tl.nhap();
-            dsTL[soluongTL] = tl;
-            soluongTL++;
-            ghiDuLieuRaFile("tailieu.txt");
-        } else {
-            System.out.println("Danh sach day");
-        }
-    }
-
-    public void suaTL(String maTL){
-        for (int i=0; i<soluongTL; i++){
-            if(dsTL[i].getMaTL().equals(maTL)){
-                System.out.println("Nhap lai thong tin tai lieu: ");
-                dsTL[i].nhap();
-                ghiDuLieuRaFile("tailieu.txt");
-                break;
-            }
-        }
-    }
-
-    public void xoaTL(String maTL){
-        for(int i= 0; i< soluongTL;i++){
-            if(dsTL[i].getMaTL().equals(maTL)){
-                for(int j=i; j< soluongTL-1; j++){
-                    dsTL[j]= dsTL[j+1];
-                }
-                dsTL[soluongTL- 1]= null;
-                soluongTL--;
-                ghiDuLieuRaFile("tailieu.txt");
-                break;
-            }
-        }
-    }
-    public void timKiemtheoMa(String maTL) {
-        boolean found = false;
-        for (int i = 0; i < soluongTL; i++) {
-            if (dsTL[i].getMaTL().equals(maTL)) {
-                dsTL[i].xuat();
-                found = true;
-                break;
-            }
-        }
-        if (!found) {
-            System.out.println("Tai lieu khong tim thay.");
-        }
-    }
-    
-    public void timKiemTheoTen(String tenTL) {
-        boolean found = false;
-        for (int i = 0; i < soluongTL; i++) {
-            if (dsTL[i].getTenTL().equals(tenTL)) {
-                dsTL[i].xuat();
-                found = true;
-            }
-        }
-        if (!found){
-            System.out.println("Khong tim thay tai lieu voi ten: " + tenTL);
-        }
-    }
+        
     public void xuat_ds(){
     	if(soluongTL ==0) {
     		System.out.println("Danh sach rong");
