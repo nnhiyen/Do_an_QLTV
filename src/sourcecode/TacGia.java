@@ -24,11 +24,11 @@ class TacGia{
     public void nhap(){
         Scanner scanner = new Scanner(System.in);
 
+	System.out.print("Nhap ma tac gia: ");
+        maTG = scanner.nextLine();
+	    
         System.out.print("Nhap ten tac gia: ");
         tenTG = scanner.nextLine();
-
-        System.out.print("Nhap ma tac gia: ");
-        maTG = scanner.nextLine();
 
         System.out.print("Nhap ngay-thang-nam sinh tac gia (dd-MM-yyyy): ");
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
