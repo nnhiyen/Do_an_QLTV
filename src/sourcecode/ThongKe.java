@@ -172,4 +172,48 @@ public class ThongKe {
     public void setSoLuongMuon(int soLuongMuon) {
         this.soLuongMuon = soLuongMuon;
     }
+
+    // Phương thức thống kê số người dùng đã xóa tạm thời
+    public void soNDXoaTamThoi() {
+        int count = 0;
+        for (int i = 0; i < soLuongND; i++) {
+            if (dsND[i].isDeleted()) {
+                count++;
+            }
+        }
+        System.out.println("Số người dùng đã xóa tạm thời: " + count);
+    }
+
+    // Phương thức thống kê số tài liệu đã xóa tạm thời
+    public void soTLXoaTamThoi() {
+        int count = 0;
+        for (int i = 0; i < soLuongTL; i++) {
+            if (dsTL[i].isDeleted()) {
+                count++;
+            }
+        }
+        System.out.println("Số tài liệu đã xóa tạm thời: " + count);
+    }
+
+    // Phương thức thống kê số phiếu nhập đã xóa tạm thời
+    public void soPNXoaTamThoi() {
+        int count = 0;
+        for (int i = 0; i < soLuongPN; i++) {
+            if (dsPN[i].isDeleted()) {
+                count++;
+            }
+        }
+        System.out.println("Số phiếu nhập đã xóa tạm thời: " + count);
+    }
+
+    // Phương thức thống kê số mượn trả tài liệu đã xóa tạm thời
+    public void soMuonXoaTamThoi() {
+        int count = 0;
+        for (int i = 0; i < soLuongMuon; i++) {
+            if (dsMuon[i].isDaXoa()) {
+                count++;
+            }
+        }
+        System.out.println("Số mượn trả tài liệu đã xóa tạm thời: " + count);
+    }
 }
