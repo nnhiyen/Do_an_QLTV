@@ -34,7 +34,7 @@ public class DsTheLoai{
                 dsTLoai[i].setTenTLoai(scanner.nextLine());
 		        found = true;
                 ghiDuLieuRaFile("theloai.txt");
-		        break;
+		        return;
             }
         }
      }
@@ -50,7 +50,7 @@ public class DsTheLoai{
                 soluongTLoai--;
                 found = true;
                 ghiDuLieuRaFile("theloai.txt");
-                break;
+                return;
             }
         }
      }
