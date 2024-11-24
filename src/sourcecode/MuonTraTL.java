@@ -9,6 +9,7 @@ public class MuonTraTL {
     private int soLuong;
     private String tenNguoiDung; // Chỉ lưu tên người dùng
     private NguoiDung nguoiDung; // Thông tin người dùng (sau khi tìm thấy)
+    private boolean daXoa; // Trạng thái đã xóa
 
     public MuonTraTL() {}
 
@@ -18,8 +19,10 @@ public class MuonTraTL {
         this.ngayTra = ngayTra;
         this.soLuong = soLuong;
         this.tenNguoiDung = tenNguoiDung;
+        this.daXoa = false; // Mặc định không bị xóa
     }
 
+    // Getters và Setters
     public String getMaTL() {
         return maTL;
     }
@@ -64,6 +67,19 @@ public class MuonTraTL {
         return nguoiDung;
     }
 
+    public void setNguoiDung(NguoiDung nguoiDung) {
+        this.nguoiDung = nguoiDung;
+    }
+
+    public boolean isDaXoa() {
+        return daXoa;
+    }
+
+    public void setDaXoa(boolean daXoa) {
+        this.daXoa = daXoa;
+    }
+
+    // Phương thức nhập thông tin
     public void nhap(DSNguoiDung dsNguoiDung) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nhập mã tài liệu: ");
@@ -94,6 +110,7 @@ public class MuonTraTL {
         }
     }
 
+    // Phương thức xuất thông tin
     public void xuat() {
         if (this.nguoiDung != null) {
             System.out.println(this);
@@ -110,6 +127,7 @@ public class MuonTraTL {
                 ", ngayTra='" + ngayTra + '\'' +
                 ", soLuong=" + soLuong +
                 ", nguoiDung=" + nguoiDung +
+                ", daXoa=" + daXoa +
                 '}';
     }
 }
