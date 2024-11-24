@@ -23,8 +23,8 @@ public class DsThongKe {
         String line;
         while ((line = reader.readLine()) != null && soLuongTK < dsTK.length) {
             String[] data = line.split(",");
-            if (data.length == 1) { // Assuming there's only one piece of data needed to initialize ThongKe
-                ThongKe thongKe = new ThongKe(); // Adjust constructor as per actual data
+            if (data.length == 1) { // Giả định chỉ cần một dữ liệu để khởi tạo ThongKe
+                ThongKe thongKe = new ThongKe(10, 10, 10, 10); // Điều chỉnh constructor theo dữ liệu thực tế
                 dsTK[soLuongTK] = thongKe;
                 soLuongTK++;
             }
@@ -57,12 +57,19 @@ public class DsThongKe {
     public void xoaTK(String maTK) {
         for (int i = 0; i < soLuongTK; i++) {
             if (dsTK[i].getMaTK().equals(maTK)) {
-                for (int j = i; j < soLuongTK - 1; j++) {
-                    dsTK[j] = dsTK[j + 1];
-                }
-                dsTK[soLuongTK - 1] = null;
-                soLuongTK--;
-                System.out.println("Đã xóa thống kê với mã: " + maTK);
+                dsTK[i].setDaXoa(true); // Đánh dấu mục này là đã xóa
+                System.out.println("Đã xóa tạm thời thống kê với mã: " + maTK);
+                return;
+            }
+        }
+        System.out.println("Không tìm thấy thống kê với mã: " + maTK);
+    }
+
+    public void khoiPhucTK(String maTK) {
+        for (int i = 0; i < soLuongTK; i++) {
+            if (dsTK[i].getMaTK().equals(maTK)) {
+                dsTK[i].setDaXoa(false); // Khôi phục mục này
+                System.out.println("Đã khôi phục thống kê với mã: " + maTK);
                 return;
             }
         }
@@ -82,6 +89,22 @@ public class DsThongKe {
     public void xuat_ds() {
         for (int i = 0; i < soLuongTK; i++) {
             dsTK[i].xuat();
+        }
+    }
+
+    public void hienThiDanhSachXoa() {
+        System.out.println("Danh sách thống kê đã xóa tạm thời:");
+        boolean hasDeleted = false; 
+        
+        for (int i = 0; i < soLuongTK; i++) {
+            if (dsTK[i].isDaXoa()) {
+                dsTK[i].xuat();
+                hasDeleted = true;
+            }
+        }
+        
+        if (!hasDeleted) {
+            System.out.println("Không có mục nào đã xóa tạm thời.");
         }
     }
 }
