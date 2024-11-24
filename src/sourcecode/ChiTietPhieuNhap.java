@@ -1,31 +1,33 @@
 package DoAn_QLTV_main.src.sourcecode;
 
+import java.util.Scanner;
+
 public class ChiTietPhieuNhap {
-    private String maPhieu;
+    private String maPN;
     private String maTL;
     private int soLuong;
     private double giaTien;
-    private double thanhTien;
+    private double tongTien;
 
     // Constructor mặc định
     public ChiTietPhieuNhap() {}
 
     // Constructor property
-    public ChiTietPhieuNhap(String maPhieu, String maTL, int soLuong, double giaTien) {
-        this.maPhieu = maPhieu;
+    public ChiTietPhieuNhap(String maPN, String maTL, int soLuong, double giaTien) {
+        this.maPN = maPN;
         this.maTL = maTL;
         this.soLuong = soLuong;
         this.giaTien = giaTien;
-        this.thanhTien = soLuong * giaTien;
+        this.tongTien = soLuong * giaTien;
     }
 
     // Getter và Setter
-    public String getMaPhieu() {
-        return maPhieu;
+    public String getMaPN() {
+        return maPN;
     }
 
-    public void setMaPhieu(String maPhieu) {
-        this.maPhieu = maPhieu;
+    public void setMaPN(String maPN) {
+        this.maPN = maPN;
     }
 
     public String getMaTL() {
@@ -42,7 +44,7 @@ public class ChiTietPhieuNhap {
 
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
-        this.thanhTien = this.soLuong * this.giaTien;
+        this.tongTien = this.soLuong * this.giaTien;
     }
 
     public double getGiaTien() {
@@ -51,31 +53,31 @@ public class ChiTietPhieuNhap {
 
     public void setGiaTien(double giaTien) {
         this.giaTien = giaTien;
-        this.thanhTien = this.soLuong * this.giaTien;
+        this.tongTien = this.soLuong * this.giaTien;
     }
 
-    public double getThanhTien() {
-        return thanhTien;
+    public double getTongTien() {
+        return tongTien;
     }
 
     // Phương thức nhập thông tin
     public void nhap() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhập mã phiếu: ");
-        maPhieu = sc.nextLine();
+        maPN = sc.nextLine();
         System.out.print("Nhập mã tài liệu: ");
         maTL = sc.nextLine();
         System.out.print("Nhập số lượng: ");
         soLuong = sc.nextInt();
         System.out.print("Nhập giá tiền: ");
         giaTien = sc.nextDouble();
-        thanhTien = soLuong * giaTien;
+        tongTien = soLuong * giaTien;
     }
 
     // Phương thức toString
     @Override
     public String toString() {
-        return "Mã phiếu: " + maPhieu + ", Mã tài liệu: " + maTL + ", Số lượng: " + soLuong + ", Giá tiền: " + giaTien + ", Thành tiền: " + thanhTien;
+        return "Mã phiếu: " + maPN + ", Mã tài liệu: " + maTL + ", Số lượng: " + soLuong + ", Giá tiền: " + giaTien + ", Tổng tiền: " + tongTien;
     }
 
     // Phương thức xuất thông tin
