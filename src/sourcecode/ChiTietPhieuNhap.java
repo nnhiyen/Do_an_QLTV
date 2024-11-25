@@ -1,4 +1,4 @@
-package DoAn_QLTV_main.src.sourcecode;
+package qltv;
 
 import java.util.Scanner;
 
@@ -8,9 +8,12 @@ public class ChiTietPhieuNhap {
     private int soLuong;
     private double giaTien;
     private double tongTien;
+    private boolean deleted; // Trạng thái đã xóa
 
     // Constructor mặc định
-    public ChiTietPhieuNhap() {}
+    public ChiTietPhieuNhap() {
+        this.deleted = false; // Mặc định không bị xóa
+    }
 
     // Constructor property
     public ChiTietPhieuNhap(String maPN, String maTL, int soLuong, double giaTien) {
@@ -19,6 +22,7 @@ public class ChiTietPhieuNhap {
         this.soLuong = soLuong;
         this.giaTien = giaTien;
         this.tongTien = soLuong * giaTien;
+        this.deleted = false; // Mặc định không bị xóa
     }
 
     // Getter và Setter
@@ -60,6 +64,14 @@ public class ChiTietPhieuNhap {
         return tongTien;
     }
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
     // Phương thức nhập thông tin
     public void nhap() {
         Scanner sc = new Scanner(System.in);
@@ -77,7 +89,7 @@ public class ChiTietPhieuNhap {
     // Phương thức toString
     @Override
     public String toString() {
-        return "Mã phiếu: " + maPN + ", Mã tài liệu: " + maTL + ", Số lượng: " + soLuong + ", Giá tiền: " + giaTien + ", Tổng tiền: " + tongTien;
+        return "Mã phiếu: " + maPN + ", Mã tài liệu: " + maTL + ", Số lượng: " + soLuong + ", Giá tiền: " + giaTien + ", Tổng tiền: " + tongTien + ", Đã xóa: " + (deleted ? "Đã xóa" : "Chưa xóa");
     }
 
     // Phương thức xuất thông tin
