@@ -1,4 +1,4 @@
-package DoAn_QLTV_main.src.sourcecode;
+package qltv;
 
 import java.util.Scanner;
 
@@ -79,6 +79,38 @@ public class MuonTraTL {
         this.daXoa = daXoa;
     }
 
+    // Phương thức tìm kiếm người dùng theo tên
+    public NguoiDung[] timKiemNguoiDungTheoTen(String tenNguoiDung, DSNguoiDung dsNguoiDung) {
+        NguoiDung[] ketQua = new NguoiDung[dsNguoiDung.getSoLuong()];
+        int soLuongTimThay = 0;
+        for (int i = 0; i < dsNguoiDung.getSoLuong(); i++) {
+            if (dsNguoiDung.getDsNguoiDung()[i].getTen().equalsIgnoreCase(tenNguoiDung)) {
+                ketQua[soLuongTimThay++] = dsNguoiDung.getDsNguoiDung()[i];
+            }
+        }
+        NguoiDung[] ketQuaChinhXac = new NguoiDung[soLuongTimThay];
+        System.arraycopy(ketQua, 0, ketQuaChinhXac, 0, soLuongTimThay);
+        return ketQuaChinhXac;
+    }
+
+    // Phương thức tìm kiếm người dùng theo mã
+    public NguoiDung timKiemNguoiDungTheoMa(String maNguoiDung, DSNguoiDung dsNguoiDung) {
+        for (int i = 0; i < dsNguoiDung.getSoLuong(); i++) {
+            if (dsNguoiDung.getDsNguoiDung()[i] instanceof SinhVien) {
+                SinhVien sv = (SinhVien) dsNguoiDung.getDsNguoiDung()[i];
+                if (sv.getMaSV().equals(maNguoiDung)) {
+                    return sv;
+                }
+            } else if (dsNguoiDung.getDsNguoiDung()[i] instanceof GiangVien) {
+                GiangVien gv = (GiangVien) dsNguoiDung.getDsNguoiDung()[i];
+                if (gv.getMaGV().equals(maNguoiDung)) {
+                    return gv;
+                }
+            }
+        }
+        return null;
+    }
+
     // Phương thức nhập thông tin
     public void nhap(DSNguoiDung dsNguoiDung) {
         Scanner scanner = new Scanner(System.in);
@@ -96,7 +128,7 @@ public class MuonTraTL {
         this.tenNguoiDung = scanner.nextLine();
 
         // Tìm kiếm thông tin người dùng dựa trên tên người dùng
-        NguoiDung[] nguoiDungs = dsNguoiDung.timKiemNguoiDungTheoTen(this.tenNguoiDung);
+        NguoiDung[] nguoiDungs = timKiemNguoiDungTheoTen(this.tenNguoiDung, dsNguoiDung);
 
         if (nguoiDungs == null || nguoiDungs.length == 0) {
             System.out.println("Không tìm thấy người dùng với tên: " + this.tenNguoiDung);
@@ -106,7 +138,7 @@ public class MuonTraTL {
             System.out.println("Có nhiều người dùng với tên: " + this.tenNguoiDung);
             System.out.print("Vui lòng nhập mã giảng viên hoặc mã sinh viên: ");
             String maNguoiDung = scanner.nextLine();
-            this.nguoiDung = dsNguoiDung.timKiemNguoiDungTheoMa(maNguoiDung);
+            this.nguoiDung = timKiemNguoiDungTheoMa(maNguoiDung, dsNguoiDung);
         }
     }
 
