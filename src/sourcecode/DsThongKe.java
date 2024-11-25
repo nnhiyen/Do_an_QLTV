@@ -1,15 +1,17 @@
-package DoAn_QLTV_main.src.sourcecode;
+package qltv;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
-public class DsThongKe {
+public class   DsThongKe {
     private ThongKe[] dsTK;
     private int soLuongTK;
+    private final int MAX_THONG_KE = 100; // Kích thước tối đa của mảng
 
-    public DsThongKe(int kichThuoc) {
-        dsTK = new ThongKe[kichThuoc];
+    public DsThongKe() {
+        dsTK = new ThongKe[MAX_THONG_KE];
         soLuongTK = 0;
         try {
             docDuLieuTuFile();
@@ -21,19 +23,32 @@ public class DsThongKe {
     private void docDuLieuTuFile() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader("duLieuThongKe.txt"));
         String line;
-        while ((line = reader.readLine()) != null && soLuongTK < dsTK.length) {
-            String[] data = line.split(",");
-            if (data.length == 1) { // Giả định chỉ cần một dữ liệu để khởi tạo ThongKe
-                ThongKe thongKe = new ThongKe(10, 10, 10, 10); // Điều chỉnh constructor theo dữ liệu thực tế
-                dsTK[soLuongTK] = thongKe;
-                soLuongTK++;
+        while ((line = reader.readLine()) != null && soLuongTK < MAX_THONG_KE) {
+            try {
+                String[] data = line.split(",");
+                if (data.length == 4) {
+                    int kichThuocND = Integer.parseInt(data[0]);
+                    int kichThuocTL = Integer.parseInt(data[1]);
+                    int kichThuocPN = Integer.parseInt(data[2]);
+                    int kichThuocMuon = Integer.parseInt(data[3]);
+                    ThongKe thongKe = new ThongKe(kichThuocND, kichThuocTL, kichThuocPN, kichThuocMuon);
+                    dsTK[soLuongTK] = thongKe;
+                    soLuongTK++;
+                } else {
+                    System.err.println("Lỗi đọc dữ liệu: Dòng không đủ thông tin.");
+                }
+            } catch (NumberFormatException e) {
+                System.err.println("Lỗi đọc dữ liệu: " + e.getMessage());
             }
         }
         reader.close();
+        if (soLuongTK == MAX_THONG_KE) {
+            System.err.println("Cảnh báo: Đã đạt đến giới hạn số lượng thống kê. Không thể đọc thêm dữ liệu.");
+        }
     }
 
     public void themTK(ThongKe thongKe) {
-        if (soLuongTK < dsTK.length) {
+        if (soLuongTK < MAX_THONG_KE) {
             dsTK[soLuongTK] = thongKe;
             soLuongTK++;
         } else {
@@ -41,68 +56,95 @@ public class DsThongKe {
         }
     }
 
-    public void suaTK(String maTK) {
-        for (int i = 0; i < soLuongTK; i++) {
-            if (dsTK[i].getMaTK().equals(maTK)) {
-                // Cập nhật thông tin thống kê tại đây
-                System.out.println("Nhập thông tin thống kê mới:");
-                dsTK[i].nhap();
-                System.out.println("Đã cập nhật thông tin thống kê.");
-                return;
-            }
+    public void suaTK(int index) {
+        if (index >= 0 && index < soLuongTK) {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Nhập số lượng người dùng mới:");
+            int soLuongND = scanner.nextInt();
+            scanner.nextLine(); // Đọc bỏ dòng thừa
+
+            System.out.println("Nhập số lượng tài liệu mới:");
+            int soLuongTL = scanner.nextInt();
+            scanner.nextLine(); // Đọc bỏ dòng thừa
+
+            System.out.println("Nhập số lượng phiếu nhập mới:");
+            int soLuongPN = scanner.nextInt();
+            scanner.nextLine(); // Đọc bỏ dòng thừa
+
+            System.out.println("Nhập số lượng mượn trả mới:");
+            int soLuongMuon = scanner.nextInt();
+            scanner.nextLine(); // Đọc bỏ dòng thừa
+
+            ThongKe thongKeCanSua = dsTK[index];
+            thongKeCanSua.setSoLuongND(soLuongND);
+            thongKeCanSua.setSoLuongTL(soLuongTL);
+            thongKeCanSua.setSoLuongPN(soLuongPN);
+            thongKeCanSua.setSoLuongMuon(soLuongMuon);
+
+            System.out.println("Đã cập nhật thông tin thống kê.");
+        } else {
+            System.out.println("Không tìm thấy thống kê với chỉ mục: " + index);
         }
-        System.out.println("Không tìm thấy thống kê với mã: " + maTK);
     }
 
-    public void xoaTK(String maTK) {
-        for (int i = 0; i < soLuongTK; i++) {
-            if (dsTK[i].getMaTK().equals(maTK)) {
-                dsTK[i].setDaXoa(true); // Đánh dấu mục này là đã xóa
-                System.out.println("Đã xóa tạm thời thống kê với mã: " + maTK);
-                return;
-            }
+    public void xoaTK(int index) {
+        if (index >= 0 && index < soLuongTK) {
+            dsTK[index].setDaXoa(true);
+            System.out.println("Đã xóa tạm thời thống kê với chỉ mục: " + index);
+        } else {
+            System.out.println("Không tìm thấy thống kê với chỉ mục: " + index);
         }
-        System.out.println("Không tìm thấy thống kê với mã: " + maTK);
     }
 
-    public void khoiPhucTK(String maTK) {
-        for (int i = 0; i < soLuongTK; i++) {
-            if (dsTK[i].getMaTK().equals(maTK)) {
-                dsTK[i].setDaXoa(false); // Khôi phục mục này
-                System.out.println("Đã khôi phục thống kê với mã: " + maTK);
-                return;
-            }
+    public void khoiPhucTK(int index) {
+        if (index >= 0 && index < soLuongTK) {
+            dsTK[index].setDaXoa(false);
+            System.out.println("Đã khôi phục thống kê với chỉ mục: " + index);
+        } else {
+            System.out.println("Không tìm thấy thống kê với chỉ mục: " + index);
         }
-        System.out.println("Không tìm thấy thống kê với mã: " + maTK);
     }
 
-    public void timkiemTK(String maTK) {
-        for (int i = 0; i < soLuongTK; i++) {
-            if (dsTK[i].getMaTK().equals(maTK)) {
-                dsTK[i].xuat();
-                return;
-            }
+    public void timKiemTK(int index) {
+        if (index >= 0 && index < soLuongTK) {
+            ThongKe tk = dsTK[index];
+            System.out.println("Thông tin thống kê:");
+            System.out.println("- Mã thống kê: " + (index + 1));
+            System.out.println("- Số lượng người dùng: " + tk.getSoLuongND());
+            System.out.println("- Số lượng tài liệu: " + tk.getSoLuongTL());
+            System.out.println("- Số lượng phiếu nhập: " + tk.getSoLuongPN());
+            System.out.println("- Số lượng mượn trả: " + tk.getSoLuongMuon());
+        } else {
+            System.out.println("Không tìm thấy thống kê với chỉ mục: " + index);
         }
-        System.out.println("Không tìm thấy thống kê với mã: " + maTK);
     }
 
-    public void xuat_ds() {
+    public void xuatDs() {
+        System.out.println("Danh sách thống kê:");
         for (int i = 0; i < soLuongTK; i++) {
-            dsTK[i].xuat();
+            ThongKe tk = dsTK[i];
+            System.out.println("Thống kê " + (i + 1) + ":");
+            System.out.println("- Số lượng người dùng: " + tk.getSoLuongND());
+            System.out.println("- Số lượng tài liệu: " + tk.getSoLuongTL());
+            System.out.println("- Số lượng phiếu nhập: " + tk.getSoLuongPN());
+            System.out.println("- Số lượng mượn trả: " + tk.getSoLuongMuon());
         }
     }
 
     public void hienThiDanhSachXoa() {
         System.out.println("Danh sách thống kê đã xóa tạm thời:");
-        boolean hasDeleted = false; 
-        
+        boolean hasDeleted = false;
         for (int i = 0; i < soLuongTK; i++) {
             if (dsTK[i].isDaXoa()) {
-                dsTK[i].xuat();
+                ThongKe tk = dsTK[i];
+                System.out.println("Thống kê " + (i + 1) + ":");
+                System.out.println("- Số lượng người dùng: " + tk.getSoLuongND());
+                System.out.println("- Số lượng tài liệu: " + tk.getSoLuongTL());
+                System.out.println("- Số lượng phiếu nhập: " + tk.getSoLuongPN());
+                System.out.println("- Số lượng mượn trả: " + tk.getSoLuongMuon());
                 hasDeleted = true;
             }
         }
-        
         if (!hasDeleted) {
             System.out.println("Không có mục nào đã xóa tạm thời.");
         }
