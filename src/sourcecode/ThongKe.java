@@ -45,18 +45,17 @@ public class ThongKe {
         System.out.println("Số tài liệu cho mượn: " + count);
     }
 
-    // Phương thức thống kê tổng số tài liệu đã nhập
-    public void soTLNhap() {
-        int count = 0;
-        for (int i = 0; i < soLuongPN; i++) {
-            count += dsPN[i].getTongTien(); // Giả định `getTongTien` trả về số lượng tài liệu nhập
-        }
-        System.out.println("Số tài liệu nhập: " + count);
-    }
-
     // Phương thức in ra tổng số phiếu nhập
     public void tongPN() {
         System.out.println("Tổng số phiếu nhập: " + soLuongPN);
+    }
+
+    public void tongTienPhieuNhap() { 
+        double total = 0; 
+        (int i = 0; i < soLuongPN; i++) {
+            total += dsPN[i].getTongTien();
+        } 
+        System.out.println("Tổng tiền phiếu nhập: " + total);
     }
 
     // Phương thức in ra tổng số người dùng
