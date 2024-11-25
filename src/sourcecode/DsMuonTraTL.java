@@ -62,6 +62,13 @@ public class DsMuonTraTL {
         }
     }
 
+    public boolean kiemTraNguoiDungDaMuon(String tenNguoiDung) { 
+        for (int i = 0; i < soLuongMuonTra; i++) {
+            if (dsMT[i].getTenNguoiDung().equals(tenNguoiDung)) { 
+                return true; } 
+        } return false; 
+    }
+
     public void xoaMuon(String maTL) {
         for (int i = 0; i < soLuongMuonTra; i++) {
             if (dsMT[i].getMaTL().equals(maTL)) {
