@@ -1,8 +1,9 @@
-package DoAn_QLTV_main.src.sourcecode;
+package qltv;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class DsMuonTraTL {
     private MuonTraTL[] dsMT;
@@ -43,11 +44,24 @@ public class DsMuonTraTL {
                     String tenNguoiDung = data[4];
 
                     MuonTraTL muonTraTL = new MuonTraTL(maTL, ngayMuon, ngayTra, soLuong, tenNguoiDung);
+
                     // Tìm kiếm thông tin người dùng và cập nhật vào đối tượng MuonTraTL
-                    muonTraTL.setNguoiDung(dsNguoiDung.timKiemNguoiDungTheoTen(tenNguoiDung)[0]);
+                    NguoiDung[] nguoiDungs = muonTraTL.timKiemNguoiDungTheoTen(tenNguoiDung, dsNguoiDung);
+                    if (nguoiDungs == null || nguoiDungs.length == 0) {
+                        System.out.println("Không tìm thấy người dùng với tên: " + tenNguoiDung);
+                    } else if (nguoiDungs.length == 1) {
+                        muonTraTL.setNguoiDung(nguoiDungs[0]);
+                    } else {
+                        System.out.println("Có nhiều người dùng với tên: " + tenNguoiDung);
+                        System.out.print("Vui lòng nhập mã giảng viên hoặc mã sinh viên: ");
+                        Scanner scanner = new Scanner(System.in);
+                        String maNguoiDung = scanner.nextLine();
+                        muonTraTL.setNguoiDung(muonTraTL.timKiemNguoiDungTheoMa(maNguoiDung, dsNguoiDung));
+                    }
                     themMuon(muonTraTL);
                 }
             }
+            System.out.println("Đọc dữ liệu thành công từ file " + tenFile);
         } catch (IOException e) {
             System.out.println("Không thể đọc file: " + e.getMessage());
         }
@@ -62,13 +76,13 @@ public class DsMuonTraTL {
         }
     }
 
-    public boolean kiemTraNguoiDungDaMuon(String tenNguoiDung) { 
-        for (int i = 0; i < soLuongMuonTra; i++) { 
-            if (dsMT[i].getTenNguoiDung().equals(tenNguoiDung)) { 
-                return true; 
-            } 
-        } 
-        return false; 
+    public boolean kiemTraNguoiDungDaMuon(String tenNguoiDung) {
+        for (int i = 0; i < soLuongMuonTra; i++) {
+            if (dsMT[i].getTenNguoiDung().equals(tenNguoiDung)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void xoaMuon(String maTL) {
@@ -99,15 +113,15 @@ public class DsMuonTraTL {
 
     public void hienThiDanhSachXoa() {
         System.out.println("Danh sách mượn trả đã xóa tạm thời:");
-        boolean hasDeleted = false; 
-        
+        boolean hasDeleted = false;
+
         for (int i = 0; i < soLuongMuonTra; i++) {
             if (dsMT[i].isDaXoa()) {
                 dsMT[i].xuat();
                 hasDeleted = true;
             }
         }
-        
+
         if (!hasDeleted) {
             System.out.println("Không có mục nào đã xóa tạm thời.");
         }
