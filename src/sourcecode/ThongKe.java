@@ -25,15 +25,14 @@ public class ThongKe {
     }
 
     // Phương thức thống kê số người dùng đã mượn tài liệu
-    public void soNgMuonTL() {
-        int count = 0;
-        for (int i = 0; i < soLuongND; i++) {
-            if (dsND[i].daMuonTL()) {
-                count++;
-            }
-        }
-        System.out.println("Số người dùng mượn tài liệu: " + count);
-    }
+   public void soNgMuonTL() { 
+       int count = 0; 
+       for (int i = 0; i < soLuongND; i++) { 
+           if (dsMuonTraTL.kiemTraNguoiDungDaMuon(dsND[i].getTen())) {
+               count++; 
+           } 
+       } System.out.println("Số người dùng mượn tài liệu: " + count); 
+   }
 
     // Phương thức thống kê số tài liệu hiện đang được mượn
     public void soTLChoMuon() {
