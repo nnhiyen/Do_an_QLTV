@@ -1,59 +1,41 @@
 package DoAn_QLTV_main.src.sourcecode;
 
-import java.util.Scanner;
+import java.utl.Scanner;
 
-public class TaiLieu{
-	    private String maTL;
+public abstract class TaiLieu{
 	    private String tenTL;
-	    private TheLoai theLoai;
-	    private TacGia tacGia;
-		private String tenNXB;
-
+	    private String tenTG;
+	    private String theLoai;
+		
 		public TaiLieu(){}
 
-	    public TaiLieu(String maTL, String tenTL, TheLoai theLoai, TacGia tacGia, String tenNXB){
-	        this.maTL = maTL;
+	    public TaiLieu(String tenTL, String tenTG, String theLoai){
 	        this.tenTL = tenTL;
+	        this.tenTG = tenTG;
 	        this.theLoai = theLoai;
-	        this.tacGia = tacGia;
-			this.tenNXB = tenNXB;
 	    }
 
 	    public void nhap(){
-	        Scanner scanner = new Scanner(System.in);
-	        System.out.print("Nhap ma tai lieu: ");
-	        maTL = scanner.nextLine();
-	        System.out.print("Nhap ten tai lieu: ");
-	        tenTL = scanner.nextLine();
-	        theLoai = new TheLoai();
-	        tacGia = new TacGia();
-	        tacGia.nhap();
-			System.out.print("Nhap ten nha xuat ban: ");
-			tenNXB = scanner.nextLine();
+			Scanner sc = new Scanner(System.in);
+	        System.out.printf("Nhap ten tai lieu: ");
+	        tenTL = sc.nextLine();
+	        System.out.printf("Nhap ten tac gia: ");
+	        tenTG = sc.nextLine();
+	        System.out.printf("Nhap ten the loai");
+	        theLoai= sc.nextLine();
 	    }
-
+	    @Override
 	    public String toString(){
-	        return "Ma tai lieu: " + maTL + "\n" +
-	               "Ten tai lieu: " + tenTL + "\n" +
-	               "The loai: " + theLoai.toString() + "\n" +
-				   "Tac gia:" + tacGia.toString() + "\n" +
-				   "Ten nha xuat ban: " + tenNXB ;
+	        return "Ten tai lieu: " + tenTL + "\n" +
+	        		"Ten tac gia: " + tenTG + "\n" +
+	               "The loai: " + theLoai;
 	    }
 
 	    public void xuat(){
-	        System.out.println("Ma tai lieu: " + maTL);
-			System.out.println("Ten tai lieu: "+ tenTL);
-			theLoai.xuat();
-			tacGia.xuat();
-			System.out.println("Ten nha xuat ban: " + tenNXB);
+	    	System.out.println("Thông tin tai lieu " + toString());
 	    }
-
-	    public String getMaTL(){
-	        return maTL;
-	    }
-	    public void setMaTL(String maTL){
-	        this.maTL = maTL;
-	    }
+	    
+	    public abstract String maTL();
 
 	    public String getTenTL(){
 	        return tenTL;
@@ -61,25 +43,28 @@ public class TaiLieu{
 	    public void setTenTL(String tenTL){
 	        this.tenTL = tenTL;
 	    }
+	    
+	    public String getTenTG(){
+	        return tenTG;
+	    }
+	    public void setTenTG(String tenTG){
+	        this.tenTG = tenTG;
+	    }
 
-	    public TheLoai getTheLoai() {
+	    public String getTheLoai() {
 	        return theLoai;
 	    }
-	    public void setTheLoai(TheLoai theLoai) {
+	    public void setTheLoai(String theLoai) {
 	        this.theLoai= theLoai;
 	    }
-	    
-	    public TacGia getTacGia() {
-	        return tacGia;
-	    }
-	    public void setTacGia(TacGia tacGia) {
-	        this.tacGia = tacGia;
+	    	    
+	    private boolean isDeleted;
+
+	    public boolean isDeleted() {
+	        return isDeleted;
 	    }
 
-		public String getTenNXB(){
-	        return tenNXB;
-	    }
-	    public void setTenNXB(String tenNXB){
-	        this.tenNXB = tenNXB;
+	    public void setDeleted(boolean deleted) {
+	        isDeleted = deleted;
 	    }
 }
