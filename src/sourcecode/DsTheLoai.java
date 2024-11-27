@@ -1,6 +1,9 @@
 package DoAn_QLTV_main.src.sourcecode;
+
 import java.util.Scanner;
-import java.util.Arrays;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -32,7 +35,7 @@ public class DsTheLoai{
                 Scanner scanner = new Scanner(System.in);
 
                 System.out.printf("Nhap ten the loai: ");
-                dsTLoai[i].setTenTLoai(scanner.nextLine());
+                dsTLoai[i].setTheLoai(scanner.nextLine());
 		        found = true;
                 ghiDuLieuRaFile("theloai.txt");
 		        return;
@@ -71,7 +74,7 @@ public class DsTheLoai{
      public void timkiemTLoaitheoten(String tenTLoai){
     	 boolean found = false;
     	 for(int i=0; i<soluongTLoai; i++){
-            if(dsTLoai[i].getTenTLoai().equals(tenTLoai)){
+            if(dsTLoai[i].getTheLoai().equals(tenTLoai)){
                 dsTLoai[i].xuat();
                 found = true;
             }
@@ -92,32 +95,34 @@ public class DsTheLoai{
     }
     
     private void ghiDuLieuRaFile(String tenFile){
-    	String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\DOAN\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+    	String duongDan = "C:\\\\Users\\\\Admin\\\\Documents\\\\NetBeansProjects\\\\DOAN\\\\src\\\\DoAn_QLTV_main\\\\src\\\\sourcefile\\\\" + tenFile;
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(duongDan))) {
             for (int i = 0; i < soluongTLoai; i++) {
                 writer.write(dsTLoai[i].toString());
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.out.println("Lỗi khi ghi vào file: " + e.getMessage());
+            System.out.println("Loi khi ghi vao file: " + e.getMessage());
         }
     }
 
     private void docDuLieuTuFile(String tenFile){
-    	String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\DOAN\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+    	String duongDan = "C:\\\\Users\\\\Admin\\\\Documents\\\\NetBeansProjects\\\\DOAN\\\\src\\\\DoAn_QLTV_main\\\\src\\\\sourcefile\\\\" + tenFile;
         try (BufferedReader reader = new BufferedReader(new FileReader(duongDan))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(" ");
                 if (data.length == 2) {
                     TheLoai tloai = new TheLoai();
-                    tloai.setTenTLoai(data[0]);
+                    tloai.setTheLoai(data[0]);
                     tloai.setMaTLoai(data[1]);
                     themTLoai(tloai);
                 }
             }
+            System.out.println("Ghi file thanh cong");
         } catch (IOException e) {
-            System.out.println("Lỗi khi đọc từ file: " + e.getMessage());
+            System.out.println("Loi khi đoc tu file: " + e.getMessage());
         }
     }
 }
+
