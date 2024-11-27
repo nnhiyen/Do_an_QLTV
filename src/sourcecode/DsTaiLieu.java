@@ -155,7 +155,7 @@ public class DsTaiLieu{
     }
     
     private void ghiDuLieuRaFile(String tenFile){
-    	String duongDan = "C:\\\\Users\\\\Admin\\\\Documents\\\\NetBeansProjects\\\\DOAN\\\\src\\\\DoAn_QLTV_main\\\\src\\\\sourcefile\\\\" + tenFile;
+    	String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\DOAN\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(duongDan))) {
             for (int i = 0; i < soluongTL; i++) {
                 writer.write(dsTL[i].toString());
@@ -167,7 +167,7 @@ public class DsTaiLieu{
     }
     public void docDuLieuTuFile(String tenFile) {
         // Đường dẫn đầy đủ tới file
-        String duongDan = "C:\\\\Users\\\\Admin\\\\Documents\\\\NetBeansProjects\\\\DOAN\\\\src\\\\DoAn_QLTV_main\\\\src\\\\sourcefile\\\\" + tenFile;
+        String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\DOAN\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(duongDan))) {
             String line;
