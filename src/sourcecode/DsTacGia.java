@@ -1,6 +1,5 @@
 package DoAn_QLTV_main.src.sourcecode;
 
-package eclip;
 import java.util.Scanner;
 import java.util.Arrays;
 import java.text.ParseException;
