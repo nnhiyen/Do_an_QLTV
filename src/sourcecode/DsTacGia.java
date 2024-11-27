@@ -1,10 +1,11 @@
 package DoAn_QLTV_main.src.sourcecode;
 
+package eclip;
 import java.util.Scanner;
+import java.util.Arrays;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Arrays;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -33,21 +34,21 @@ public class DsTacGia{
     	 boolean found = false;
         for(int i=0; i<soluongTG; i++){
             if(dsTG[i].getMaTG().equals(maTG)){
-                Scanner scanner = new Scanner(System.in);
+                Scanner sc = new Scanner(System.in);
 
                 System.out.printf("Nhap ten tac gia: ");
-                dsTG[i].setTenTG(scanner.nextLine());
+                dsTG[i].setTenTG(sc.nextLine());
 
                 System.out.print("Nhap ngay-thang-nam sinh tac gia (dd-MM-yyyy): ");
 		        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
 		        try {
-		            dsTG[i].setNgaySinh(formatter.parse(scanner.nextLine()));
+		            dsTG[i].setNgaySinh(formatter.parse(sc.nextLine()));
 		        } catch (ParseException e) {
 		            System.out.println("Ngay sinh khong hop le");
 		        }
 		
 		        System.out.print("Nhap dia chi tac gia: ");
-		        dsTG[i].setDiaChi(scanner.nextLine());
+		        dsTG[i].setDiaChi(sc.nextLine());
 		        found = true;
                 ghiDuLieuRaFile("tacgia.txt");
 		        return;
@@ -107,19 +108,19 @@ public class DsTacGia{
     }
     
     private void ghiDuLieuRaFile(String tenFile){
-    	String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\DOAN\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+    	String duongDan = "C:\\\\Users\\\\Admin\\\\Documents\\\\NetBeansProjects\\\\DOAN\\\\src\\\\DoAn_QLTV_main\\\\src\\\\sourcefile\\\\" + tenFile;
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(duongDan))) {
             for (int i = 0; i < soluongTG; i++) {
                 writer.write(dsTG[i].toString());
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.out.println("Lỗi khi ghi vào file: " + e.getMessage());
+            System.out.println("Loi khi ghi vào file: " + e.getMessage());
         }
     }
 
     private void docDuLieuTuFile(String tenFile){
-    	String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\DOAN\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+    	String duongDan = "C:\\\\Users\\\\Admin\\\\Documents\\\\NetBeansProjects\\\\DOAN\\\\src\\\\DoAn_QLTV_main\\\\src\\\\sourcefile\\\\" + tenFile;
         try (BufferedReader reader = new BufferedReader(new FileReader(duongDan))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -132,14 +133,16 @@ public class DsTacGia{
                     try {
                         tg.setNgaySinh(formatter.parse(data[2]));
                     } catch (ParseException e) {
-                        System.out.println("Ngày sinh không hợp lệ: " + data[2]);
+                        System.out.println("Ngay sinh khong hop le: " + data[2]);
                     }
                     tg.setDiaChi(data[3]);
                     themTG(tg);
                 }
             }
+            System.out.println("Ghi file thanh cong");
         } catch (IOException e) {
-            System.out.println("Lỗi khi đọc từ file: " + e.getMessage());
+            System.out.println("Loi khi đọc từ file: " + e.getMessage());
         }
     }
 }
+
