@@ -7,10 +7,12 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 public class DsTaiLieu{
     private TaiLieu[] dsTL;
     private int soluongTL;
+    private static final String maTLxxx = "^TL\\d{3}$";
     Scanner sc = new Scanner(System.in);
     
     public DsTaiLieu(int kichThuoc){
@@ -19,8 +21,12 @@ public class DsTaiLieu{
     }
     
     public boolean kiemTraMaTL(String maTL) {
+    	if (!Pattern.matches(maTLxxx, maTL)) {
+            System.out.println("Mã tài liệu không hợp lệ. Định dạng đúng là 'TLxxx' (ví dụ: TL001,...).");
+            return false;
+        }
         for (int i = 0; i < soluongTL; i++) {
-            if (dsTL[i].maTL().equals(maTL)) {
+            if (dsTL[i].getMaTL().equals(maTL)) {
                 return true;  
             }
         }
@@ -30,74 +36,66 @@ public class DsTaiLieu{
     public void themTL(TaiLieu tl){
         if (soluongTL < dsTL.length){
         	tl.nhap();
-            dsTL[soluongTL] = tl;
-            soluongTL++;
-            ghiDuLieuRaFile("tailieu.txt");
+        	while (!tl.kiemTraThongTinHopLe()) {
+                System.out.println("Khong duoc de thong tin trong.");
+                tl.nhap();
+            }
+        	while (kiemTraMaTL(tl.getMaTL())) { 
+                System.out.println("Ma tai lieu bi trung. Vui long nhap lai.");
+                tl.nhap();
+            }
+		    dsTL[soluongTL] = tl;
+		    soluongTL++;
+		    ghiDuLieuRaFile("tailieu1.txt");
+		    System.out.println("Them thanh cong.");
         } else {
             System.out.println("Danh sach day");
         }
     }
     
-    public void themNhieuTaiLieu(int soLuongThem, TaiLieu tl) {
-        Scanner sc = new Scanner(System.in);
-        for (int i = 0; i < soLuongThem; i++) {
-            System.out.println("Thêm tài liệu thứ " + (i + 1) + ": ");
-            tl.nhap();
-            
-            if (kiemTraMaTL(tl.maTL())) {
-                System.out.println("Mã tài liệu " + tl.maTL() + " đã tồn tại. Vui lòng nhập mã khác.");
-            } else {
-                themTL(tl);
-                System.out.println("Tài liệu " + tl.getTenTL() + " đã được thêm thành công.");
-            }
-        }
-    }
-    
     public void suaTL(String maTL){
         for (int i=0; i<soluongTL; i++){
-            if(dsTL[i].maTL().equals(maTL)){
+            if(dsTL[i].getMaTL().equals(maTL)){
                 System.out.println("Nhap lai thong tin tai lieu: ");
                 dsTL[i].nhap();
-                ghiDuLieuRaFile("tailieu.txt");
+                ghiDuLieuRaFile("tailieu1.txt");
+    		    System.out.println("Sua thanh cong.");
                 return;
             }
         }
     }
 
     public void xoaTaiLieu(String tenTL) {
-        for (int i = 0; i < soluongTL; i++) {
+        for (int i = 0; i < soluongTL; i++ ) {
             if (dsTL[i].getTenTL().equals(tenTL)) {
-            	TaiLieu tl= (TaiLieu) dsTL[i];
-            	tl.setDeleted(true);
+            	dsTL[i].setDeleted(true);
             }
-            System.out.println("Xóa tạm thời thành công.");
-            ghiDuLieuRaFile("tailieu.txt"); 
+            System.out.println("xoa tam thoi thanh cong.");
+            ghiDuLieuRaFile("tailieu1.txt"); 
             return;
         }
-        System.out.println("Không tìm thấy tài liệu.");
+        System.out.println("Khong tim thay tai lieu.");
     }
     
     public void khoiPhucTaiLieu(String tenTL){
         for (int i = 0; i < soluongTL; i++) {
             if (dsTL[i].getTenTL().equals(tenTL)){
-            	TaiLieu tl= (TaiLieu) dsTL[i];
-            	tl.setDeleted(false);
+            	dsTL[i].setDeleted(false);
             }
-            System.out.println("Khôi phục thành công.");
-            ghiDuLieuRaFile("tailieu.txt");
+            System.out.println("Khoi phuc thanh cong.");
+            ghiDuLieuRaFile("tailieu1.txt");
             return;
         }
-        System.out.println("Không tìm thấy tài liệu.");
+        System.out.println("Khong tim thay tai lieu.");
     }
     
-    public void DsXoa() {
+    public void xuat_dsXoa() {
     	System.out.println("Danh sach tai lieu xoa tam thoi:");
     	boolean hasDeleted = false;
     	
     	for(int i=0; i<soluongTL; i++) {
-    		TaiLieu tl = (TaiLieu) dsTL[i];
-    		if(tl.isDeleted()) {
-    			System.out.printf(tl.getTenTL());
+    		if(dsTL[i].isDeleted()) {
+    			System.out.printf("Ten tai lieu bi xoa tam thoi: "+ dsTL[i].getTenTL());
     			hasDeleted = true;
     		}
     	}
@@ -109,9 +107,8 @@ public class DsTaiLieu{
     public void timKiemtheoMa(String maTL) {
         boolean found = false;
         for(int i=0; i<soluongTL; i++) {
-        	TaiLieu tl= (TaiLieu) dsTL[i];
-        	if(tl.maTL().equals(maTL)) {
-        		tl.xuat();
+        	if(dsTL[i].getMaTL().equals(maTL)) {
+        		dsTL[i].xuat();
         		found = true;
         	}
         }
@@ -132,17 +129,17 @@ public class DsTaiLieu{
             System.out.println("Khong tim thay tai lieu voi ten: " + tenTL);
         }
     }
-    public void xuat_ds(){
-    	if(soluongTL ==0) {
-    		System.out.println("Danh sach rong");
-    		return;
-    	}
-    	System.out.println("Danh sach tai lieu: ");
-        for(int i = 0; i < soluongTL; i++){
-        	TaiLieu tl = (TaiLieu) dsTL[i];
-        	if(!tl.isDeleted()) {
-            dsTL[i].xuat();
-        	}
+    public void xuat_ds() {
+        docDuLieuTuFile("tailieu1.txt");
+        if (soluongTL == 0) {
+            System.out.println("Danh sach rong");
+            return;
+        }
+        System.out.println("Danh sach tai lieu: ");
+        for (int i = 0; i < soluongTL; i++) {
+            if (!dsTL[i].isDeleted()) {
+                dsTL[i].xuat();
+            }
         }
     }
     
@@ -155,40 +152,43 @@ public class DsTaiLieu{
     }
     
     private void ghiDuLieuRaFile(String tenFile){
-    	String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\DOAN\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+    	if (soluongTL == 0) {
+            System.out.println("Không có dữ liệu để ghi.");
+            return;
+        }
+    	String duongDan = "C:\\eclip\\eclip\\eclip\\\\" + tenFile;
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(duongDan))) {
             for (int i = 0; i < soluongTL; i++) {
                 writer.write(dsTL[i].toString());
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.out.println("Loi khi ghi vào file: " + e.getMessage());
+            System.out.println("Loi khi ghi vao file: " + e.getMessage());
         }
     }
     public void docDuLieuTuFile(String tenFile) {
-        // Đường dẫn đầy đủ tới file
-        String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\DOAN\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+        String duongDan = "C:\\\\eclip\\\\eclip\\\\eclip\\\\\\\\" + tenFile;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(duongDan))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(", "); 
-                if (parts.length >= 4) { 
-                    String tenTL = parts[0].split(": ")[1];
-                    String tenTG = parts[1].split(": ")[1];
-                    String theLoai = parts[2].split(": ")[1];
-                    String ma = parts[3];
-                        TheLoai tl = new TheLoai();
-                        tl.setTenTL(tenTL);
-                        tl.setTenTG(tenTG);
-                        tl.setTheLoai(theLoai);
-                        tl.maTL();
+                String[] data = line.split(", "); 
+                if (data.length >= 7) { 
+                        TaiLieu tl = new TaiLieu();
+                        tl.setMaTL(data[0]);
+                        tl.setTenTL(data[1]);
+                        tl.setMaTG(data[2]);
+                        tl.setTenTG(data[3]);
+                        tl.setMaTLoai(data[4]);
+                        tl.setTenTLoai(data[5]);
+                        tl.setMaNXB(data[6]);
+                        tl.setTenNXB(data[7]);
                         themTL(tl);   
                 }
             }
-            System.out.println("Đọc dữ liệu thành công từ file " + duongDan);
+            System.out.println("Doc du lieu thanh cong tu file " + duongDan);
         } catch (IOException e) {
-            System.out.println("Lỗi khi đọc dữ liệu từ file: " + e.getMessage());
+            System.out.println("Loi khi doc file: " + e.getMessage());
         }
     }
 }
