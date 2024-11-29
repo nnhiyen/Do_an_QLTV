@@ -18,11 +18,23 @@ public class DsTheLoai{
         dsTLoai = new TheLoai[kichThuoc];
         soluongTLoai = 0;
     }
+     public boolean kiemTraMaTheLoai(String maTLoai) {  	
+		for (int i = 0; i < soluongTLoai; i++) {
+		        if (dsTLoai[i].getMaTG().equals(maTLoai)) {
+		        	return true;  
+		        }
+		}
+		return false;
+	}
      public void themTLoai(TheLoai tloai){
         if(soluongTLoai < dsTLoai.length){
             tloai.nhap();
             while (!tloai.kiemTraThongTinHopLe()) {
                 System.out.println("Khong duoc de thong tin trong.");
+                tloai.nhap();
+            }
+	    while (kiemTraMaTheLoai(tloai.getMaTL())) { 
+                System.out.println("Ma the loai bi trung. Vui long nhap lai.");
                 tloai.nhap();
             }
             soluongTLoai++;
