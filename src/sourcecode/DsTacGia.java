@@ -19,11 +19,17 @@ public class DsTacGia{
         dsTG = new TacGia[kichThuoc];
         soluongTG = 0;
     }
+    
      public void themTG(TacGia tg){
         if(soluongTG < dsTG.length){
-            dsTG[soluongTG] = tg;
+            tg.nhap();
+            while (!tg.kiemTraThongTinHopLe()) {
+                System.out.println("Khong duoc de thong tin trong.");
+                tg.nhap();
+            }
             soluongTG++;
-            ghiDuLieuRaFile("tacgia.txt");
+            ghiDuLieuRaFile("tacgia1.txt");
+		    System.out.println("Them thanh cong.");
         } else{
             System.out.println("Danh sach day");
         }
@@ -49,27 +55,52 @@ public class DsTacGia{
 		        System.out.print("Nhap dia chi tac gia: ");
 		        dsTG[i].setDiaChi(sc.nextLine());
 		        found = true;
-                ghiDuLieuRaFile("tacgia.txt");
+                ghiDuLieuRaFile("tacgia1.txt");
+    		    System.out.println("Sua thanh cong.");
 		        return;
             }
         }
      }
-
-     public void xoaTG(String maTG){
-    	 boolean found = false;
-        for(int i =0; i<soluongTG; i++){
-            if(dsTG[i].getMaTG().equals(maTG)){
-                for(int j=i; j<soluongTG-1; j++){
-                    dsTG[j]= dsTG[j+1];
-                }
-                dsTG[soluongTG-1]=null;
-                soluongTG--;
-                found = true;
-                ghiDuLieuRaFile("tacgia.txt");
-                return;
-            }
-        }
+  
+     public void xoaTacGia(String tenTG) {
+         for (int i = 0; i < soluongTG; i++ ) {
+             if (dsTG[i].getTenTG().equals(tenTG)) {
+            	 dsTG[i].setDeleted(true);
+             }
+             System.out.println("xoa tam thoi thanh cong.");
+             ghiDuLieuRaFile("tacgia1.txt"); 
+             return;
+         }
+         System.out.println("Khong tim thay tai lieu.");
      }
+     
+     public void khoiPhucTacGia(String tenTG){
+         for (int i = 0; i < soluongTG; i++) {
+             if (dsTG[i].getTenTG().equals(tenTG)){
+            	 dsTG[i].setDeleted(false);
+             }
+             System.out.println("Khoi phuc thanh cong.");
+             ghiDuLieuRaFile("tacgia1.txt");
+             return;
+         }
+         System.out.println("Khong tim thay tai lieu.");
+     }
+     
+     public void xuat_dsXoa() {
+     	System.out.println("Danh sach tac gia xoa tam thoi:");
+     	boolean hasDeleted = false;
+     	
+     	for(int i=0; i<soluongTG; i++) {
+     		if(dsTG[i].isDeleted()) {
+       			System.out.printf("Ten tac gia bi xoa tam thoi: "+ dsTG[i].getTenTG());
+     			hasDeleted = true;
+     		}
+     	}
+     	if(!hasDeleted) {
+     		System.out.println("Khong co tai lieu nao bi xoa.");
+     	}
+     }
+     
      public void timkiemTGtheoma(String maTG){
     	 boolean found = false;
     	 for(int i=0; i<soluongTG; i++){
@@ -96,6 +127,7 @@ public class DsTacGia{
          }
       }
     public void xuat_ds(){
+        docDuLieuTuFile("tacgia1.txt");
     	if(soluongTG ==0) {
     		System.out.println("Danh sach rong");
     		return;
@@ -107,19 +139,19 @@ public class DsTacGia{
     }
     
     private void ghiDuLieuRaFile(String tenFile){
-    	String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\DOAN\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+    	String duongDan = "C:\\\\Users\\\\Admin\\\\Documents\\\\NetBeansProjects\\\\DOAN\\\\src\\\\DoAn_QLTV_main\\\\src\\\\sourcefile\\\\" + tenFile;
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(duongDan))) {
             for (int i = 0; i < soluongTG; i++) {
                 writer.write(dsTG[i].toString());
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.out.println("Loi khi ghi vào file: " + e.getMessage());
+            System.out.println("Loi khi ghi vao file: " + e.getMessage());
         }
     }
 
     private void docDuLieuTuFile(String tenFile){
-    	String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\DOAN\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+    	String duongDan = "C:\\\\Users\\\\Admin\\\\Documents\\\\NetBeansProjects\\\\DOAN\\\\src\\\\DoAn_QLTV_main\\\\src\\\\sourcefile\\\\" + tenFile;
         try (BufferedReader reader = new BufferedReader(new FileReader(duongDan))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -138,9 +170,9 @@ public class DsTacGia{
                     themTG(tg);
                 }
             }
-            System.out.println("Ghi file thanh cong");
+            System.out.println("Doc file thanh cong");
         } catch (IOException e) {
-            System.out.println("Loi khi đọc từ file: " + e.getMessage());
+            System.out.println("Loi khi doc tu file: " + e.getMessage());
         }
     }
 }
