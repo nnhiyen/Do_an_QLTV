@@ -40,7 +40,7 @@ public class DsTaiLieu{
                 System.out.println("Khong duoc de thong tin trong.");
                 tl.nhap();
             }
-        	while (kiemTraMaTL(tl.getMaTL())) { 
+        	while (kiemTraMaTaiLieu(tl.getMaTL())) { 
                 System.out.println("Ma tai lieu bi trung. Vui long nhap lai.");
                 tl.nhap();
             }
