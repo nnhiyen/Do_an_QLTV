@@ -20,8 +20,13 @@ public class DsTheLoai{
     }
      public void themTLoai(TheLoai tloai){
         if(soluongTLoai < dsTLoai.length){
-            dsTLoai[soluongTLoai] = tloai;
+            tloai.nhap();
+            while (!tloai.kiemTraThongTinHopLe()) {
+                System.out.println("Khong duoc de thong tin trong.");
+                tloai.nhap();
+            }
             soluongTLoai++;
+            System.out.println("Them thanh cong.");
             ghiDuLieuRaFile("theloai.txt");
         } else{
             System.out.println("Danh sach day");
@@ -35,28 +40,52 @@ public class DsTheLoai{
                 Scanner scanner = new Scanner(System.in);
 
                 System.out.printf("Nhap ten the loai: ");
-                dsTLoai[i].setTheLoai(scanner.nextLine());
+                dsTLoai[i].setTenTLoai(scanner.nextLine());
 		        found = true;
+		        System.out.println("Sua thanh cong.");
                 ghiDuLieuRaFile("theloai.txt");
 		        return;
             }
         }
      }
 
-     public void xoaTLoai(String maTLoai){
-    	 boolean found = false;
-        for(int i =0; i<soluongTLoai; i++){
-            if(dsTLoai[i].getMaTLoai().equals(maTLoai)){
-                for(int j=i; j<soluongTLoai-1; j++){
-                    dsTLoai[j]= dsTLoai[j+1];
-                }
-                dsTLoai[soluongTLoai-1]=null;
-                soluongTLoai--;
-                found = true;
-                ghiDuLieuRaFile("theloai.txt");
-                return;
-            }
-        }
+     public void xoaTLoai(String tenTLoai) {
+         for (int i = 0; i < soluongTLoai; i++ ) {
+             if (dsTLoai[i].getTenTLoai().equals(tenTLoai)) {
+            	 dsTLoai[i].setDeleted(true);
+             }
+             System.out.println("xoa tam thoi thanh cong.");
+             ghiDuLieuRaFile("theloai1.txt"); 
+             return;
+         }
+         System.out.println("Khong tim thay the loai.");
+     }
+     
+     public void khoiPhucTheLoai(String tenTLoai){
+         for (int i = 0; i < soluongTLoai; i++) {
+             if (dsTLoai[i].getTenTLoai().equals(tenTLoai)){
+            	 dsTLoai[i].setDeleted(false);
+             }
+             System.out.println("Khoi phuc thanh cong.");
+             ghiDuLieuRaFile("theloai1.txt");
+             return;
+         }
+         System.out.println("Khong tim thay the loai.");
+     }
+     
+     public void xuat_dsXoa() {
+     	System.out.println("Danh sach the loai xoa tam thoi:");
+     	boolean hasDeleted = false;
+     	
+     	for(int i=0; i<soluongTLoai; i++) {
+     		if(dsTLoai[i].isDeleted()) {
+       			System.out.printf("Ten the loai bi xoa tam thoi: "+ dsTLoai[i].getTenTLoai());
+     			hasDeleted = true;
+     		}
+     	}
+     	if(!hasDeleted) {
+     		System.out.println("Khong co the loai nao bi xoa.");
+     	}
      }
      public void timkiemTLoaitheoma(String maTLoai){
     	 boolean found = false;
@@ -74,7 +103,7 @@ public class DsTheLoai{
      public void timkiemTLoaitheoten(String tenTLoai){
     	 boolean found = false;
     	 for(int i=0; i<soluongTLoai; i++){
-            if(dsTLoai[i].getTheLoai().equals(tenTLoai)){
+            if(dsTLoai[i].getTenTLoai().equals(tenTLoai)){
                 dsTLoai[i].xuat();
                 found = true;
             }
@@ -84,6 +113,7 @@ public class DsTheLoai{
          }
       }
     public void xuat_ds(){
+        docDuLieuTuFile("theloai1.txt");
     	if(soluongTLoai ==0) {
     		System.out.println("Danh sach rong");
     		return;
@@ -95,7 +125,7 @@ public class DsTheLoai{
     }
     
     private void ghiDuLieuRaFile(String tenFile){
-    	String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\DOAN\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+    	String duongDan = "C:\\\\Users\\\\Admin\\\\Documents\\\\NetBeansProjects\\\\DOAN\\\\src\\\\DoAn_QLTV_main\\\\src\\\\sourcefile\\\\" + tenFile;
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(duongDan))) {
             for (int i = 0; i < soluongTLoai; i++) {
                 writer.write(dsTLoai[i].toString());
@@ -107,22 +137,27 @@ public class DsTheLoai{
     }
 
     private void docDuLieuTuFile(String tenFile){
-    	String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\DOAN\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+    	String duongDan = "C:\\\\Users\\\\Admin\\\\Documents\\\\NetBeansProjects\\\\DOAN\\\\src\\\\DoAn_QLTV_main\\\\src\\\\sourcefile\\\\" + tenFile;
         try (BufferedReader reader = new BufferedReader(new FileReader(duongDan))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] data = line.split(" ");
-                if (data.length == 2) {
+                if (data.length >= 2) {
                     TheLoai tloai = new TheLoai();
-                    tloai.setTheLoai(data[0]);
+                    tloai.setTenTLoai(data[0]);
                     tloai.setMaTLoai(data[1]);
+                    tloai.setMaTL(data[2]);
+                    tloai.setTenTL(data[3]);
+                    tloai.setMaTG(data[4]);
+                    tloai.setTenTG(data[5]);
+                    tloai.setMaNXB(data[6]);
+                    tloai.setTenNXB(data[7]);
                     themTLoai(tloai);
                 }
             }
             System.out.println("Ghi file thanh cong");
         } catch (IOException e) {
-            System.out.println("Loi khi đoc tu file: " + e.getMessage());
+            System.out.println("Loi khi Ä‘oc tu file: " + e.getMessage());
         }
     }
 }
-
