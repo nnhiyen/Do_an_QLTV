@@ -37,7 +37,7 @@ public class DsTacGia{
                 tg.nhap();
             }
 	    while (kiemTraMaTacGia(tg.getMaTG())) { 
-                System.out.println("Ma tai lieu bi trung. Vui long nhap lai.");
+                System.out.println("Ma tac gia bi trung. Vui long nhap lai.");
                 tg.nhap();
             }
             soluongTG++;
