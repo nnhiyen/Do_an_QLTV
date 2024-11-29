@@ -5,24 +5,27 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class TacGia extends TaiLieu{
+public class TacGia{
 	private String tenTG;
     private String maTG;
     private Date ngaySinh;
     private String diaChi;
     private DsTaiLieu dsTaiLieu;
     
-    public TacGia(){
-    	super();
-    	}
+    public TacGia(){}
 
-    public TacGia(String tenTL, String theLoai, String tenTG,  String maTG, Date ngaySinh, String diaChi){
-        super(tenTL, theLoai, tenTG);
+    public TacGia(String tenTG,  String maTG, Date ngaySinh, String diaChi){
+        this.tenTG = tenTG;
         this.maTG = maTG;
         this.ngaySinh = ngaySinh;
         this.diaChi = diaChi;
     }
-
+    public String getTenTG() {
+    	return tenTG;
+    }
+    public void setTenTG(String tenTG) {
+    	this.tenTG = tenTG;
+    }
     public String getMaTG(){
         return maTG;
     }
@@ -43,16 +46,21 @@ public class TacGia extends TaiLieu{
 	public void setDiaChi(String diaChi){
         this.diaChi = diaChi;
     }
+	private boolean isDeleted;
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
 	
-	@Override
-	public String maTL() {
-		return maTG;
-	}
-	@Override
     public void nhap(){
         Scanner sc = new Scanner(System.in);
         
-        super.nhap();
+        System.out.printf("Nhap ten tac gia: ");
+        tenTG = sc.nextLine();
         
         System.out.print("Nhap ma tac gia: ");
         maTG = sc.nextLine();
@@ -69,6 +77,21 @@ public class TacGia extends TaiLieu{
         System.out.print("Nhap dia chi tac gia: ");
         diaChi = sc.nextLine();
     }
+    public boolean kiemTraThongTinHopLe() {
+        if (maTG == null && maTG.isEmpty() &&
+            tenTG == null && tenTG.isEmpty() &&
+            diaChi == null && diaChi.isEmpty()) {
+            return false;
+        }
+        if (ngaySinh == null) {
+            return false;
+        }
+        Date currentDate = new Date();
+        if (ngaySinh.after(currentDate)) {
+            return false;  // Nếu ngày sinh sau ngày hiện tại, không hợp lệ
+        }
+        return true;
+    }
     @Override
     public String toString(){
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -77,16 +100,11 @@ public class TacGia extends TaiLieu{
                "Ngay sinh: " + (ngaySinh != null ? formatter.format(ngaySinh) : "Khong co") + "\n" +
                "Dia chi tac gia: " + diaChi;
     }
-    @Override	
     public void xuat(){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-        System.out.println("Ten tac gia: " + tenTG);
-        System.out.println("Ma tac gia: " + maTG);
-        System.out.println("Ngay sinh: " + (ngaySinh != null ? formatter.format(ngaySinh) : "Khong co"));
-        System.out.println("Dia chi tac gia: " + diaChi);
+    	System.out.println(toString()+ "\n ----");
         System.out.println("Danh sach tac pham cua tac gia " + tenTG + ": ");
         if (dsTaiLieu.getSoLuongTaiLieu() == 0) {
-            System.out.println("Không có tài liệu nào.");
+            System.out.println("Tai lieu trong: ");
         } else {
             dsTaiLieu.xuat_ds();
         }
