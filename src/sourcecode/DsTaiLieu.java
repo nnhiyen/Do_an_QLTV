@@ -20,7 +20,7 @@ public class DsTaiLieu{
         soluongTL = 0;
     }
     
-    public boolean kiemTraMaTL(String maTL) {
+    public boolean kiemTraMaTaiLieu(String maTL) {
     	if (!Pattern.matches(maTLxxx, maTL)) {
             System.out.println("Mã tài liệu không hợp lệ. Định dạng đúng là 'TLxxx' (ví dụ: TL001,...).");
             return false;
@@ -33,7 +33,7 @@ public class DsTaiLieu{
         return false;
     }
     
-    public void themTL(TaiLieu tl){
+    public void themTaiLieu(TaiLieu tl){
         if (soluongTL < dsTL.length){
         	tl.nhap();
         	while (!tl.kiemTraThongTinHopLe()) {
@@ -53,7 +53,7 @@ public class DsTaiLieu{
         }
     }
     
-    public void suaTL(String maTL){
+    public void suaTaiLieu(String maTL){
         for (int i=0; i<soluongTL; i++){
             if(dsTL[i].getMaTL().equals(maTL)){
                 System.out.println("Nhap lai thong tin tai lieu: ");
@@ -117,7 +117,7 @@ public class DsTaiLieu{
         }
     }
     
-    public void timKiemTheoTen(String tenTL) {
+    public void timKiemtheoTen(String tenTL) {
         boolean found = false;
         for (int i = 0; i < soluongTL; i++) {
             if (dsTL[i].getTenTL().equals(tenTL)) {
