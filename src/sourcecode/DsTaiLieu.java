@@ -156,7 +156,7 @@ public class DsTaiLieu{
             System.out.println("Không có dữ liệu để ghi.");
             return;
         }
-    	String duongDan = "C:\\eclip\\eclip\\eclip\\\\" + tenFile;
+    	String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\DOAN\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(duongDan))) {
             for (int i = 0; i < soluongTL; i++) {
                 writer.write(dsTL[i].toString());
@@ -167,7 +167,7 @@ public class DsTaiLieu{
         }
     }
     public void docDuLieuTuFile(String tenFile) {
-        String duongDan = "C:\\\\eclip\\\\eclip\\\\eclip\\\\\\\\" + tenFile;
+        String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\DOAN\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
 
         try (BufferedReader reader = new BufferedReader(new FileReader(duongDan))) {
             String line;
