@@ -19,12 +19,25 @@ public class DsTacGia{
         dsTG = new TacGia[kichThuoc];
         soluongTG = 0;
     }
+
+     public boolean kiemTraMaTacGia(String maTG) {
+        for (int i = 0; i < soluongTG; i++) {
+            if (dsTG[i].getMaTG().equals(maTG)) {
+                return true;  
+            }
+        }
+        return false;
+    }
     
      public void themTG(TacGia tg){
         if(soluongTG < dsTG.length){
             tg.nhap();
             while (!tg.kiemTraThongTinHopLe()) {
                 System.out.println("Khong duoc de thong tin trong.");
+                tg.nhap();
+            }
+	    while (kiemTraMaTacGia(tg.getMaTG())) { 
+                System.out.println("Ma tai lieu bi trung. Vui long nhap lai.");
                 tg.nhap();
             }
             soluongTG++;
