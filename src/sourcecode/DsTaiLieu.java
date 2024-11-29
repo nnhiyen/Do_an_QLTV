@@ -183,7 +183,7 @@ public class DsTaiLieu{
                         tl.setTenTLoai(data[5]);
                         tl.setMaNXB(data[6]);
                         tl.setTenNXB(data[7]);
-                        themTL(tl);   
+                        themTaiLieu(tl);   
                 }
             }
             System.out.println("Doc du lieu thanh cong tu file " + duongDan);
