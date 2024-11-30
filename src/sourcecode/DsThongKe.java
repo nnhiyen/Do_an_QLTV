@@ -2,6 +2,7 @@ package qltv;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -44,6 +45,20 @@ public class   DsThongKe {
         reader.close();
         if (soLuongTK == MAX_THONG_KE) {
             System.err.println("Cảnh báo: Đã đạt đến giới hạn số lượng thống kê. Không thể đọc thêm dữ liệu.");
+        }
+    }
+    
+    public void ghiDuLieuVaoFile() {
+        String tenFile = "duLieuThongKe.txt";
+        try (FileWriter writer = new FileWriter(tenFile)) {
+            for (int i = 0; i < soLuongTK; i++) {
+                ThongKe tk = dsTK[i];
+                writer.write(tk.getSoLuongND() + "," + tk.getSoLuongTL() + "," + 
+                             tk.getSoLuongPN() + "," + tk.getSoLuongMuon() + "\n");
+            }
+            System.out.println("Ghi dữ liệu thành công vào file " + tenFile);
+        } catch (IOException e) {
+            System.out.println("Không thể ghi file: " + e.getMessage());
         }
     }
 
