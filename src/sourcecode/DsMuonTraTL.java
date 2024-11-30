@@ -2,6 +2,7 @@ package qltv;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -64,6 +65,18 @@ public class DsMuonTraTL {
             System.out.println("Đọc dữ liệu thành công từ file " + tenFile);
         } catch (IOException e) {
             System.out.println("Không thể đọc file: " + e.getMessage());
+        }
+    }
+        public void ghiDuLieuVaoFile() {String tenFile = "duLieuMuonTra.txt"; // Ghi vào file cố định
+        try (FileWriter writer = new FileWriter(tenFile)) {
+            for (int i = 0; i < soLuongMuonTra; i++) {
+                MuonTraTL mt = dsMT[i];
+                writer.write(mt.getMaTL() + "," + mt.getNgayMuon() + "," + mt.getNgayTra() + "," + 
+                             mt.getSoLuong() + "," + mt.getTenNguoiDung() + "\n");
+            }
+            System.out.println("Ghi dữ liệu thành công vào file " + tenFile);
+        } catch (IOException e) {
+            System.out.println("Không thể ghi file: " + e.getMessage());
         }
     }
 
