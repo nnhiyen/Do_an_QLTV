@@ -1,5 +1,7 @@
 package DoAn_QLTV_main.src.sourcecode;
 
+package qltv;
+
 import java.util.Scanner;
 
 public class MuonTraTL {
@@ -141,7 +143,16 @@ public class MuonTraTL {
             this.nguoiDung = timKiemNguoiDungTheoMa(maNguoiDung, dsNguoiDung);
         }
     }
-
+      public TaiLieu timKiemTaiLieu(String maTL, DsTaiLieu dsTaiLieu) {
+    for (int i = 0; i < dsTaiLieu.getSoluongTL(); i++) {
+        TaiLieu taiLieu = dsTaiLieu.getDsTL()[i];
+        if (taiLieu.getMaTL().equals(maTL)) {
+            return taiLieu; // Tìm thấy tài liệu
+        }
+    }
+    // Nếu không tìm thấy
+    System.out.println("Không tìm thấy tài liệu với mã: " + maTL);
+    return null;
     // Phương thức xuất thông tin
     public void xuat() {
         if (this.nguoiDung != null) {
@@ -150,7 +161,8 @@ public class MuonTraTL {
             System.out.println("Thông tin người dùng không hợp lệ. Không thể xuất thông tin mượn trả tài liệu.");
         }
     }
-
+      
+}
     @Override
     public String toString() {
         return "MuonTraTL{" +
