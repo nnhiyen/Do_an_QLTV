@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DoAn_QLTV_main.src.sourcecode;
 
 import java.io.BufferedReader;
@@ -13,7 +9,6 @@ import java.util.Scanner;
 
 public class DSChiTietPhieuNhap {
     private ChiTietPhieuNhap[] dsChiTiet;
-    
     private int soLuongCTPN;
     Scanner sc = new Scanner(System.in);
 
@@ -41,6 +36,20 @@ public class DSChiTietPhieuNhap {
             dsChiTiet[i].xuatCTPN();
         }
         System.out.println("+--------------------+----------+--------------+--------------+------------+");
+    }
+
+    public void timKiemChiTietPhieuNhap(String maPN) { 
+        boolean found = false; 
+        for (int i = 0; i < soLuongCTPN; i++) { 
+            if (dsChiTiet[i].getMaPN().equals(maPN)) { 
+                dsChiTiet[i].xuatCTPN(); 
+                found = true; 
+                break; 
+            } 
+        } 
+        if (!found) { 
+            System.out.println("Không tìm thấy chi tiết phiếu nhập với mã: " + maPN); 
+        } 
     }
 
     public double tinhTongTien() {
