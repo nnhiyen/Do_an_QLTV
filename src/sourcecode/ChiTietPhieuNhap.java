@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package DoAn_QLTV_main.src.sourcecode;
 
 import java.util.Scanner;
@@ -7,22 +11,19 @@ public class ChiTietPhieuNhap {
     private String maTL;
     private int soLuong;
     private double giaTien;
-    private double tongTien;
-    private boolean deleted; // Trạng thái đã xóa
+    private double thanhTien;
+    private boolean isDeleted;
+    public static Scanner sc = new Scanner(System.in);
 
-    // Constructor mặc định
-    public ChiTietPhieuNhap() {
-        this.deleted = false; // Mặc định không bị xóa
-    }
+    public ChiTietPhieuNhap() {}
 
-    // Constructor property
-    public ChiTietPhieuNhap(String maPN, String maTL, int soLuong, double giaTien) {
+    public ChiTietPhieuNhap(String maPN, String maTL, int soLuong, double giaTien, double thanhTien) {
         this.maPN = maPN;
         this.maTL = maTL;
         this.soLuong = soLuong;
         this.giaTien = giaTien;
-        this.tongTien = soLuong * giaTien;
-        this.deleted = false; // Mặc định không bị xóa
+        this.thanhTien = thanhTien;
+        this.isDeleted = false;
     }
 
     // Getter và Setter
@@ -48,7 +49,6 @@ public class ChiTietPhieuNhap {
 
     public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
-        this.tongTien = this.soLuong * this.giaTien;
     }
 
     public double getGiaTien() {
@@ -57,25 +57,27 @@ public class ChiTietPhieuNhap {
 
     public void setGiaTien(double giaTien) {
         this.giaTien = giaTien;
-        this.tongTien = this.soLuong * this.giaTien;
     }
 
-    public double getTongTien() {
-        return tongTien;
+    public double getThanhTien() {
+        return thanhTien;
+    }
+
+    public void setThanhTien(double thanhTien) {
+        this.thanhTien = thanhTien;
     }
 
     public boolean isDeleted() {
-        return deleted;
+        return isDeleted;
     }
 
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     // Phương thức nhập thông tin
     public void nhap() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Nhập mã phiếu: ");
+        System.out.print("Nhập mã phiếu nhập: ");
         maPN = sc.nextLine();
         System.out.print("Nhập mã tài liệu: ");
         maTL = sc.nextLine();
@@ -83,17 +85,17 @@ public class ChiTietPhieuNhap {
         soLuong = sc.nextInt();
         System.out.print("Nhập giá tiền: ");
         giaTien = sc.nextDouble();
-        tongTien = soLuong * giaTien;
+        thanhTien = soLuong * giaTien; // Tính thành tiền
     }
 
-    // Phương thức toString
+    // Phương thức xuất chi tiết phiếu nhập
+    public void xuatCTPN() {
+        System.out.printf("| %-12s | %-12s | %-8d | %-12.2f | %-12.2f | %-8s |\n", 
+            maPN, maTL, soLuong, giaTien, thanhTien, isDeleted ? "Đã xóa" : "Hoạt động");
+    }
+
     @Override
     public String toString() {
-        return "Mã phiếu: " + maPN + ", Mã tài liệu: " + maTL + ", Số lượng: " + soLuong + ", Giá tiền: " + giaTien + ", Tổng tiền: " + tongTien + ", Đã xóa: " + (deleted ? "Đã xóa" : "Chưa xóa");
-    }
-
-    // Phương thức xuất thông tin
-    public void xuat() {
-        System.out.println(this.toString());
+        return "Mã phiếu nhập: " + maPN + ", Mã tài liệu: " + maTL + ", Số lượng: " + soLuong + ", Giá tiền: " + giaTien + ", Thành tiền: " + thanhTien + ", Trạng thái xóa: " + isDeleted;
     }
 }
