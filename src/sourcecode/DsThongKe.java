@@ -1,169 +1,144 @@
 package DoAn_QLTV_main.src.sourcecode;
 
+import java.util.Scanner;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 
-public class DsThongKe {
-    private ThongKe[] dsTK;
-    private int soLuongTK;
-    private final int MAX_THONG_KE = 100; // Kích thước tối đa của mảng
-    
-    // Đường dẫn cố định tới file
-    private static final String FILE_PATH = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\DOAN\\src\\DoAn_QLTV_main\\src\\sourcefile\\duLieuThongKe.txt";
+public class DanhSachThongKe {
+    private ThongKe[] arr_tk;
+    private int soLuong;
+    Scanner sc = new Scanner(System.in);
 
-    public DsThongKe() {
-        dsTK = new ThongKe[MAX_THONG_KE];
-        soLuongTK = 0;
-        try {
-            docDuLieuTuFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public DanhSachThongKe(int kichThuoc) {
+        arr_tk = new ThongKe[kichThuoc];
+        soLuong = 0;
     }
 
-    private void docDuLieuTuFile() throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
-            String line;
-            while ((line = reader.readLine()) != null && soLuongTK < MAX_THONG_KE) {
-                try {
-                    String[] data = line.split(",");
-                    if (data.length == 4) {
-                        int kichThuocND = Integer.parseInt(data[0]);
-                        int kichThuocTL = Integer.parseInt(data[1]);
-                        int kichThuocPN = Integer.parseInt(data[2]);
-                        int kichThuocMuon = Integer.parseInt(data[3]);
-                        ThongKe thongKe = new ThongKe(kichThuocND, kichThuocTL, kichThuocPN, kichThuocMuon);
-                        dsTK[soLuongTK] = thongKe;
-                        soLuongTK++;
-                    } else {
-                        System.err.println("Lỗi đọc dữ liệu: Dòng không đủ thông tin.");
-                    }
-                } catch (NumberFormatException e) {
-                    System.err.println("Lỗi đọc dữ liệu: " + e.getMessage());
-                }
+    public void tangSoLuongNguoiDung(int thang, int nam, int sl) {
+        for (int i = 0; i < soLuong; i++) {
+            if (arr_tk[i].getD().getThang() == thang && arr_tk[i].getD().getNam() == nam) {
+                arr_tk[i].setSoluongNguoiDung(arr_tk[i].getSoluongNguoiDung() + sl);
+                return;
             }
         }
-        if (soLuongTK == MAX_THONG_KE) {
-            System.err.println("Cảnh báo: Đã đạt đến giới hạn số lượng thống kê. Không thể đọc thêm dữ liệu.");
-        }
-    }
-
-    public void ghiDuLieuVaoFile() {
-        try (FileWriter writer = new FileWriter(FILE_PATH)) {
-            for (int i = 0; i < soLuongTK; i++) {
-                ThongKe tk = dsTK[i];
-                writer.write(tk.getSoLuongND() + "," + tk.getSoLuongTL() + "," + 
-                             tk.getSoLuongPN() + "," + tk.getSoLuongMuon() + "\n");
-            }
-            System.out.println("Ghi dữ liệu thành công vào file " + FILE_PATH);
-        } catch (IOException e) {
-            System.out.println("Không thể ghi file: " + e.getMessage());
-        }
-    }
-
-    public void themTK(ThongKe thongKe) {
-        if (soLuongTK < MAX_THONG_KE) {
-            dsTK[soLuongTK] = thongKe;
-            soLuongTK++;
+        if (soLuong < arr_tk.length) {
+            ThongKe tk = new ThongKe(new date(thang, nam), sl, 0, 0, 0);
+            arr_tk[soLuong++] = tk;
         } else {
             System.out.println("Danh sách thống kê đã đầy.");
         }
     }
 
-    public void suaTK(int index) {
-        if (index >= 0 && index < soLuongTK) {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Nhập số lượng người dùng mới:");
-            int soLuongND = scanner.nextInt();
-            scanner.nextLine(); // Đọc bỏ dòng thừa
-
-            System.out.println("Nhập số lượng tài liệu mới:");
-            int soLuongTL = scanner.nextInt();
-            scanner.nextLine(); // Đọc bỏ dòng thừa
-
-            System.out.println("Nhập số lượng phiếu nhập mới:");
-            int soLuongPN = scanner.nextInt();
-            scanner.nextLine(); // Đọc bỏ dòng thừa
-
-            System.out.println("Nhập số lượng mượn trả mới:");
-            int soLuongMuon = scanner.nextInt();
-            scanner.nextLine(); // Đọc bỏ dòng thừa
-
-            ThongKe thongKeCanSua = dsTK[index];
-            thongKeCanSua.setSoLuongND(soLuongND);
-            thongKeCanSua.setSoLuongTL(soLuongTL);
-            thongKeCanSua.setSoLuongPN(soLuongPN);
-            thongKeCanSua.setSoLuongMuon(soLuongMuon);
-
-            System.out.println("Đã cập nhật thông tin thống kê.");
-        } else {
-            System.out.println("Không tìm thấy thống kê với chỉ mục: " + index);
-        }
-    }
-
-    public void xoaTK(int index) {
-        if (index >= 0 && index < soLuongTK) {
-            dsTK[index].setDaXoa(true);
-            System.out.println("Đã xóa tạm thời thống kê với chỉ mục: " + index);
-        } else {
-            System.out.println("Không tìm thấy thống kê với chỉ mục: " + index);
-        }
-    }
-
-    public void khoiPhucTK(int index) {
-        if (index >= 0 && index < soLuongTK) {
-            dsTK[index].setDaXoa(false);
-            System.out.println("Đã khôi phục thống kê với chỉ mục: " + index);
-        } else {
-            System.out.println("Không tìm thấy thống kê với chỉ mục: " + index);
-        }
-    }
-
-    public void timKiemTK(int index) {
-        if (index >= 0 && index < soLuongTK) {
-            ThongKe tk = dsTK[index];
-            System.out.println("Thông tin thống kê:");
-            System.out.println("- Mã thống kê: " + (index + 1));
-            System.out.println("- Số lượng người dùng: " + tk.getSoLuongND());
-            System.out.println("- Số lượng tài liệu: " + tk.getSoLuongTL());
-            System.out.println("- Số lượng phiếu nhập: " + tk.getSoLuongPN());
-            System.out.println("- Số lượng mượn trả: " + tk.getSoLuongMuon());
-        } else {
-            System.out.println("Không tìm thấy thống kê với chỉ mục: " + index);
-        }
-    }
-
-    public void xuatDs() {
-        System.out.println("Danh sách thống kê:");
-        for (int i = 0; i < soLuongTK; i++) {
-            ThongKe tk = dsTK[i];
-            System.out.println("Thống kê " + (i + 1) + ":");
-            System.out.println("- Số lượng người dùng: " + tk.getSoLuongND());
-            System.out.println("- Số lượng tài liệu: " + tk.getSoLuongTL());
-            System.out.println("- Số lượng phiếu nhập: " + tk.getSoLuongPN());
-            System.out.println("- Số lượng mượn trả: " + tk.getSoLuongMuon());
-        }
-    }
-
-    public void hienThiDanhSachXoa() {
-        System.out.println("Danh sách thống kê đã xóa tạm thời:");
-        boolean hasDeleted = false;
-        for (int i = 0; i < soLuongTK; i++) {
-            if (dsTK[i].isDaXoa()) {
-                ThongKe tk = dsTK[i];
-                System.out.println("Thống kê " + (i + 1) + ":");
-                System.out.println("- Số lượng người dùng: " + tk.getSoLuongND());
-                System.out.println("- Số lượng tài liệu: " + tk.getSoLuongTL());
-                System.out.println("- Số lượng phiếu nhập: " + tk.getSoLuongPN());
-                System.out.println("- Số lượng mượn trả: " + tk.getSoLuongMuon());
-                hasDeleted = true;
+    public void tangSoLuongTaiLieu(int thang, int nam, int sl) {
+        for (int i = 0; i < soLuong; i++) {
+            if (arr_tk[i].getD().getThang() == thang && arr_tk[i].getD().getNam() == nam) {
+                arr_tk[i].setSoluongTaiLieu(arr_tk[i].getSoluongTaiLieu() + sl);
+                return;
             }
         }
-        if (!hasDeleted) {
-            System.out.println("Không có mục nào đã xóa tạm thời.");
+        if (soLuong < arr_tk.length) {
+            ThongKe tk = new ThongKe(new date(thang, nam), 0, sl, 0, 0);
+            arr_tk[soLuong++] = tk;
+        } else {
+            System.out.println("Danh sách thống kê đã đầy.");
+        }
+    }
+
+    public void tangSoLuongPhieuNhap(int thang, int nam) {
+        for (int i = 0; i < soLuong; i++) {
+            if (arr_tk[i].getD().getThang() == thang && arr_tk[i].getD().getNam() == nam) {
+                arr_tk[i].setSoluongPhieuNhap(arr_tk[i].getSoluongPhieuNhap() + 1);
+                return;
+            }
+        }
+        if (soLuong < arr_tk.length) {
+            ThongKe tk = new ThongKe(new date(thang, nam), 0, 0, 1, 0);
+            arr_tk[soLuong++] = tk;
+        } else {
+            System.out.println("Danh sách thống kê đã đầy.");
+        }
+    }
+
+    public void tangSoLuongMuonTra(int thang, int nam, int sl) {
+        for (int i = 0; i < soLuong; i++) {
+            if (arr_tk[i].getD().getThang() == thang && arr_tk[i].getD().getNam() == nam) {
+                arr_tk[i].setSoluongMuonTra(arr_tk[i].getSoluongMuonTra() + sl);
+                return;
+            }
+        }
+        if (soLuong < arr_tk.length) {
+            ThongKe tk = new ThongKe(new date(thang, nam), 0, 0, 0, sl);
+            arr_tk[soLuong++] = tk;
+        } else {
+            System.out.println("Danh sách thống kê đã đầy.");
+        }
+    }
+
+    public void xuatDSTK(int thang, int nam) {
+        System.out.println("+-----------------------------------------------------------------------------------------------+");
+        System.out.println("|                                           Thống kê tháng                                        |");
+        System.out.println("+-----------------------------------------------------------------------------------------------+");
+        System.out.printf("| %-12s | %-20s | %-20s | %-20s | %-20s | %-15s |%n", "Ngày", "Số lượng người dùng", "Số lượng tài liệu", "Số lượng phiếu nhập", "Số lượng mượn trả", "Trạng thái xóa");
+        System.out.println("+-----------------------------------------------------------------------------------------------+");
+
+        boolean hasRecords = false;
+        for (int i = 0; i < soLuong; i++) {
+            if (arr_tk[i].getD().getThang() == thang && arr_tk[i].getD().getNam() == nam) {
+                arr_tk[i].xuat();
+                hasRecords = true;
+            }
+        }
+
+        if (!hasRecords) {
+            System.out.println("|                                 Không có giao dịch nào trong tháng                              |");
+        }
+        System.out.println("+-----------------------------------------------------------------------------------------------+");
+    }
+    
+    public void ghiDuLieuRaFile(String tenFile) {
+        String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\DOAN\\src\\Do_an_QLTV-main\\Do_an_QLTV-main\\src\\sourcefile\\" + tenFile;
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(duongDan))) {
+            for (int i = 0; i < soLuong; i++) {
+                writer.write(arr_tk[i].toString()); // Gọi phương thức toString() của ThongKe
+                writer.newLine();
+            }
+            System.out.println("Ghi dữ liệu thành công vào file " + duongDan);
+        } catch (IOException e) {
+            System.out.println("Lỗi khi ghi dữ liệu vào file: " + e.getMessage());
+        }
+    }
+
+    public void docDuLieuTuFile(String tenFile) {
+        String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\DOAN\\src\\Do_an_QLTV-main\\Do_an_QLTV-main\\src\\sourcefile\\" + tenFile;
+        soLuong = 0; // Đặt lại số lượng thống kê trước khi đọc
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(duongDan))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(", ");
+                date d = new date(Integer.parseInt(parts[0].split("=")[1]), Integer.parseInt(parts[1].split("=")[1]));
+                int soluongNguoiDung = Integer.parseInt(parts[2].split("=")[1]);
+                int soluongTaiLieu = Integer.parseInt(parts[3].split("=")[1]);
+                int soluongPhieuNhap = Integer.parseInt(parts[4].split("=")[1]);
+                int soluongMuonTra = Integer.parseInt(parts[5].split("=")[1]);
+                boolean isDeleted = Boolean.parseBoolean(parts[6].split("=")[1].replace("]", ""));
+
+                ThongKe tk = new ThongKe(d, soluongNguoiDung, soluongTaiLieu, soluongPhieuNhap, soluongMuonTra);
+                tk.setDeleted(isDeleted);
+
+                if (soLuong < arr_tk.length) {
+                    arr_tk[soLuong++] = tk;
+                } else {
+                    System.out.println("Danh sách thống kê đã đầy.");
+                }
+            }
+            System.out.println("Đọc dữ liệu thành công từ file " + duongDan);
+        } catch (IOException e) {
+            System.out.println("Lỗi khi đọc dữ liệu từ file: " + e.getMessage());
         }
     }
 }
