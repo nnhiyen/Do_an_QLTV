@@ -88,6 +88,38 @@ public class checkLoi {
             System.out.print("Mời nhập lại: ");
         }
     }
+
+    public static String checkMaTG() {
+        String maTG;
+        while (true) {
+            maTG = sc.nextLine();
+            maTG = maTG.toUpperCase();
+            if(maTG.matches("TG" + "[0-9]{3}")){
+                return maTG;
+            }else if(maTG.isEmpty()){
+                System.err.println("Mã tác giả không được để trống. Vui lòng nhập lại.");
+            }else {
+                System.err.println("Mã sai định dạng. Ví dụ: TG001");
+            }
+            System.out.print("Mời nhập lại: ");
+        }
+    }
+	
+	public static String checkMaTLoai() {
+        String maTLoai;
+        while (true) {
+            maTLoai = sc.nextLine();
+            maTLoai = maTLoai.toUpperCase();
+            if(maTLoai.matches("TLoai" + "[0-9]{3}")){
+                return maTLoai;
+            }else if(maTLoai.isEmpty()){
+                System.err.println("Mã thể loại không được để trống. Vui lòng nhập lại.");
+            }else {
+                System.err.println("Mã sai định dạng. Ví dụ: TLoai001");
+            }
+            System.out.print("Mời nhập lại: ");
+        }
+    }
     
     public static String checkMaNXB(){
         String input;
