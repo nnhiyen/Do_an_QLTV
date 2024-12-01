@@ -398,72 +398,95 @@ public void menuQLMTTL() {
 
     // Menu quản lý phiếu nhập
     public void menuQLPN() {
-        boolean exit = false;
 
-        while (!exit) {
-            System.out.println("+-----------------------------+");
-            System.out.println("|         Menu Phiếu Nhập     |");
-            System.out.println("+-----------------------------+");
-            System.out.println("|1. Xem danh sách phiếu nhập. |");
-            System.out.println("|2. Tìm phiếu nhập.           |");
-            System.out.println("|3. Tạo phiếu nhập.           |");
-            System.out.println("|0. Thoát.                    |");
-            System.out.println("+-----------------------------+");
-            System.out.print("Mời bạn nhập lựa chọn: ");
-            int choice = scanner.nextInt();
+        do {
+            System.out.println("\n--- Quản lý Phiếu Nhập ---");
+            System.out.println("1. Thêm phiếu nhập");
+            System.out.println("2. Sửa phiếu nhập");
+            System.out.println("3. Xem danh sách phiếu nhập");
+            System.out.println("4. Tìm phiếu nhập");
+            System.out.println("5. Xóa phiếu nhập");
+            System.out.println("6. Khôi phục phiếu nhập");
+            System.out.println("7. Xem danh sách phiếu nhập đã xóa");
+            System.out.println("8. Thoát");
+            System.out.println("9. Đọc file dữ liệu");
+            System.out.println("10. Ghi file dữ liệu");
+            System.out.print("Nhập lựa chọn: ");
+            int option = luaChon();
+            scanner.nextLine(); // Đọc bỏ ký tự newline
 
-            switch (choice) {
-                case 1:
+            switch (option) {
+                case 1: {
+                    // Thêm phiếu nhập
+                    PhieuNhap newPN = new PhieuNhap();
+                    newPN.nhap();
+                    dsPhieuNhap.themPhieuNhap(newPN);
+                    break;
+                }
+                case 2: {
+                    // Sửa phiếu nhập
+                    System.out.print("Nhập mã phiếu nhập cần sửa: ");
+                    String maPN = scanner.nextLine();
+                    dsPhieuNhap.suaPhieuNhap(maPN);
+                    break;
+                }
+                case 3: {
+                    // Xem danh sách phiếu nhập
                     dsPhieuNhap.xemDanhSachPhieuNhap();
                     break;
-                case 2:
+                }
+                case 4: {
+                    // Tìm phiếu nhập theo mã
                     System.out.print("Nhập mã phiếu nhập cần tìm: ");
-                    String maPN = scanner.next();
+                    String maPN = scanner.nextLine();
                     PhieuNhap pn = dsPhieuNhap.timPhieuNhap(maPN);
                     if (pn != null) {
-                        pn.xuatPN();
+                        System.out.println(pn); // Hiển thị phiếu nhập tìm thấy
                     } else {
                         System.out.println("Không tìm thấy phiếu nhập.");
                     }
                     break;
-                case 3:
-                    PhieuNhap newPN = new PhieuNhap();
-                newPN.nhap();
-                dsPhieuNhap.themPhieuNhap(newPN);
-
-                DSChiTietPhieuNhap dsChiTietPN = new DSChiTietPhieuNhap();
-                boolean done = false;
-
-                while (!done) {
-                    System.out.println("+-----------------------------+");
-                    System.out.println("|   Menu chi tiết phiếu nhập  |");
-                    System.out.println("+-----------------------------+");
-                    System.out.println("|1. Nhập sản phẩm.            |");
-                    System.out.println("|0. Hoàn thành.               |");
-                    System.out.println("+-----------------------------+");
-                    System.out.print("Mời bạn nhập lựa chọn: ");
-
-                    int ctChoice = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
-
-                    if (ctChoice == 1) {
-                        ChiTietPhieuNhap ctpn = new ChiTietPhieuNhap();
-                        ctpn.nhap();
-                        dsChiTietPN.themChiTietPhieuNhap(ctpn);
-                    } else if (ctChoice == 0) {
-                        done = true;
-                        double tongTien = dsChiTietPN.tinhTongTien();
-                        newPN.setTongTien(tongTien);
-                        System.out.println("Tổng tiền: " + tongTien);
-                    } else {
-                        System.out.println("Lựa chọn không hợp lệ. Vui lòng thử lại.");
-                    }
                 }
-
+                case 5: {
+                    // Xóa phiếu nhập
+                    System.out.print("Nhập mã phiếu nhập cần xóa: ");
+                    String maPN = scanner.nextLine();
+                    dsPhieuNhap.xoaPhieuNhap(maPN);
+                    break;
+                }
+                case 6: {
+                    // Khôi phục phiếu nhập
+                    System.out.print("Nhập mã phiếu nhập cần khôi phục: ");
+                    String maPN = scanner.nextLine();
+                    dsPhieuNhap.khoiPhucPhieuNhap(maPN);
+                    break;
+                }
+                case 7: {
+                    // Xem danh sách phiếu nhập đã xóa
+                    dsPhieuNhap.hienThiDanhSachXoa();
+                    break;
+                }
+                case 8: {
+                    // Thoát
+                    System.out.println("Cảm ơn bạn đã sử dụng chương trình!");
+                    break;
+                }
+                case 9: {
+                    dsPhieuNhap.ghiDuLieuRaFile("phieunhap.txt");
+                }
+                case 10: {
+                    dsPhieuNhap.docDuLieuTuFile("phieunhap.txt");
+                }
+                default:
+                    System.out.println("Lựa chọn không hợp lệ! Vui lòng chọn lại.");
+                    break;
             }
+
+            // Ghi dữ liệu ra file sau khi thực hiện thao tác
+            dsPhieuNhap.ghiDuLieuRaFile("PhieuNhap.txt");
+
         }
     }
-
     // Menu quản lý chi tiết phiếu nhập
     public void menuCTPN() {
         int option;
