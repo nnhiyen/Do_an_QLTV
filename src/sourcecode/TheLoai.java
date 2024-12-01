@@ -3,24 +3,17 @@ package DoAn_QLTV_main.src.sourcecode;
 import java.util.Scanner;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class TheLoai{
     private String tenTLoai;
     private String maTLoai;
-    private String tenTL;
-    private String tenTG;
-    private String tenNXB;
     private boolean isDeleted;
 
     public TheLoai(){}
 
-    public TheLoai(String tenTLoai, String maTLoai, String tenTL, String tenTG, String tenNXB){
+    public TheLoai(String tenTLoai, String maTLoai){
     	this.tenTLoai = tenTLoai;
         this.maTLoai = maTLoai;
-        this.tenTL = tenTL;
-        this.tenTG = tenTG;
-        this.tenNXB = tenNXB;
         this.isDeleted = false;
     }
     public void nhap(){
@@ -30,26 +23,17 @@ public class TheLoai{
         tenTLoai = checkLoi.checkChuoiRong();
         System.out.print("Nhap ma the loai: ");
         maTLoai = checkLoi.checkMaTLoai();
-        System.out.printf("Nhap ten tai lieu: ");
-        tenTL = checkLoi.checkChuoiRong();
-        System.out.printf("Nhap ten tac gia: ");
-        tenTG = checkLoi.checkChuoiRong();
-        System.out.printf("Nhap ten nha xuat ban: ");
-        tenNXB = checkLoi.checkChuoiRong();
     }
 
     @Override
     public String toString() {
     	return ", Ten the loai" + tenTLoai+
-    			", Ma the loai" + maTLoai+
-        		", Ten tai lieu: "+ tenTL+
-        		", Ten tac gia: "+ tenTG+
-        		", Ten nha xuat ban: "+ tenNXB;
+    			", Ma the loai" + maTLoai;
     }
 
     public void xuat(){
-    	String format = "| %-12s | %-20s | %-20s | %-20s | %-20 |\n";
-        System.out.format(format, maTLoai, tenTLoai, tenTL, tenTG, tenNXB);
+    	String format = "| %-12s | %-20s | %-20s |\n";
+        System.out.format(format, maTLoai, tenTLoai);
     }
     
     public String getTenTLoai(){
@@ -64,27 +48,6 @@ public class TheLoai{
     }
     public void setMaTLoai(String maTLoai){
         this.maTLoai = maTLoai;
-    }
-    
-    public String getTenTL(){
-        return tenTL;
-    }
-    public void setTenTL(String tenTL){
-        this.tenTL = tenTL;
-    }
-    
-    public String getTenTG(){
-        return tenTG;
-    }
-    public void setTenTG(String tenTG){
-        this.tenTG = tenTG;
-    }
-    
-    public String getTenNXB(){
-    	return tenNXB;
-    }
-    public void setTenNXB(String tenNXB){
-    	this.tenNXB = tenNXB;
     }
     
     public boolean isDeleted() {
