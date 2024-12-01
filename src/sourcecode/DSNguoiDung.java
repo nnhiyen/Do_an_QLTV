@@ -1,5 +1,8 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package DoAn_QLTV_main.src.sourcecode;
-
 import java.io.BufferedReader;
 import java.util.Scanner;
 import java.util.Arrays;
@@ -22,8 +25,11 @@ Scanner sc = new Scanner(System.in);
         soLuong = 0;
     }
     
-    // kiem tra trùng
-    public boolean kiemTraSV(String maSV) {
+    // Cần 2 đối só là mã SV cùng với tên File để đọc
+    // Trước khi kiểm tra phải đọc File lấy data sau đó có thể dùng Foreach hoặc For normal
+    public boolean kiemTraSV(String maSV, String tenFile) {
+    docDuLieuTuFile(tenFile); 
+
     for (int i = 0; i < soLuong; i++) {
         if (dsNguoiDung[i] instanceof SinhVien) {
             SinhVien sv = (SinhVien) dsNguoiDung[i];
@@ -34,40 +40,54 @@ Scanner sc = new Scanner(System.in);
     }
     return false;
 }
+    public boolean kiemTraGV(String maGV, String tenFile){
+        docDuLieuTuFile(tenFile);
+        for(NguoiDung nd : dsNguoiDung){
+            if(nd instanceof GiangVien){
+                GiangVien gv = (GiangVien) nd;
+                if(gv.getMaGV().equals(maGV)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
-// Thêm người dùng
+// Khi thêm thì có thể set đối số ban đầu để khỏi dùng một mảng
+// Do trả về đúng sai (kiemTraSV,GV) nên là dùng While để duyệt mà dùng While thì phải có biến để set khi nào dừng LOOP
 public void themNguoiDung(NguoiDung nd) {
+    boolean hopLe = false; 
+
+    if (nd instanceof SinhVien) {
+        SinhVien sv = (SinhVien) nd;
+        while (!hopLe) {
+            if (kiemTraSV(sv.getMaSV(), "nguoidung.txt")) {
+                System.out.println("Mã sinh viên " + sv.getMaSV() + " đã tồn tại. Vui lòng nhập lại mã.");
+                sv.nhap(); 
+            } else {
+                hopLe = true; // Do hàm if nếu như trùng thì hopLe = False, mà False While vẫn chạy thì ĐK ở trên.
+            }
+        }
+    } else if (nd instanceof GiangVien) {
+        GiangVien gv = (GiangVien) nd;
+        while (!hopLe) {
+            if (kiemTraGV(gv.getMaGV(), "nguoidung.txt")) {
+                System.out.println("Mã giảng viên " + gv.getMaGV() + " đã tồn tại. Vui lòng nhập lại mã.");
+                gv.nhap(); 
+            } else {
+                hopLe = true; 
+            }
+        }
+    }
+
+    // Thêm người dùng vào danh sách
     if (soLuong < dsNguoiDung.length) {
         dsNguoiDung[soLuong] = nd;
         soLuong++;
+        ghiDuLieuRaFile("nguoidung.txt"); // Ghi ngay vào file
+        System.out.println("Thêm thành công!");
     } else {
         System.out.println("Danh sách đã đầy!");
-    }
-}
-
-public void themNhieuNguoiDung(int loai, int soLuongThem) {
-    for (int i = 0; i < soLuongThem; i++) {
-        if (loai == 1) {
-            System.out.println("Thêm sinh viên thứ " + (i + 1) + ":");
-            SinhVien sv = new SinhVien();
-            sv.nhap();
-
-            // Kiểm tra mã sinh viên trùng
-            if (kiemTraSV(sv.getMaSV())) {
-                System.out.println("Mã sinh viên " + sv.getMaSV() + " đã tồn tại. Vui lòng nhập mã khác.");
-            } else {
-                themNguoiDung(sv); 
-            }
-            
-        } else if (loai == 2) {
-            System.out.println("Thêm giảng viên thứ " + (i + 1) + ":");
-            GiangVien gv = new GiangVien();
-            gv.nhap();
-            themNguoiDung(gv);
-        } else {
-            System.out.println("Lựa chọn không hợp lệ.");
-            break;
-        }
     }
 }
 
@@ -80,21 +100,21 @@ public void themNhieuNguoiDung(int loai, int soLuongThem) {
     return false;
 }
     // Sửa thông tin người dùng
-public void suaNguoiDung(String ten) {
-    if (!tonTaiNguoiDung(ten)) {
-        System.out.println("Không tìm thấy người dùng.");
-        return;
-    }
+public void suaNguoiDung(String ma) {
     for (int i = 0; i < soLuong; i++) {
-        if (dsNguoiDung[i].getTen().equals(ten)) {
-            System.out.println("Sửa thông tin người dùng: ");
-            dsNguoiDung[i].nhap(); //
-            ghiDuLieuRaFile("nguoidung.txt"); 
+        if ((dsNguoiDung[i] instanceof SinhVien && ((SinhVien) dsNguoiDung[i]).getMaSV().equals(ma)) ||
+            (dsNguoiDung[i] instanceof GiangVien && ((GiangVien) dsNguoiDung[i]).getMaGV().equals(ma))) {
+            
+            System.out.println("Sửa thông tin người dùng:");
+            dsNguoiDung[i].nhap(); // Gọi phương thức nhập để cập nhật thông tin
+            ghiDuLieuRaFile("nguoidung.txt"); // Ghi lại thông tin vào file
             System.out.println("Thông tin người dùng đã được sửa và lưu vào file.");
             return;
         }
     }
+    System.out.println("Không tìm thấy người dùng với mã: " + ma);
 }
+
     // SEARCH SV
     boolean found = false;
     public void timKiemSV(String maSV){
@@ -141,72 +161,63 @@ public void suaNguoiDung(String ten) {
         }  
     }
     
-    public void xoaNguoiDung(String ten) {
+    public void xoaNguoiDung(String ma) {
     for (int i = 0; i < soLuong; i++) {
-        if (dsNguoiDung[i].getTen().equals(ten)) {
-       
-            if (dsNguoiDung[i] instanceof SinhVien) {
-                SinhVien sv = (SinhVien) dsNguoiDung[i];
-                sv.setDeleted(true);
-            } else if (dsNguoiDung[i] instanceof GiangVien) {
-                GiangVien gv = (GiangVien) dsNguoiDung[i];
-                gv.setDeleted(true);
-            }
+        if ((dsNguoiDung[i] instanceof SinhVien && ((SinhVien) dsNguoiDung[i]).getMaSV().equals(ma)) ||
+            (dsNguoiDung[i] instanceof GiangVien && ((GiangVien) dsNguoiDung[i]).getMaGV().equals(ma))) {
+            
+            dsNguoiDung[i].setDeleted(true); // Đánh dấu là đã xóa
             System.out.println("Xóa tạm thời thành công.");
-            ghiDuLieuRaFile("nguoidung.txt"); 
+            ghiDuLieuRaFile("nguoidung.txt"); // Cập nhật lại file
             return;
         }
     }
-    System.out.println("Không tìm thấy người dùng.");
+    System.out.println("Không tìm thấy người dùng với mã: " + ma);
 }
 
-public void khoiPhucNguoiDung(String ten) {
+
+public void khoiPhucNguoiDung(String ma) {
     for (int i = 0; i < soLuong; i++) {
-        if (dsNguoiDung[i].getTen().equals(ten)) {
-          
-            if (dsNguoiDung[i] instanceof SinhVien) {
-                SinhVien sv = (SinhVien) dsNguoiDung[i];
-                sv.setDeleted(false); // Khôi phục SinhVien
-            } else if (dsNguoiDung[i] instanceof GiangVien) {
-                GiangVien gv = (GiangVien) dsNguoiDung[i];
-                gv.setDeleted(false); 
-            }
+        if ((dsNguoiDung[i] instanceof SinhVien && ((SinhVien) dsNguoiDung[i]).getMaSV().equals(ma)) ||
+            (dsNguoiDung[i] instanceof GiangVien && ((GiangVien) dsNguoiDung[i]).getMaGV().equals(ma))) {
+            
+            dsNguoiDung[i].setDeleted(false); // Khôi phục trạng thái
             System.out.println("Khôi phục thành công.");
-            ghiDuLieuRaFile("nguoidung.txt");
+            ghiDuLieuRaFile("nguoidung.txt"); // Cập nhật lại file
             return;
         }
     }
-    System.out.println("Không tìm thấy người dùng.");
+    System.out.println("Không tìm thấy người dùng với mã: " + ma);
 }
+
 
 
 
 
     public void hienThiDanhSachXoa() {
     System.out.println("Danh sách người dùng đã xóa tạm thời:");
-    
-    boolean hasDeleted = false; 
-    
+    System.out.printf("| %-12s | %-20s | %-6s | %-8s |\n", "Mã", "Tên", "Khoa", "Năm sinh");
+    System.out.println("---------------------------------------------------------------");
+    boolean hasDeleted = false;
+
     for (int i = 0; i < soLuong; i++) {
-        if (dsNguoiDung[i] instanceof SinhVien) {
-            SinhVien sv = (SinhVien) dsNguoiDung[i];
-            if (sv.isDeleted()) {
+        if (dsNguoiDung[i].isDeleted()) {
+            hasDeleted = true;
+            if (dsNguoiDung[i] instanceof SinhVien) {
+                SinhVien sv = (SinhVien) dsNguoiDung[i];
                 System.out.printf("| %-12s | %-20s | %-6s | %-8d |\n", sv.getMaSV(), sv.getTen(), sv.getKhoa(), sv.getNamSinh());
-                hasDeleted = true;
-            }
-        } else if (dsNguoiDung[i] instanceof GiangVien) {
-            GiangVien gv = (GiangVien) dsNguoiDung[i];
-            if (gv.isDeleted()) {
+            } else if (dsNguoiDung[i] instanceof GiangVien) {
+                GiangVien gv = (GiangVien) dsNguoiDung[i];
                 System.out.printf("| %-12s | %-20s | %-6s | %-8d |\n", gv.getMaGV(), gv.getTen(), gv.getKhoa(), gv.getNamSinh());
-                hasDeleted = true;
             }
         }
     }
-    
+
     if (!hasDeleted) {
         System.out.println("Không có người dùng nào đã xóa tạm thời.");
     }
 }
+
 
 
 
@@ -277,20 +288,12 @@ public void khoiPhucNguoiDung(String ten) {
 
     
     public void ghiDuLieuRaFile(String tenFile) {
-    if (soLuong == 0) {
-        System.out.println("Không có dữ liệu để ghi.");
-        return;
-    }
-
-    // Đường dẫn đầy đủ tới file
     String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\DOAN\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
 
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(duongDan))) {
         for (int i = 0; i < soLuong; i++) {
-            if (!dsNguoiDung[i].isDeleted()) { 
-                writer.write(dsNguoiDung[i].toString()); 
-                writer.newLine();
-            }
+            writer.write(dsNguoiDung[i].toString());
+            writer.newLine();
         }
         System.out.println("Ghi dữ liệu thành công vào file " + duongDan);
     } catch (IOException e) {
@@ -298,34 +301,38 @@ public void khoiPhucNguoiDung(String ten) {
     }
 }
 
+
 public void docDuLieuTuFile(String tenFile) {
-    // Đường dẫn đầy đủ tới file
     String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\DOAN\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+    soLuong = 0; // Đặt lại số lượng người dùng trước khi đọc
 
     try (BufferedReader reader = new BufferedReader(new FileReader(duongDan))) {
         String line;
         while ((line = reader.readLine()) != null) {
-            String[] parts = line.split(", "); 
-            if (parts.length >= 4) { 
+            String[] parts = line.split(", ");
+            if (parts.length >= 5) { // Đọc cả trạng thái isDeleted
                 String ten = parts[0].split(": ")[1];
                 String khoa = parts[1].split(": ")[1];
-                int namSinh = Integer.parseInt(parts[2].split(": ")[1]); // check
-                String ma = parts[3]; // Mã sinh viên hoặc giảng viên
+                int namSinh = Integer.parseInt(parts[2].split(": ")[1]);
+                String ma = parts[3].split(": ")[1];
+                boolean isDeleted = Boolean.parseBoolean(parts[4].split(": ")[1]);
 
-                if (ma.startsWith("Mã sinh viên:")) {
+                if (ma.startsWith("SV")) {
                     SinhVien sv = new SinhVien();
                     sv.setTen(ten);
                     sv.setKhoa(khoa);
                     sv.setNamSinh(namSinh);
-                    sv.setMaSV(ma.split(": ")[1]);
-                    themNguoiDung(sv);
-                } else if (ma.startsWith("Mã giảng viên:")) {
+                    sv.setMaSV(ma);
+                    sv.setDeleted(isDeleted);
+                    dsNguoiDung[soLuong++] = sv;
+                } else if (ma.startsWith("GV")) {
                     GiangVien gv = new GiangVien();
                     gv.setTen(ten);
                     gv.setKhoa(khoa);
                     gv.setNamSinh(namSinh);
-                    gv.setMaGV(ma.split(": ")[1]);
-                    themNguoiDung(gv);
+                    gv.setMaGV(ma);
+                    gv.setDeleted(isDeleted);
+                    dsNguoiDung[soLuong++] = gv;
                 }
             }
         }
@@ -334,6 +341,8 @@ public void docDuLieuTuFile(String tenFile) {
         System.out.println("Lỗi khi đọc dữ liệu từ file: " + e.getMessage());
     }
 }
+
+
 
 }
 
