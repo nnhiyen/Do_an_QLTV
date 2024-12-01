@@ -12,11 +12,23 @@ public class DSChiTietPhieuNhap {
     private int soLuongCTPN;
     Scanner sc = new Scanner(System.in);
 
+    // Constructor
     public DSChiTietPhieuNhap(int kichThuoc) {
         dsChiTiet = new ChiTietPhieuNhap[kichThuoc];
         soLuongCTPN = 0;
     }
 
+    // Kiểm tra trùng
+    public boolean kiemTraCTPN(String maPN) {
+        for (int i = 0; i < soLuongCTPN; i++) {
+            if (dsChiTiet[i].getMaPN().equals(maPN)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Thêm chi tiết phiếu nhập
     public void themChiTietPhieuNhap(ChiTietPhieuNhap ctpn) {
         if (soLuongCTPN < dsChiTiet.length) {
             dsChiTiet[soLuongCTPN] = ctpn;
@@ -28,36 +40,49 @@ public class DSChiTietPhieuNhap {
         }
     }
 
-    public void xuatDanhSachChiTiet() {
-        System.out.println("+--------------------+----------+--------------+--------------+------------+");
-        System.out.println("|    Mã phiếu nhập   | Mã tài liệu | Số lượng  | Giá tiền   | Thành tiền | Trạng thái |");
-        System.out.println("+--------------------+----------+--------------+--------------+------------+");
-        for (int i = 0; i < soLuongCTPN; i++) {
-            dsChiTiet[i].xuatCTPN();
+    public void themNhieuChiTietPhieuNhap(int soLuongThem) {
+        for (int i = 0; i < soLuongThem; i++) {
+            System.out.println("Thêm chi tiết phiếu nhập thứ " + (i + 1) + ":");
+            ChiTietPhieuNhap ctpn = new ChiTietPhieuNhap();
+            ctpn.nhap();
+
+            if (kiemTraCTPN(ctpn.getMaPN())) {
+                System.out.println("Mã phiếu nhập " + ctpn.getMaPN() + " đã tồn tại. Vui lòng nhập mã khác.");
+            } else {
+                themChiTietPhieuNhap(ctpn);
+            }
         }
-        System.out.println("+--------------------+----------+--------------+--------------+------------+");
     }
 
-    public void timKiemChiTietPhieuNhap(String maPN) { 
-        boolean found = false; 
-        for (int i = 0; i < soLuongCTPN; i++) { 
-            if (dsChiTiet[i].getMaPN().equals(maPN)) { 
-                dsChiTiet[i].xuatCTPN(); 
-                found = true; 
-                break; 
-            } 
-        } 
-        if (!found) { 
-            System.out.println("Không tìm thấy chi tiết phiếu nhập với mã: " + maPN); 
-        } 
+    public void suaChiTietPhieuNhap(String maPN) {
+        boolean found = false;
+        for (int i = 0; i < soLuongCTPN; i++) {
+            if (dsChiTiet[i].getMaPN().equals(maPN)) {
+                System.out.println("Sửa chi tiết phiếu nhập: ");
+                dsChiTiet[i].nhap();
+                ghiDuLieuRaFile("chitietphieunhap.txt");
+                System.out.println("Chi tiết phiếu nhập đã được sửa và lưu vào file.");
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            System.out.println("Không tìm thấy chi tiết phiếu nhập với mã: " + maPN);
+        }
     }
 
-    public double tinhTongTien() {
-        double tongTien = 0;
+    public void timKiemChiTietPhieuNhap(String maPN) {
+        boolean found = false;
         for (int i = 0; i < soLuongCTPN; i++) {
-            tongTien += dsChiTiet[i].getThanhTien();
+            if (dsChiTiet[i].getMaPN().equals(maPN)) {
+                dsChiTiet[i].xuatCTPN();
+                found = true;
+                break;
+            }
         }
-        return tongTien;
+        if (!found) {
+            System.out.println("Không tìm thấy chi tiết phiếu nhập với mã: " + maPN);
+        }
     }
 
     public void xoaChiTietPhieuNhap(String maPN) {
@@ -99,6 +124,24 @@ public class DSChiTietPhieuNhap {
 
         if (!hasDeleted) {
             System.out.println("Không có chi tiết phiếu nhập nào đã xóa tạm thời.");
+        }
+    }
+
+    public void hienThiDanhSach() {
+        System.out.println("Danh sách chi tiết phiếu nhập:");
+
+        if (soLuongCTPN == 0) {
+            System.out.println("Danh sách trống.");
+        } else {
+            System.out.println("+--------------------+----------+--------------+--------------+------------+");
+            System.out.println("|    Mã phiếu nhập   | Mã tài liệu | Số lượng  | Giá tiền   | Thành tiền | Trạng thái |");
+            System.out.println("+--------------------+----------+--------------+--------------+------------+");
+            for (int i = 0; i < soLuongCTPN; i++) {
+                if (!dsChiTiet[i].isDeleted()) {
+                    dsChiTiet[i].xuatCTPN();
+                }
+            }
+            System.out.println("+--------------------+----------+--------------+--------------+------------+");
         }
     }
 
