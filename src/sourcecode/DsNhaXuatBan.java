@@ -2,18 +2,22 @@ package DoAn_QLTV_main.src.sourcecode;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
+
 
 public class DsNhaXuatBan {
     private NhaXuatBan[] dsNXB;
     private int soLuong;
+    Scanner sc = new Scanner(System.in);
+
 
     // Constructor
     public DsNhaXuatBan(int kichThuoc) {
         dsNXB = new NhaXuatBan[kichThuoc];
-        soLuong = 0;
+        soLuong = 0;  
     }
 
     // Kiểm tra sự tồn tại của nhà xuất bản dựa trên mã NXB
@@ -103,21 +107,56 @@ public class DsNhaXuatBan {
         System.out.println("Không tìm thấy nhà xuất bản với mã: " + maNXB);
     }
 
-    // Xóa nhà xuất bản
+    // Xóa nhà xuất bản (Tạm thời)
     public void xoaNXB(String maNXB) {
         for (int i = 0; i < soLuong; i++) {
             if (dsNXB[i].getMaNXB().equals(maNXB)) {
-                for (int j = i; j < soLuong - 1; j++) {
-                    dsNXB[j] = dsNXB[j + 1];  // Dịch chuyển các phần tử còn lại lên
-                }
-                dsNXB[soLuong - 1] = null;
-                soLuong--;
+                dsNXB[i].setDeleted(true);  // Đánh dấu là đã xóa
                 ghiDuLieuRaFile("nxb.txt");  // Cập nhật lại file
-                System.out.println("Xóa nhà xuất bản thành công.");
+                System.out.println("Xóa nhà xuất bản tạm thời thành công.");
                 return;
             }
         }
         System.out.println("Không tìm thấy nhà xuất bản.");
+    }
+
+    // Khôi phục nhà xuất bản đã xóa
+    public void khoiPhucNXB(String maNXB) {
+        for (int i = 0; i < soLuong; i++) {
+            if (dsNXB[i].getMaNXB().equals(maNXB)) {
+                dsNXB[i].setDeleted(false);  // Khôi phục trạng thái xóa
+                ghiDuLieuRaFile("nxb.txt");  // Cập nhật lại file
+                System.out.println("Khôi phục nhà xuất bản thành công.");
+                return;
+            }
+        }
+        System.out.println("Không tìm thấy nhà xuất bản để khôi phục.");
+    }
+
+    // Hiển thị danh sách nhà xuất bản đã xóa
+    public void hienThiDanhSachXoa() {
+        System.out.println("Danh sách nhà xuất bản đã xóa tạm thời:");
+        System.out.println("+---------------------------------------------------------+");
+        System.out.println("|                 Nhà Xuất Bản Đã Xóa Tạm Thời           |");
+        System.out.println("+---------------------------------------------------------+");
+        System.out.println("|  Mã NXB  |        Tên Nhà Xuất Bản            | Địa Chỉ |");
+        System.out.println("+---------------------------------------------------------+");
+
+        boolean hasDeleted = false;
+        for (int i = 0; i < soLuong; i++) {
+            if (dsNXB[i].isDeleted()) {
+                hasDeleted = true;
+                System.out.printf("| %-12s | %-40s | %-30s |\n",
+                        dsNXB[i].getMaNXB(),
+                        dsNXB[i].getTenNXB(),
+                        dsNXB[i].getDiaChi());
+            }
+        }
+
+        if (!hasDeleted) {
+            System.out.println("|                  Không có nhà xuất bản nào             |");
+        }
+        System.out.println("+---------------------------------------------------------+");
     }
 
     // Tìm kiếm nhà xuất bản theo mã
@@ -153,7 +192,9 @@ public class DsNhaXuatBan {
             System.out.println("Danh sách trống");
         } else {
             for (int i = 0; i < soLuong; i++) {
-                dsNXB[i].xuatNXB();
+                if (!dsNXB[i].isDeleted()) {
+                    dsNXB[i].xuatNXB();
+                }
             }
         }
     }
@@ -164,8 +205,10 @@ public class DsNhaXuatBan {
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(duongDan))) {
             for (int i = 0; i < soLuong; i++) {
-                writer.write(dsNXB[i].toString());  // Gọi phương thức toString() của NhaXuatBan
-                writer.newLine();
+                if (!dsNXB[i].isDeleted()) {  // Không ghi các nhà xuất bản đã xóa
+                    writer.write(dsNXB[i].toString());  // Gọi phương thức toString() của NhaXuatBan
+                    writer.newLine();
+                }
             }
             System.out.println("Ghi dữ liệu thành công vào file " + duongDan);
         } catch (IOException e) {
