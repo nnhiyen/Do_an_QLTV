@@ -8,9 +8,11 @@ public class ThongKe {
     private int soluongTaiLieu;
     private int soluongPhieuNhap;
     private int soluongMuonTra;
+    private boolean isDeleted;
     Scanner sc = new Scanner(System.in);
 
     public ThongKe() {
+        this.isDeleted = false; // Mặc định là chưa bị xóa
     }
 
     public ThongKe(date d, int soluongNguoiDung, int soluongTaiLieu, int soluongPhieuNhap, int soluongMuonTra) {
@@ -19,6 +21,7 @@ public class ThongKe {
         this.soluongTaiLieu = soluongTaiLieu;
         this.soluongPhieuNhap = soluongPhieuNhap;
         this.soluongMuonTra = soluongMuonTra;
+        this.isDeleted = false; // Mặc định là chưa bị xóa
     }
 
     public date getD() {
@@ -61,13 +64,31 @@ public class ThongKe {
         this.soluongMuonTra = soluongMuonTra;
     }
 
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
     public void nhap() {
         d.nhapThangNam();
     }
 
+    public void xuat() {
+        String format = "| %-12s | %-20s | %-15s | %-15s | %-15s | %-15s |\n";
+        System.out.format(format, d, soluongNguoiDung, soluongTaiLieu, soluongPhieuNhap, soluongMuonTra, isDeleted);
+    }
+
+    // Phương thức chuyển thống kê thành chuỗi (ghi vào file)
     @Override
     public String toString() {
-        return "ThongKe [d=" + d + ", soluongNguoiDung=" + soluongNguoiDung + ", soluongTaiLieu=" + soluongTaiLieu +
-                ", soluongPhieuNhap=" + soluongPhieuNhap + ", soluongMuonTra=" + soluongMuonTra + "]";
+        return "Ngày: " + d +
+               ", Số lượng người dùng: " + soluongNguoiDung +
+               ", Số lượng tài liệu: " + soluongTaiLieu +
+               ", Số lượng phiếu nhập: " + soluongPhieuNhap +
+               ", Số lượng mượn trả: " + soluongMuonTra +
+               ", Trạng thái xóa: " + isDeleted;
     }
 }
