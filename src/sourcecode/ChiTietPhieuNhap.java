@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DoAn_QLTV_main.src.sourcecode;
 
 import java.util.Scanner;
@@ -13,7 +9,6 @@ public class ChiTietPhieuNhap {
     private double giaTien;
     private double thanhTien;
     private boolean isDeleted;
-    public static Scanner sc = new Scanner(System.in);
 
     public ChiTietPhieuNhap() {}
 
@@ -71,27 +66,28 @@ public class ChiTietPhieuNhap {
         return isDeleted;
     }
 
-    public void setDeleted(boolean isDeleted) {
-        this.isDeleted = isDeleted;
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
     // Phương thức nhập thông tin
     public void nhap() {
+        Scanner sc = new Scanner(System.in);
         System.out.print("Nhập mã phiếu nhập: ");
-        maPN = sc.nextLine();
+        maPN = checkLoi.checkMaPN();
         System.out.print("Nhập mã tài liệu: ");
-        maTL = sc.nextLine();
+        maTL = checkLoi.checkChuoiRong();
         System.out.print("Nhập số lượng: ");
-        soLuong = sc.nextInt();
+        soLuong = checkLoi.checkChuoiRong();
         System.out.print("Nhập giá tiền: ");
         giaTien = sc.nextDouble();
         thanhTien = soLuong * giaTien; // Tính thành tiền
     }
 
     // Phương thức xuất chi tiết phiếu nhập
-    public void xuatCTPN() {
-        System.out.printf("| %-12s | %-12s | %-8d | %-12.2f | %-12.2f | %-8s |\n", 
-            maPN, maTL, soLuong, giaTien, thanhTien, isDeleted ? "Đã xóa" : "Hoạt động");
+    public void xuat() {
+        String format = "| %-12s | %-20s | %-20s | %-20s | %-20s |\n";
+        System.out.format(format, maPN, maTL, soLuong, giaTien, thanhTien);
     }
 
     @Override
