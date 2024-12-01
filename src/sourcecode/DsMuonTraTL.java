@@ -9,6 +9,9 @@ import java.util.Scanner;
 public class DsMuonTraTL {
     private MuonTraTL[] dsMT;
     private int soLuongMuonTra;
+    
+    // Đường dẫn cố định tới file
+    private static final String FILE_PATH = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\DOAN\\src\\DoAn_QLTV_main\\src\\sourcefile\\duLieuMuonTra.txt";
 
     public DsMuonTraTL(int kichThuoc) {
         dsMT = new MuonTraTL[kichThuoc];
@@ -32,8 +35,7 @@ public class DsMuonTraTL {
     }
 
     public void docDuLieuTuFile(DSNguoiDung dsNguoiDung) {
-        String tenFile = "duLieuMuonTra.txt"; // Đọc dữ liệu từ file cố định
-        try (BufferedReader reader = new BufferedReader(new FileReader(tenFile))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;
             while ((line = reader.readLine()) != null && soLuongMuonTra < dsMT.length) {
                 String[] data = line.split(",");
@@ -62,19 +64,25 @@ public class DsMuonTraTL {
                     themMuon(muonTraTL);
                 }
             }
-            System.out.println("Đọc dữ liệu thành công từ file " + tenFile);
+            System.out.println("Đọc dữ liệu thành công từ file " + FILE_PATH);
         } catch (IOException e) {
             System.out.println("Không thể đọc file: " + e.getMessage());
         }
     }
-        public void ghiDuLieuVaoFile() {String tenFile = "duLieuMuonTra.txt"; // Ghi vào file cố định
-        try (FileWriter writer = new FileWriter(tenFile)) {
+
+    public void ghiDuLieuRaFile() {
+        if (soLuongMuonTra == 0) {
+            System.out.println("Không có dữ liệu để ghi.");
+            return;
+        }
+
+        try (FileWriter writer = new FileWriter(FILE_PATH)) {
             for (int i = 0; i < soLuongMuonTra; i++) {
                 MuonTraTL mt = dsMT[i];
                 writer.write(mt.getMaTL() + "," + mt.getNgayMuon() + "," + mt.getNgayTra() + "," + 
                              mt.getSoLuong() + "," + mt.getTenNguoiDung() + "\n");
             }
-            System.out.println("Ghi dữ liệu thành công vào file " + tenFile);
+            System.out.println("Ghi dữ liệu thành công vào file " + FILE_PATH);
         } catch (IOException e) {
             System.out.println("Không thể ghi file: " + e.getMessage());
         }
