@@ -1,7 +1,5 @@
 package DoAn_QLTV_main.src.sourcecode;
 
-import java.util.Scanner;
-
 public class TacGia{
 	private String tenTG;
     private String maTG;
