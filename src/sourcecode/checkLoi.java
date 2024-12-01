@@ -28,6 +28,22 @@ public class checkLoi {
         }
         return input;
     }
+	public static int checkNamSinhTG(){
+        int input = -1;
+        while(true){
+            try {
+                input = Integer.parseInt(sc.nextLine().trim()); // ???
+                if(input >= 0 && input <= 2024){
+                    break;
+                } else{
+                    System.out.println("Năm sinh phải từ 0 đến 2018. Vui lòng nhập lại.");
+                }
+            }catch (NumberFormatException e){
+                System.out.println("Dữ liệu không hợp lệ. Vui lòng nhập một số nguyên.");
+            }
+        }
+        return input;
+    }
     
     public static String checkChuoiRong(){
         String input;
