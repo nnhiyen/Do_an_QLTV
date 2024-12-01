@@ -1,7 +1,5 @@
 package DoAn_QLTV_main.src.sourcecode;
 
-import java.util.Scanner;
-
 public class TaiLieu {
     private String maTL;
     private String tenTL;

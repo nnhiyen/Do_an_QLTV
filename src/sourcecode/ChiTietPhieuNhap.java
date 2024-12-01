@@ -74,11 +74,11 @@ public class ChiTietPhieuNhap {
     public void nhap() {
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhập mã phiếu nhập: ");
-        maPN = checkLoi.checkMaPN();
+        maPN = checkLoi.checkChuoiRong();
         System.out.print("Nhập mã tài liệu: ");
         maTL = checkLoi.checkChuoiRong();
         System.out.print("Nhập số lượng: ");
-        soLuong = checkLoi.checkChuoiRong();
+        soLuong = checkLoi.checkSoNguyen();
         System.out.print("Nhập giá tiền: ");
         giaTien = sc.nextDouble();
         thanhTien = soLuong * giaTien; // Tính thành tiền
