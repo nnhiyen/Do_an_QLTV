@@ -1,4 +1,4 @@
-package DoAn_QLTV_main.src.sourcecode;
+package qltv;
 
 import java.util.Scanner;
 
@@ -397,24 +397,90 @@ public void menuQLMTTL() {
 
     // Menu quản lý phiếu nhập
     @Override
-    public void menuQLPN() {
-    //     do {
-    //         System.out.println("\n--- Quản lý Phiếu Nhập ---");
-    //         System.out.println("1. Thêm phiếu nhập");
-    //         System.out.println("2. Sửa phiếu nhập");
-    //         System.out.println("3. Xem danh sách phiếu nhập");
-    //         System.out.println("4. Tìm phiếu nhập");
-    //         System.out.println("5. Xóa phiếu nhập");
-    //         System.out.println("6. Khôi phục phiếu nhập");
-    //         System.out.println("7. Xem danh sách phiếu nhập đã xóa");
-    //         System.out.println("8. Thoát");
-    //         System.out.println("9. Đọc file dữ liệu");
-    //         System.out.println("10. Ghi file dữ liệu");
-    //         System.out.print("Nhập lựa chọn: ");
-    //         int option = luaChon();
-    //         scanner.nextLine(); // Đọc bỏ ký tự newline
-    // }
+public void menuQLPN() {
+    int option;
+    do {
+        System.out.println("=== Quản lý Phiếu Nhập ===");
+        System.out.println("1. Thêm phiếu nhập");
+        System.out.println("2. Ghi dữ liệu ra file");
+        System.out.println("3. Đọc dữ liệu từ file");
+        System.out.println("4. Hiển thị danh sách phiếu nhập");
+        System.out.println("5. Tìm kiếm phiếu nhập");
+        System.out.println("6. Sửa thông tin phiếu nhập");
+        System.out.println("7. Xóa hoặc khôi phục");
+        System.out.println("8. Dữ liệu đã xóa");
+        System.out.println("0. Thoát");
+        System.out.print("Chọn tùy chọn: ");
+        option = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+        System.out.println("===================================================");
+
+        switch (option) {
+            case 1:
+                PhieuNhap pn = new PhieuNhap();
+                pn.nhap();
+                dsPhieuNhap.themPhieuNhap(pn);
+                break;
+            case 2:
+                dsPhieuNhap.ghiDuLieuRaFile("phieunhap.txt");
+                break;
+            case 3:
+                dsPhieuNhap.docDuLieuTuFile("phieunhap.txt");
+                break;
+            case 4:
+                dsPhieuNhap.xemDanhSachPhieuNhap();
+                break;
+            case 5:
+                System.out.print("Nhập mã phiếu nhập cần tìm: ");
+                String maPNTim = scanner.nextLine();
+                dsPhieuNhap.timPhieuNhap(maPNTim);
+                break;
+            case 6:
+                System.out.print("Nhập mã phiếu nhập cần sửa: ");
+                scanner.nextLine();
+                String maSua = scanner.nextLine();
+                dsPhieuNhap.suaPhieuNhap(maSua);
+                break;
+            case 7:
+                System.out.println("=== Chọn hành động xóa ===");
+                System.out.println("1. Xóa tạm thời");
+                System.out.println("2. Khôi phục phiếu nhập đã xóa");
+                System.out.println("3. Quay lại");
+                System.out.print("Chọn tùy chọn: ");
+                int subOption = scanner.nextInt();
+                scanner.nextLine(); // Consume newline
+
+                switch (subOption) {
+                    case 1:
+                        System.out.print("Nhập mã phiếu nhập cần xóa tạm thời: ");
+                        String maXoa = scanner.nextLine();
+                        dsPhieuNhap.xoaPhieuNhap(maXoa);
+                        break;
+                    case 2:
+                        System.out.print("Nhập mã phiếu nhập cần khôi phục: ");
+                        String maKhoiPhuc = scanner.nextLine();
+                        dsPhieuNhap.khoiPhucPhieuNhap(maKhoiPhuc);
+                        break;
+                    case 3:
+                        System.out.println("Quay lại menu trước.");
+                        break;
+                    default:
+                        System.out.println("Lựa chọn không hợp lệ.");
+                        break;
+                }
+                break;
+            case 8:
+                dsPhieuNhap.hienThiDanhSachXoa();
+                break;
+            case 0:
+                System.out.println("Thoát chương trình.");
+                break;
+            default:
+                System.out.println("Lựa chọn không hợp lệ. Vui lòng thử lại.");
+        }
+    } while (option != 0);
 }
+
 
     // Menu quản lý chi tiết phiếu nhập
     @Override
