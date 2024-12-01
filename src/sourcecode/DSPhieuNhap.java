@@ -14,7 +14,7 @@ public class DSPhieuNhap {
 
     public DSPhieuNhap(int soLuong) {
         dsPhieuNhap = new PhieuNhap[soLuong];
-        soLuongPN = 0;
+        soLuongPN = 0;s
     }
 
     // Kiểm tra mã phiếu nhập có tồn tại trong file hay không

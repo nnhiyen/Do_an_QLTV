@@ -92,7 +92,7 @@ public class PhieuNhap {
 
     @Override
     public String toString() {
-        return maPN + ", " + maNXB + ", " + ngayNhap + ", " + tongTien + ", " + isDeleted;
+        return "Mã phiếu nhập: " + maPN + ", " + "Mã nhà xuất bản: " + maNXB + ", " + "Ngày nhập: " + ngayNhap + ", " + "Tổng tiền: " + tongTien + ", " + "Trạng thái: " + isDeleted;
     }
     
 }

@@ -53,7 +53,7 @@ public class NhaXuatBan {
 
     @Override
     public String toString() {
-        return "Mã NXB: " +maNXB + ", "+ "Tên NXB: " + tenNXB + "Địa chỉ: " + diaChi;
+        return "Mã NXB: " +maNXB + ", "+ "Tên NXB: " + tenNXB + " ,Địa chỉ: " + diaChi;
     }
     public void xuatNXB() {
         // Định dạng xuất thông tin ra màn hình

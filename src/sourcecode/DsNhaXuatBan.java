@@ -150,7 +150,7 @@ public class DsNhaXuatBan {
     public void hienThiDanhSach() {
         System.out.println("Danh sách nhà xuất bản:");
         if (soLuong == 0) {
-            System.out.println("Danh sách trống.");
+            System.out.println("Danh sách trống");
         } else {
             for (int i = 0; i < soLuong; i++) {
                 dsNXB[i].xuatNXB();
