@@ -6,6 +6,8 @@ public class NhaXuatBan {
     private String maNXB;
     private String tenNXB;
     private String diaChi;
+    private boolean isDeleted;
+
 
     Scanner sc = new Scanner(System.in);
 
@@ -15,6 +17,8 @@ public class NhaXuatBan {
         this.maNXB = maNXB;
         this.tenNXB = tenNXB;
         this.diaChi = diaChi;
+        this.isDeleted = false; // Mặc định là chưa bị xóa
+
     }
 
     public String getMaNXB() {
@@ -38,6 +42,13 @@ public class NhaXuatBan {
 
     public void setDiaChi(String diaChi) {
         this.diaChi = diaChi;
+    }
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
     public void nhap() {

@@ -1,13 +1,12 @@
 package DoAn_QLTV_main.src.sourcecode;
 
-import java.util.Scanner;
-import java.util.regex.Pattern;
-import java.util.Arrays;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DsTacGia{
@@ -181,18 +180,17 @@ public class DsTacGia{
          }
 
          System.out.println("+---------------------------------------------------------+");
-         System.out.println("|                    Thông Tin Tác Giả                  |");
+         System.out.println("|                    Thông Tin Tác Giả                    |");
          System.out.println("+---------------------------------------------------------+");
-         System.out.println("|    Mã tác giả    |         Tên          |    Năm sinh  |    Địa chỉ   |");
+         System.out.println("|    Mã tác giả    |         Tên          |    Năm sinh   |");
          System.out.println("+---------------------------------------------------------+");
 
          for (int i = 0; i < soluongTG; i++) {
              if (!dsTG[i].isDeleted()) {
-                 System.out.printf("| %-16s | %-20s | %-12s | %-18s |\n",
+                 System.out.printf("| %-16s | %-20s | %-12s |\n",
                          dsTG[i].getMaTG(),
                          dsTG[i].getTenTG(),
-                         dsTG[i].getNamSinh(),
-                         dsTG[i].getDiaChi());
+                         dsTG[i].getNamSinh());
              }
          }
          System.out.println("+---------------------------------------------------------+");
@@ -211,33 +209,47 @@ public class DsTacGia{
              System.out.println("Lỗi khi ghi dữ liệu vào file: " + e.getMessage());
          }
      }
+     public void docDuLieuTuFile(String tenFile) {
+        String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\DOAN\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+        
+        // Khởi tạo SimpleDateFormat để chuyển chuỗi thành Date
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
-    private void docDuLieuTuFile(String tenFile){
-    	String duongDan = "C:\\\\Users\\\\Admin\\\\Documents\\\\NetBeansProjects\\\\DOAN\\\\src\\\\DoAn_QLTV_main\\\\src\\\\sourcefile\\\\" + tenFile;
-    	soluongTG = 0;
-    	
-    	try (BufferedReader reader = new BufferedReader(new FileReader(duongDan))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(duongDan))) {
             String line;
             while ((line = reader.readLine()) != null) {
+                // Kiểm tra dữ liệu trước khi xử lý
                 String[] parts = line.split(", ");
-                if (parts.length >= 5) { // Bao gồm các trường dữ liệu và trạng thái isDeleted
-                    String maTG = parts[0].split(": ")[1];
-                    String tenTG = parts[1].split(": ")[1];
-                    String namSinh = parts[2].split(": ")[1];
-                    String diaChi = parts[3].split(": ")[1];
-                    boolean isDeleted = Boolean.parseBoolean(parts[4].split(": ")[1]);
+                if (parts.length >= 5) { // Đảm bảo có đủ ít nhất 5 phần
+                    try {
+                        // Tách các phần dữ liệu với ": "
+                        String maTG = parts[0].split(": ")[1];
+                        String tenTG = parts[1].split(": ")[1];
+                        String namSinhstr = parts[2].split(": ")[1];
+                        boolean isDeleted = Boolean.parseBoolean(parts[3].split(": ")[1]);
 
-                    // Tạo đối tượng TaiLieu
-                    TacGia tg = new TacGia();
-                    
-                    tg.setMaTG(maTG);
-                    tg.setTenTG(tenTG);
-                    tg.setNamSinh(namSinh);
-                    tg.setDiaChi(diaChi);
-                    tg.setDeleted(isDeleted);
+                        // Chuyển chuỗi ngày thành đối tượng Date
+                        Date namSinh = null;
+                        try {
+                            namSinh = dateFormat.parse(namSinhstr); // Chuyển chuỗi ngày sang đối tượng Date
+                        } catch (ParseException e) {
+                            System.out.println("Lỗi khi chuyển chuỗi ngày: " + namSinhstr);
+                        }
 
-                    // Thêm vào danh sách
-                    dsTG[soluongTG++] = tg;
+                        // Tạo đối tượng TacGia và thiết lập thông tin
+                        TacGia tg = new TacGia();
+
+                        // Thêm vào danh sách
+                        if (soluongTG < dsTG.length) {
+                            dsTG[soluongTG++] = tg;
+                        } else {
+                            // Nếu mảng đầy, bạn có thể mở rộng mảng hoặc sử dụng ArrayList
+                            System.out.println("Mảng dsTG đã đầy.");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Lỗi khi xử lý dòng: " + line);
+                        e.printStackTrace();
+                    }
                 }
             }
             System.out.println("Đọc dữ liệu thành công từ file " + duongDan);
@@ -246,4 +258,3 @@ public class DsTacGia{
         }
     }
 }
-

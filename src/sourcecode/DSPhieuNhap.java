@@ -6,6 +6,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DSPhieuNhap {
     private PhieuNhap[] dsPhieuNhap;
@@ -58,7 +61,7 @@ public class DSPhieuNhap {
             // Nếu tìm thấy phiếu nhập với mã maPN
             if (dsPhieuNhap[i].getMaPN().equals(maPN)) {
                 System.out.println("Thông tin phiếu nhập cần sửa:");
-                dsPhieuNhap[i].xuat();  // In ra thông tin phiếu nhập cần sửa
+                dsPhieuNhap[i].xuatPN();  // In ra thông tin phiếu nhập cần sửa
     
                 boolean hopLe = false;
                 // Nếu mã phiếu nhập trùng với mã trong danh sách, yêu cầu nhập lại mã
@@ -194,33 +197,40 @@ public class DSPhieuNhap {
         }
     }
 
-    // Đọc dữ liệu từ file
-// Đọc dữ liệu từ file
-public void docDuLieuTuFile(String tenFile) {
-    String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\DOAN\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
-    soLuongPN = 0; // Đặt lại số lượng phiếu nhập trước khi đọc
-
-    try (BufferedReader reader = new BufferedReader(new FileReader(duongDan))) {
-        String line;
-        while ((line = reader.readLine()) != null) { // Đọc từng dòng
-            String[] parts = line.split(", "); // Tách dữ liệu theo dấu ", "
-            if (parts.length >= 5) { // Đảm bảo đủ thông tin
-                String maPN = parts[0];
-                String maNXB = parts[1];
-                String ngayNhapStr = parts[2];
-                double tongTien = Double.parseDouble(parts[3]);
-                boolean isDeleted = Boolean.parseBoolean(parts[4]); // Chuyển chuỗi sang boolean
-
-                date ngayNhap = date.fromString(ngayNhapStr); // Chuyển chuỗi ngày sang đối tượng date
-                PhieuNhap pn = new PhieuNhap(maPN, maNXB, tongTien, ngayNhap); // Khởi tạo phiếu nhập
-                pn.setDeleted(isDeleted); // Đặt trạng thái isDeleted
-                dsPhieuNhap[soLuongPN++] = pn; // Thêm vào danh sách
+    
+    public void docDuLieuTuFile(String tenFile) {
+        String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\DOAN\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+        soLuongPN = 0; // Đặt lại số lượng phiếu nhập trước khi đọc
+    
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  // Định dạng ngày tháng (ví dụ: 2024-12-01)
+    
+        try (BufferedReader reader = new BufferedReader(new FileReader(duongDan))) {
+            String line;
+            while ((line = reader.readLine()) != null) { // Đọc từng dòng
+                String[] parts = line.split(", "); // Tách dữ liệu theo dấu ", "
+                if (parts.length >= 5) { // Đảm bảo đủ thông tin
+                    String maPN = parts[0];
+                    String maNXB = parts[1];
+                    String ngayNhapStr = parts[2];
+                    double tongTien = Double.parseDouble(parts[3]);
+                    boolean isDeleted = Boolean.parseBoolean(parts[4]); // Chuyển chuỗi sang boolean
+    
+                    Date ngayNhap = null;
+                    try {
+                        ngayNhap = dateFormat.parse(ngayNhapStr); // Chuyển chuỗi ngày sang đối tượng Date
+                    } catch (ParseException e) {
+                        System.out.println("Lỗi khi chuyển chuỗi ngày: " + ngayNhapStr);
+                    }
+    
+                    PhieuNhap pn = new PhieuNhap(); // Khởi tạo phiếu nhập
+                    pn.setDeleted(isDeleted); // Đặt trạng thái isDeleted
+                    dsPhieuNhap[soLuongPN++] = pn; // Thêm vào danh sách
+                }
             }
+            System.out.println("Đọc dữ liệu thành công từ file: " + duongDan);
+        } catch (IOException e) {
+            System.out.println("Lỗi khi đọc dữ liệu từ file: " + e.getMessage());
         }
-        System.out.println("Đọc dữ liệu thành công từ file: " + duongDan);
-    } catch (IOException e) {
-        System.out.println("Lỗi khi đọc dữ liệu từ file: " + e.getMessage());
     }
-}
-
+    
 }

@@ -8,9 +8,8 @@ public class Menu implements IMenu {
     DsTaiLieu dsTaiLieu = new DsTaiLieu(100);
     DsTacGia dsTacGia = new DsTacGia(50);
     DsTheLoai dsTheLoai = new DsTheLoai(50);
-    DsMuonTraTL dsMuonTraTL = new DsMuonTraTL(100);
-    DsThongKe dsThongKe = new DsThongKe();
-    DSNhaXuatBan dsNXB = new DSNhaXuatBan(50);
+    // DsMuonTraTL dsMuonTraTL = new DsMuonTraTL(100);
+    DsNhaXuatBan dsNXB = new DsNhaXuatBan(50);
     DSPhieuNhap dsPhieuNhap = new DSPhieuNhap(100);  
     Scanner scanner = new Scanner(System.in);
 
@@ -308,163 +307,117 @@ public void menuQLMTTL() {
         int option = luaChon();
         scanner.nextLine(); // Đọc bỏ ký tự newline
 
-        switch (option) {
-            case 1:
-                System.out.print("Nhập số lượng mượn trả muốn thêm: ");
-                int soLuongThem = scanner.nextInt();
-                scanner.nextLine();
-                for (int i = 0; i < soLuongThem; i++) {
-                    System.out.print("Nhập mã tài liệu: ");
-                    String maTL = scanner.nextLine();
-                    System.out.print("Nhập ngày mượn: ");
-                    String ngayMuon = scanner.nextLine();
-                    System.out.print("Nhập ngày trả: ");
-                    String ngayTra = scanner.nextLine();
-                    System.out.print("Nhập số lượng: ");
-                    int soLuong = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.print("Nhập tên người dùng: ");
-                    String tenNguoiDung = scanner.nextLine();
+        // switch (option) {
+        //     case 1:
+        //         System.out.print("Nhập số lượng mượn trả muốn thêm: ");
+        //         int soLuongThem = scanner.nextInt();
+        //         scanner.nextLine();
+        //         for (int i = 0; i < soLuongThem; i++) {
+        //             System.out.print("Nhập mã tài liệu: ");
+        //             String maTL = scanner.nextLine();
+        //             System.out.print("Nhập ngày mượn: ");
+        //             String ngayMuon = scanner.nextLine();
+        //             System.out.print("Nhập ngày trả: ");
+        //             String ngayTra = scanner.nextLine();
+        //             System.out.print("Nhập số lượng: ");
+        //             int soLuong = scanner.nextInt();
+        //             scanner.nextLine();
+        //             System.out.print("Nhập tên người dùng: ");
+        //             String tenNguoiDung = scanner.nextLine();
                     
-                    MuonTraTL muonTraTL = new MuonTraTL(maTL, ngayMuon, ngayTra, soLuong, tenNguoiDung);
-                    dsMuonTraTL.themMuon(muonTraTL);
-                }
-                break;
-            case 2:
-                dsMuonTraTL.ghiDuLieuRaFile();
-                break;
-            case 3:
-                dsMuonTraTL.docDuLieuTuFile(dsNguoiDung);
-                break;
-            case 4:
-                dsMuonTraTL.hienThiDanhSach();
-                break;
-            case 5:
-                System.out.print("Nhập mã tài liệu cần tìm: ");
-                String maTL = scanner.nextLine();
-                for (MuonTraTL mt : dsMuonTraTL.getDsMT()) {
-                    if (mt.getMaTL().equals(maTL)) {
-                        mt.xuat();
-                    }
-                }
-                break;
-            case 6:
-                System.out.print("Nhập mã mượn trả cần sửa: ");
-                String maSua = scanner.nextLine();
-                for (MuonTraTL mt : dsMuonTraTL.getDsMT()) {
-                    if (mt.getMaTL().equals(maSua)) {
-                        // Tùy chỉnh thông tin mượn trả cần sửa
-                    }
-                }
-                break;
-            case 7:
-                // Tạo menu con cho Xóa tạm thời và Khôi phục
-                System.out.println("=== Chọn hành động xóa ===");
-                System.out.println("1. Xóa tạm thời");
-                System.out.println("2. Khôi phục mượn trả đã xóa");
-                System.out.println("3. Quay lại");
-                System.out.print("Chọn tùy chọn: ");
-                int subOption = scanner.nextInt();
-                scanner.nextLine(); // Đọc bỏ ký tự newline
+        //             MuonTraTL muonTraTL = new MuonTraTL(maTL, ngayMuon, ngayTra, soLuong, tenNguoiDung);
+        //             dsMuonTraTL.themMuon(muonTraTL);
+        //         }
+        //         break;
+        //     case 2:
+        //         dsMuonTraTL.ghiDuLieuRaFile();
+        //         break;
+        //     case 3:
+        //         dsMuonTraTL.docDuLieuTuFile(dsNguoiDung);
+        //         break;
+        //     case 4:
+        //         dsMuonTraTL.hienThiDanhSach();
+        //         break;
+        //     case 5:
+        //         System.out.print("Nhập mã tài liệu cần tìm: ");
+        //         String maTL = scanner.nextLine();
+        //         for (MuonTraTL mt : dsMuonTraTL.getDsMT()) {
+        //             if (mt.getMaTL().equals(maTL)) {
+        //                 mt.xuat();
+        //             }
+        //         }
+        //         break;
+        //     case 6:
+        //         System.out.print("Nhập mã mượn trả cần sửa: ");
+        //         String maSua = scanner.nextLine();
+        //         for (MuonTraTL mt : dsMuonTraTL.getDsMT()) {
+        //             if (mt.getMaTL().equals(maSua)) {
+        //                 // Tùy chỉnh thông tin mượn trả cần sửa
+        //             }
+        //         }
+        //         break;
+        //     case 7:
+        //         // Tạo menu con cho Xóa tạm thời và Khôi phục
+        //         System.out.println("=== Chọn hành động xóa ===");
+        //         System.out.println("1. Xóa tạm thời");
+        //         System.out.println("2. Khôi phục mượn trả đã xóa");
+        //         System.out.println("3. Quay lại");
+        //         System.out.print("Chọn tùy chọn: ");
+        //         int subOption = scanner.nextInt();
+        //         scanner.nextLine(); // Đọc bỏ ký tự newline
 
-                switch (subOption) {
-                    case 1:
-                        System.out.print("Nhập mã mượn trả cần xóa tạm thời: ");
-                        String maXoa = scanner.nextLine();
-                        dsMuonTraTL.xoaMuon(maXoa);
-                        break;
-                    case 2:
-                        System.out.print("Nhập mã mượn trả cần khôi phục: ");
-                        String maKhoiPhuc = scanner.nextLine();
-                        dsMuonTraTL.khoiPhucMuon(maKhoiPhuc);
-                        break;
-                    case 3:
-                        break;
-                    default:
-                        System.out.println("Lựa chọn không hợp lệ.");
-                }
-                break;
-            case 8:
-                dsMuonTraTL.hienThiDanhSachXoa();
-                break;
-            case 0:
-                System.out.println("Thoát chương trình.");
-                return;
-            default:
-                System.out.println("Lựa chọn không hợp lệ. Vui lòng thử lại.");
-        }
+        //         switch (subOption) {
+        //             case 1:
+        //                 System.out.print("Nhập mã mượn trả cần xóa tạm thời: ");
+        //                 String maXoa = scanner.nextLine();
+        //                 dsMuonTraTL.xoaMuon(maXoa);
+        //                 break;
+        //             case 2:
+        //                 System.out.print("Nhập mã mượn trả cần khôi phục: ");
+        //                 String maKhoiPhuc = scanner.nextLine();
+        //                 dsMuonTraTL.khoiPhucMuon(maKhoiPhuc);
+        //                 break;
+        //             case 3:
+        //                 break;
+        //             default:
+        //                 System.out.println("Lựa chọn không hợp lệ.");
+        //         }
+        //         break;
+        //     case 8:
+        //         dsMuonTraTL.hienThiDanhSachXoa();
+        //         break;
+        //     case 0:
+        //         System.out.println("Thoát chương trình.");
+        //         return;
+        //     default:
+        //         System.out.println("Lựa chọn không hợp lệ. Vui lòng thử lại.");
+        // }
     }
 }
 
     // Menu quản lý phiếu nhập
+    @Override
     public void menuQLPN() {
-        boolean exit = false;
-
-        while (!exit) {
-            System.out.println("+-----------------------------+");
-            System.out.println("|         Menu Phiếu Nhập     |");
-            System.out.println("+-----------------------------+");
-            System.out.println("|1. Xem danh sách phiếu nhập. |");
-            System.out.println("|2. Tìm phiếu nhập.           |");
-            System.out.println("|3. Tạo phiếu nhập.           |");
-            System.out.println("|0. Thoát.                    |");
-            System.out.println("+-----------------------------+");
-            System.out.print("Mời bạn nhập lựa chọn: ");
-            int choice = scanner.nextInt();
-
-            switch (choice) {
-                case 1:
-                    dsPhieuNhap.xemDanhSachPhieuNhap();
-                    break;
-                case 2:
-                    System.out.print("Nhập mã phiếu nhập cần tìm: ");
-                    String maPN = scanner.next();
-                    PhieuNhap pn = dsPhieuNhap.timPhieuNhap(maPN);
-                    if (pn != null) {
-                        pn.xuatPN();
-                    } else {
-                        System.out.println("Không tìm thấy phiếu nhập.");
-                    }
-                    break;
-                case 3:
-                    PhieuNhap newPN = new PhieuNhap();
-                newPN.nhap();
-                dsPhieuNhap.themPhieuNhap(newPN);
-
-                DSChiTietPhieuNhap dsChiTietPN = new DSChiTietPhieuNhap();
-                boolean done = false;
-
-                while (!done) {
-                    System.out.println("+-----------------------------+");
-                    System.out.println("|   Menu chi tiết phiếu nhập  |");
-                    System.out.println("+-----------------------------+");
-                    System.out.println("|1. Nhập sản phẩm.            |");
-                    System.out.println("|0. Hoàn thành.               |");
-                    System.out.println("+-----------------------------+");
-                    System.out.print("Mời bạn nhập lựa chọn: ");
-
-                    int ctChoice = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
-
-                    if (ctChoice == 1) {
-                        ChiTietPhieuNhap ctpn = new ChiTietPhieuNhap();
-                        ctpn.nhap();
-                        dsChiTietPN.themChiTietPhieuNhap(ctpn);
-                    } else if (ctChoice == 0) {
-                        done = true;
-                        double tongTien = dsChiTietPN.tinhTongTien();
-                        newPN.setTongTien(tongTien);
-                        System.out.println("Tổng tiền: " + tongTien);
-                    } else {
-                        System.out.println("Lựa chọn không hợp lệ. Vui lòng thử lại.");
-                    }
-                }
-
-            }
-        }
-    }
+    //     do {
+    //         System.out.println("\n--- Quản lý Phiếu Nhập ---");
+    //         System.out.println("1. Thêm phiếu nhập");
+    //         System.out.println("2. Sửa phiếu nhập");
+    //         System.out.println("3. Xem danh sách phiếu nhập");
+    //         System.out.println("4. Tìm phiếu nhập");
+    //         System.out.println("5. Xóa phiếu nhập");
+    //         System.out.println("6. Khôi phục phiếu nhập");
+    //         System.out.println("7. Xem danh sách phiếu nhập đã xóa");
+    //         System.out.println("8. Thoát");
+    //         System.out.println("9. Đọc file dữ liệu");
+    //         System.out.println("10. Ghi file dữ liệu");
+    //         System.out.print("Nhập lựa chọn: ");
+    //         int option = luaChon();
+    //         scanner.nextLine(); // Đọc bỏ ký tự newline
+    // }
+}
 
     // Menu quản lý chi tiết phiếu nhập
+    @Override
     public void menuCTPN() {
         int option;
         do {
@@ -501,7 +454,7 @@ public void menuQLMTTL() {
                 case 5:
                     System.out.print("Nhập mã phiếu nhập cần tìm: ");
                     String maPNTim = scanner.nextLine();
-                    dsChiTiet.timKiemChiTietPhieuNhap(maPNTim);
+                    dsChiTiet.timKiemCTPN(maPNTim);
 
                     break;
                 case 6:
@@ -587,7 +540,7 @@ public void menuQLMTTL() {
                 case 5:
                     System.out.print("Nhập mã nhà xuất bản cần tìm: ");
                     String maNXBTim = scanner.nextLine();
-                    dsNXB.timkiemNXB(maNXBTim);
+                    dsNXB.timKiemNXB(maNXBTim);
                     break;
                 case 6:
                     System.out.print("Nhập mã nhà xuất bản cần sửa: ");
@@ -634,79 +587,81 @@ public void menuQLMTTL() {
     
     // Menu thống kê
     public void menuTK() {
-        int luaChon;
-        do {
-            System.out.println("=== Menu Thống Kê ===");
-            System.out.println("1. Thêm thống kê");
-            System.out.println("2. Sửa thống kê");
-            System.out.println("3. Xóa tạm thời thống kê");
-            System.out.println("4. Khôi phục thống kê");
-            System.out.println("5. Tìm kiếm thống kê");
-            System.out.println("6. Hiển thị danh sách thống kê");
-            System.out.println("7. Hiển thị danh sách thống kê đã xóa tạm thời");
-            System.out.println("0. Thoát");
-            System.out.print("Chọn chức năng: ");
-            luaChon = luaChon();
-            scanner.nextLine(); // Consume newline
-            System.out.println("===================================================");
+    //     int luaChon;
+    //     do {
+    //         System.out.println("=== Menu Thống Kê ===");
+    //         System.out.println("1. Thêm thống kê");
+    //         System.out.println("2. Sửa thống kê");
+    //         System.out.println("3. Xóa tạm thời thống kê");
+    //         System.out.println("4. Khôi phục thống kê");
+    //         System.out.println("5. Tìm kiếm thống kê");
+    //         System.out.println("6. Hiển thị danh sách thống kê");
+    //         System.out.println("7. Hiển thị danh sách thống kê đã xóa tạm thời");
+    //         System.out.println("0. Thoát");
+    //         System.out.print("Chọn chức năng: ");
+    //         luaChon = luaChon();
+    //         scanner.nextLine(); // Consume newline
+    //         System.out.println("===================================================");
     
-            switch (luaChon) {
-                case 1:
-                    System.out.print("Nhập số lượng người dùng: ");
-                    int soLuongND = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
-                    System.out.print("Nhập số lượng tài liệu: ");
-                    int soLuongTL = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
-                    System.out.print("Nhập số lượng phiếu nhập: ");
-                    int soLuongPN = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
-                    System.out.print("Nhập số lượng mượn trả: ");
-                    int soLuongMuon = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
+    //     //     switch (luaChon) {
+    //     //         case 1:
+    //     //             System.out.print("Nhập số lượng người dùng: ");
+    //     //             int soLuongND = scanner.nextInt();
+    //     //             scanner.nextLine(); // Consume newline
+    //     //             System.out.print("Nhập số lượng tài liệu: ");
+    //     //             int soLuongTL = scanner.nextInt();
+    //     //             scanner.nextLine(); // Consume newline
+    //     //             System.out.print("Nhập số lượng phiếu nhập: ");
+    //     //             int soLuongPN = scanner.nextInt();
+    //     //             scanner.nextLine(); // Consume newline
+    //     //             System.out.print("Nhập số lượng mượn trả: ");
+    //     //             int soLuongMuon = scanner.nextInt();
+    //     //             scanner.nextLine(); // Consume newline
     
-                    ThongKe thongKe = new ThongKe(soLuongND, soLuongTL, soLuongPN, soLuongMuon);
-                    dsThongKe.themTK(thongKe);
-                    System.out.println("Đã thêm thống kê mới.");
-                    break;
-                case 2:
-                    System.out.print("Nhập chỉ mục thống kê cần sửa: ");
-                    int indexSua = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
-                    dsThongKe.suaTK(indexSua - 1); // Giảm 1 vì chỉ mục bắt đầu từ 0
-                    break;
-                case 3:
-                    System.out.print("Nhập chỉ mục thống kê cần xóa tạm thời: ");
-                    int indexXoa = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
-                    dsThongKe.xoaTK(indexXoa - 1); // Giảm 1 vì chỉ mục bắt đầu từ 0
-                    break;
-                case 4:
-                    System.out.print("Nhập chỉ mục thống kê cần khôi phục: ");
-                    int indexKhoiPhuc = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
-                    dsThongKe.khoiPhucTK(indexKhoiPhuc - 1); // Giảm 1 vì chỉ mục bắt đầu từ 0
-                    break;
-                case 5:
-                    System.out.print("Nhập chỉ mục thống kê cần tìm kiếm: ");
-                    int indexTimKiem = scanner.nextInt();
-                    scanner.nextLine(); // Consume newline
-                    dsThongKe.timKiemTK(indexTimKiem - 1); // Giảm 1 vì chỉ mục bắt đầu từ 0
-                    break;
-                case 6:
-                    dsThongKe.xuatDs();
-                    break;
-                case 7:
-                    dsThongKe.hienThiDanhSachXoa();
-                    break;
-                case 0:
-                    System.out.println("Thoát chương trình...");
-                    break;
-                default:
-                    System.out.println("Lựa chọn không hợp lệ! Vui lòng chọn lại.");
-            }
-        } while (luaChon != 0);
-    }
+    //     //             ThongKe thongKe = new ThongKe(soLuongND, soLuongTL, soLuongPN, soLuongMuon);
+    //     //             dsThongKe.themTK(thongKe);
+    //     //             System.out.println("Đã thêm thống kê mới.");
+    //     //             break;
+    //     //         case 2:
+    //     //             System.out.print("Nhập chỉ mục thống kê cần sửa: ");
+    //     //             int indexSua = scanner.nextInt();
+    //     //             scanner.nextLine(); // Consume newline
+    //     //             dsThongKe.suaTK(indexSua - 1); // Giảm 1 vì chỉ mục bắt đầu từ 0
+    //     //             break;
+    //     //         case 3:
+    //     //             System.out.print("Nhập chỉ mục thống kê cần xóa tạm thời: ");
+    //     //             int indexXoa = scanner.nextInt();
+    //     //             scanner.nextLine(); // Consume newline
+    //     //             dsThongKe.xoaTK(indexXoa - 1); // Giảm 1 vì chỉ mục bắt đầu từ 0
+    //     //             break;
+    //     //         case 4:
+    //     //             System.out.print("Nhập chỉ mục thống kê cần khôi phục: ");
+    //     //             int indexKhoiPhuc = scanner.nextInt();
+    //     //             scanner.nextLine(); // Consume newline
+    //     //             dsThongKe.khoiPhucTK(indexKhoiPhuc - 1); // Giảm 1 vì chỉ mục bắt đầu từ 0
+    //     //             break;
+    //     //         case 5:
+    //     //             System.out.print("Nhập chỉ mục thống kê cần tìm kiếm: ");
+    //     //             int indexTimKiem = scanner.nextInt();
+    //     //             scanner.nextLine(); // Consume newline
+    //     //             dsThongKe.timKiemTK(indexTimKiem - 1); // Giảm 1 vì chỉ mục bắt đầu từ 0
+    //     //             break;
+    //     //         case 6:
+    //     //             dsThongKe.xuatDs();
+    //     //             break;
+    //     //         case 7:
+    //     //             dsThongKe.hienThiDanhSachXoa();
+    //     //             break;
+    //     //         case 0:
+    //     //             System.out.println("Thoát chương trình...");
+    //     //             break;
+    //     //         default:
+    //     //             System.out.println("Lựa chọn không hợp lệ! Vui lòng chọn lại.");
+    //     //     }
+    //     // } while (luaChon != 0);
+    // }
+
+}
     
     // Menu quản lý tác giả
 public void menuTacGia() {
@@ -740,17 +695,17 @@ public void menuTacGia() {
                 dsTacGia.docDuLieuTuFile("tacgia.txt");
                 break;
             case 4:
-                dsTacGia.xuat_ds();
+                dsTacGia.hienThiDanhSach();
                 break;
             case 5:
                 System.out.print("Nhập mã tác giả cần tìm: ");
                 String maTGTim = scanner.nextLine();
-                dsTacGia.timkiemTGtheoma(maTGTim);
+                dsTacGia.timKiemTG(maTGTim);
                 break;
             case 6:
                 System.out.print("Nhập mã tác giả cần sửa: ");
                 String maSua = scanner.nextLine();
-                dsTacGia.suaTG(maSua);
+                dsTacGia.suaTacGia(maSua);
                 break;
             case 7:
                 System.out.println("=== Chọn hành động xóa ===");
@@ -779,7 +734,7 @@ public void menuTacGia() {
                 }
                 break;
             case 8:
-                dsTacGia.xuat_dsXoa();
+                dsTacGia.hienThiDanhSachXoa();
                 break;
             case 0:
                 System.out.println("Thoát...");
@@ -823,17 +778,17 @@ public void menuTheLoai() {
                 dsTheLoai.docDuLieuTuFile("theloai.txt");
                 break;
             case 4:
-                dsTheLoai.xuat_ds();
+                dsTheLoai.hienThiDanhSach();
                 break;
             case 5:
                 System.out.print("Nhập mã thể loại cần tìm: ");
                 String maTLoaiTim = scanner.nextLine();
-                dsTheLoai.timkiemTLoaitheoma(maTLoaiTim);
+                dsTheLoai.timKiemTLoai(maTLoaiTim);
                 break;
             case 6:
                 System.out.print("Nhập mã thể loại cần sửa: ");
                 String maSua = scanner.nextLine();
-                dsTheLoai.suaTLoai(maSua);
+                dsTheLoai.suaTheLoai(maSua);
                 break;
             case 7:
                 System.out.println("=== Chọn hành động xóa ===");
@@ -848,7 +803,7 @@ public void menuTheLoai() {
                     case 1:
                         System.out.print("Nhập mã thể loại cần xóa tạm thời: ");
                         String maXoa = scanner.nextLine();
-                        dsTheLoai.xoaTLoai(maXoa);
+                        dsTheLoai.xoaTheLoai(maXoa);
                         break;
                     case 2:
                         System.out.print("Nhập mã thể loại cần khôi phục: ");
@@ -862,7 +817,7 @@ public void menuTheLoai() {
                 }
                 break;
             case 8:
-                dsTheLoai.xuat_dsXoa();
+                dsTheLoai.hienThiDanhSachXoa();
                 break;
             case 0:
                 System.out.println("Thoát...");

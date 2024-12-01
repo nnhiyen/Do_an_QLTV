@@ -1,5 +1,6 @@
 package DoAn_QLTV_main.src.sourcecode;
 
+
 public class TheLoai{
     private String tenTLoai;
     private String maTLoai;
@@ -13,8 +14,6 @@ public class TheLoai{
         this.isDeleted = false;
     }
     public void nhap(){
-        Scanner sc = new Scanner(System.in);
-
         System.out.print("Nhap ten the loai: ");
         tenTLoai = checkLoi.checkChuoiRong();
         System.out.print("Nhap ma the loai: ");

@@ -63,16 +63,14 @@ public class PhieuNhap {
     public void setNgayNhap(date ngayNhap) {
         this.ngayNhap = ngayNhap;
     }
-    public static void giamIdPN(){
-        cntmaPN --;
-    }
+
     
     public void nhap(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhập mã phiếu nhập:");
         maPN = checkLoi.checkMaPN();
         System.out.print("Nhập ngày tạo phiếu nhập: ");
-        ngayNhap = checkLoi.checkDate();
+        ngayNhap.nhap();
         System.out.print("Nhập mã nhà xuất bản:");
         maNXB = checkLoi.checkMaNXB();
     }

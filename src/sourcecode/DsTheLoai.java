@@ -203,7 +203,7 @@ import java.io.IOException;
          }
      }
 
-    private void docDuLieuTuFile(String tenFile){
+    public void docDuLieuTuFile(String tenFile){
     	String duongDan = "C:\\\\Users\\\\Admin\\\\Documents\\\\NetBeansProjects\\\\DOAN\\\\src\\\\DoAn_QLTV_main\\\\src\\\\sourcefile\\\\" + tenFile;
         soluongTLoai = 0;
     	
