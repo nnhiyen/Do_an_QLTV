@@ -1,6 +1,5 @@
 package DoAn_QLTV_main.src.sourcecode;
 
-package eclip;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 import java.util.Arrays;
