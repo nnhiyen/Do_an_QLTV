@@ -2,6 +2,8 @@ package DoAn_QLTV_main.src.sourcecode;
 
 public class GiangVien extends NguoiDung {
     private String maGV;
+    private boolean isDeleted; 
+
 
     // Constructor mặc định
     public GiangVien() {super();}
@@ -18,7 +20,13 @@ public class GiangVien extends NguoiDung {
     public void setMaGV(String maGV) {
         this.maGV=maGV;
     }
+    public boolean isDeleted() {
+        return isDeleted;
+    }
 
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
     // Phương thức nhập thông tin Giảng Viên
     @Override
     public void nhap() {
@@ -44,17 +52,7 @@ public class GiangVien extends NguoiDung {
     return "Tên: " + getTen() + ", Khoa: " + getKhoa() + ", Năm sinh: " + getNamSinh() + ", Mã sinh viên: " + maNguoiDung() + ", Trạng thái xóa: " + isDeleted;
     }
 // test
-    private boolean isDeleted; // Thêm thuộc tính này
 
-    // Constructor, getter, setter
-
-    public boolean isDeleted() {
-        return isDeleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        isDeleted = deleted;
-    }
 
 }
 s
