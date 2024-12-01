@@ -64,7 +64,7 @@ public class DSPhieuNhap {
                 // Nếu mã phiếu nhập trùng với mã trong danh sách, yêu cầu nhập lại mã
                 while (!hopLe) {
                     // Nhập lại thông tin phiếu nhập
-                    System.out.println("Nhập lại thông tin phiếu nhập: ");
+                    System.out.println("Hãy nhập lại thông tin phiếu nhập: ");
                     dsPhieuNhap[i].nhap();  // Gọi phương thức nhập để cập nhật thông tin mới
     
                     // Lấy mã phiếu nhập sau khi sửa

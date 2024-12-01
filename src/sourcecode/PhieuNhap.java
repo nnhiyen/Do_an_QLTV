@@ -22,18 +22,6 @@ public class PhieuNhap {
         this.tongTien= tongTien;
         this.ngayNhap= ngayNhap;
         this.isDeleted = false; // Mặc định là chưa bị xóa
-
-    
-        if (maPN == null || maPN.isEmpty()) {
-            if (cntmaPN < 10) {
-                this.maPN = "PN00" + cntmaPN;
-            } else if (cntmaPN < 100) {
-                this.maPN = "PN0" + cntmaPN;
-            } else {
-                this.maPN = "PN" + cntmaPN;
-            }
-            cntmaPN++;
-        }
     }
     
     
@@ -81,6 +69,8 @@ public class PhieuNhap {
     
     public void nhap(){
         Scanner sc = new Scanner(System.in);
+        System.out.print("Nhập mã phiếu nhập:");
+        maPN = checkLoi.checkMaNXB();
         System.out.print("Nhập ngày tạo phiếu nhập: ");
         ngayNhap = checkLoi.checkDate();
         System.out.print("Nhập mã nhà xuất bản:");
