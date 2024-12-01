@@ -1,41 +1,48 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DoAn_QLTV_main.src.sourcecode;
 import java.util.Scanner;
-/**
- *
- * @author Luong Thanh Tuan
- */
+
 public class PhieuNhap {
     private String maPN;
     private String maNXB;
     private double tongTien;
     private static int cntmaPN = 1;
     private date ngayNhap = new date();
+    private boolean isDeleted; 
     
     Scanner sc = new Scanner(System.in);
     
     // Constructor
-    public PhieuNhap(){
-        String cnt;
-        if(cntmaPN < 10){
-            maPN = "PN00" + cntmaPN;
-        } else if(cntmaPN < 100){
-            maPN = "PN0" + cntmaPN;
-        } else{
-            maPN = "PN" + cntmaPN;
+    public PhieuNhap(String maNXB, double tongTien, date ngayNhap) {
+        this.maNXB = maNXB;
+        this.tongTien = tongTien;
+        this.ngayNhap = ngayNhap;
+    
+        if (maPN == null || maPN.isEmpty()) {
+            if (cntmaPN < 10) {
+                this.maPN = "PN00" + cntmaPN;
+            } else if (cntmaPN < 100) {
+                this.maPN = "PN0" + cntmaPN;
+            } else {
+                this.maPN = "PN" + cntmaPN;
+            }
+            cntmaPN++;
         }
-        cntmaPN ++;
     }
     
+    
     // Contructor property
-    public PhieuNhap(String maPn, String maNXB, double tongTien, date ngayNhap){
+    public PhieuNhap(String maPN, String maNXB, double tongTien, date ngayNhap){
         this.maNXB = maNXB;
         this.maPN= maPN;
         this.tongTien= tongTien;
         this.ngayNhap= ngayNhap;
+    }
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
     
     public String getMaPN(){
@@ -94,6 +101,7 @@ public class PhieuNhap {
 
     @Override
     public String toString() {
-        return maPN + ", " + maNXB + ", " + ngayNhap + ", " + tongTien;
+        return maPN + ", " + maNXB + ", " + ngayNhap + ", " + tongTien + ", " + isDeleted;
     }
+    
 }
