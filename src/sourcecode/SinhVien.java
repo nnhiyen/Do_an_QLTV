@@ -40,8 +40,20 @@ public class SinhVien extends NguoiDung {
     
     @Override
     public String toString() {
-    return "Tên: " + getTen() + ", Khoa: " + getKhoa() + ", Năm sinh: " + getNamSinh() + ", Mã sinh viên: " + maNguoiDung();
+    return "Tên: " + getTen() + ", Khoa: " + getKhoa() + ", Năm sinh: " + getNamSinh() + ", Mã sinh viên: " + maNguoiDung() + ", Trạng thái xóa: " + isDeleted;
+    }
+// test
+    private boolean isDeleted; // Thêm thuộc tính này
+
+    // Constructor, getter, setter
+
+    public boolean isDeleted() {
+        return isDeleted;
     }
 
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
 
 }
+
