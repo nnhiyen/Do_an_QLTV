@@ -58,15 +58,16 @@ public abstract class NguoiDung {
         ten = checkLoi.checkChuoiRong();
         System.out.print("Nhập khoa: ");
         khoa = checkLoi.checkChuoiRong();
-        System.out.println("Nhập năm sinh:");
+        System.out.print("Nhập năm sinh:");
         namSinh = checkLoi.checkNamSinh();
     }
 
     // Phương thức toString
     @Override
     public String toString() {
-        return "Tên: " + ten + ", Khoa: " + khoa + ", Năm sinh: " + namSinh;
+    return "Tên: " + ten + ", Khoa: " + khoa + ", Năm sinh: " + namSinh + ", Trạng thái xóa: " + isDeleted;
     }
+
 
     // Phương thức trừu tượng
     public abstract String maNguoiDung();
