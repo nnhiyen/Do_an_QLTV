@@ -147,6 +147,19 @@ public class checkLoi {
             System.out.print("Mời nhập lại");
         }
     }
+    public static String checkMaPN() {
+        String input;
+        while (true) {
+            input = sc.nextLine().toUpperCase(); // Chuyển chuỗi về chữ in hoa
+            if (input.matches("PN" + "[0-9]{3}")) {  // Kiểm tra định dạng PNxxx
+                return input;
+            } else {
+                System.err.println("Mã phiếu nhập sai định dạng. Ví dụ: PN001");
+            }
+            System.out.print("Mời nhập lại: ");
+        }
+    }
+    
     
 //    public static String checkMaSV(){
 //        chỉnh lại nếu như muốn xét mã như NXB
