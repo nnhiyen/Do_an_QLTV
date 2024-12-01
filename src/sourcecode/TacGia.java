@@ -1,7 +1,5 @@
 package DoAn_QLTV_main.src.sourcecode;
 
-package eclip;
-
 import java.util.Scanner;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
