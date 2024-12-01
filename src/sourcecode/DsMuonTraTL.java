@@ -51,30 +51,33 @@ public class DsMuonTraTL {
     public void setSc(Scanner sc) {
         this.sc = sc;
     }
+    
+    
 
     
-    public void suaMuonTra(String maTL) {
-        // Đọc lại dữ liệu từ file để cập nhật danh sách mượn trả mới nhất
-        docDuLieuTuFile("muontra.txt");
+    public void suaMuonTra(String maTL, DSNguoiDung dsNguoiDung, DsTaiLieu dsTaiLieu) {
+    // Đọc lại dữ liệu từ file để cập nhật danh sách mượn trả mới nhất
+    docDuLieuTuFile("muontra.txt");
 
-        for (int i = 0; i < soLuongMuonTra; i++) {
-            if (dsMT[i].getMaTL().equals(maTL)) {
-                System.out.println("Thông tin mượn trả cần sửa:");
-                dsMT[i].xuat(); // In ra thông tin mượn trả cần sửa
+    for (int i = 0; i < soLuongMuonTra; i++) {
+        if (dsMT[i].getMaTL().equals(maTL)) {
+            System.out.println("Thông tin mượn trả cần sửa:");
+            dsMT[i].xuat(); // In ra thông tin mượn trả cần sửa
 
-                // Nhập thông tin mới
-                System.out.println("Nhập lại thông tin mượn trả: ");
-                dsMT[i].nhap(); // Gọi phương thức nhập để cập nhật thông tin mới
+            // Nhập thông tin mới
+            System.out.println("Nhập lại thông tin mượn trả: ");
+            dsMT[i].nhap(dsNguoiDung, dsTaiLieu); // Gọi phương thức nhập để cập nhật thông tin mới
 
-                // Cập nhật lại dữ liệu vào file sau khi sửa
-                ghiDuLieuRaFile("muontra.txt");
-                System.out.println("Sửa thành công.");
-                return;
-            }
+            // Cập nhật lại dữ liệu vào file sau khi sửa
+            ghiDuLieuRaFile("muontra.txt");
+            System.out.println("Sửa thành công.");
+            return;
         }
-
-        System.out.println("Không tìm thấy mượn trả với mã: " + maTL);
     }
+
+    System.out.println("Không tìm thấy mượn trả với mã: " + maTL);
+}
+
 
     public void xoaMuonTra(String maTL) {
         for (int i = 0; i < soLuongMuonTra; i++) {
@@ -223,6 +226,20 @@ public class DsMuonTraTL {
             System.out.println("Lỗi khi đọc dữ liệu từ file: " + e.getMessage());
         }
     }
+    
+    
+    
+    
+    
+    public boolean kiemTraNguoiDungDaMuon(String tenNguoiDung) {
+    for (int i = 0; i < soLuongMuonTra; i++) {
+        if (dsMT[i].getTenNguoiDung().equals(tenNguoiDung) && dsMT[i].getNgayTra() == null) {
+            return true; // Người dùng đã mượn tài liệu và chưa trả
+        }
+    }
+    return false; // Người dùng chưa mượn tài liệu hoặc đã trả
+}
+
 
     private date parseDate(String dateString) {
         String[] parts = dateString.split("-");
