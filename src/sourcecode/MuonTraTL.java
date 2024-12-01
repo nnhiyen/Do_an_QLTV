@@ -1,21 +1,21 @@
 package DoAn_QLTV_main.src.sourcecode;
 
-package qltv;
-
 import java.util.Scanner;
 
 public class MuonTraTL {
     private String maTL;
-    private String ngayMuon;
-    private String ngayTra;
+    private date ngayMuon;
+    private date ngayTra;
     private int soLuong;
     private String tenNguoiDung; // Chỉ lưu tên người dùng
     private NguoiDung nguoiDung; // Thông tin người dùng (sau khi tìm thấy)
     private boolean daXoa; // Trạng thái đã xóa
 
-    public MuonTraTL() {}
+    public MuonTraTL() {
+        this.daXoa = false; // Mặc định không bị xóa
+    }
 
-    public MuonTraTL(String maTL, String ngayMuon, String ngayTra, int soLuong, String tenNguoiDung) {
+    public MuonTraTL(String maTL, date ngayMuon, date ngayTra, int soLuong, String tenNguoiDung) {
         this.maTL = maTL;
         this.ngayMuon = ngayMuon;
         this.ngayTra = ngayTra;
@@ -33,19 +33,19 @@ public class MuonTraTL {
         this.maTL = maTL;
     }
 
-    public String getNgayMuon() {
+    public date getNgayMuon() {
         return ngayMuon;
     }
 
-    public void setNgayMuon(String ngayMuon) {
+    public void setNgayMuon(date ngayMuon) {
         this.ngayMuon = ngayMuon;
     }
 
-    public String getNgayTra() {
+    public date getNgayTra() {
         return ngayTra;
     }
 
-    public void setNgayTra(String ngayTra) {
+    public void setNgayTra(date ngayTra) {
         this.ngayTra = ngayTra;
     }
 
@@ -113,21 +113,43 @@ public class MuonTraTL {
         return null;
     }
 
-    // Phương thức nhập thông tin
-    public void nhap(DSNguoiDung dsNguoiDung) {
+    // Phương thức tìm kiếm tài liệu
+    public TaiLieu timKiemTaiLieu(String maTL, DsTaiLieu dsTaiLieu) {
+        for (int i = 0; i < dsTaiLieu.getSoluongTL(); i++) {
+            TaiLieu taiLieu = dsTaiLieu.getDsTL()[i];
+            if (taiLieu.getMaTL().equals(maTL)) {
+                return taiLieu; // Tìm thấy tài liệu
+            }
+        }
+        // Nếu không tìm thấy
+        System.out.println("Không tìm thấy tài liệu với mã: " + maTL);
+        return null;
+    }
+
+    // Phương thức nhập thông tin với kiểm tra hợp lệ
+    public void nhap(DSNguoiDung dsNguoiDung, DsTaiLieu dsTaiLieu) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Nhập mã tài liệu: ");
-        this.maTL = scanner.nextLine();
-        System.out.print("Nhập ngày mượn: ");
-        this.ngayMuon = scanner.nextLine();
-        System.out.print("Nhập ngày trả: ");
-        this.ngayTra = scanner.nextLine();
+        this.maTL = checkLoi.checkMaTaiLieu();
+        
+        TaiLieu taiLieu = timKiemTaiLieu(this.maTL, dsTaiLieu);
+        if (taiLieu == null) {
+            System.out.println("Tài liệu không tồn tại, vui lòng nhập lại!");
+            return;
+        }
+
+        System.out.println("Nhập ngày mượn: ");
+        this.ngayMuon = new date();
+        this.ngayMuon.nhap();
+        System.out.println("Nhập ngày trả: ");
+        this.ngayTra = new date();
+        this.ngayTra.nhap();
         System.out.print("Nhập số lượng: ");
-        this.soLuong = scanner.nextInt();
+        this.soLuong = checkLoi.checkSoLuong();
         scanner.nextLine(); // Đọc ký tự newline sau khi nhập số
 
         System.out.print("Nhập tên người dùng: ");
-        this.tenNguoiDung = scanner.nextLine();
+        this.tenNguoiDung = checkLoi.checkChuoiRong();
 
         // Tìm kiếm thông tin người dùng dựa trên tên người dùng
         NguoiDung[] nguoiDungs = timKiemNguoiDungTheoTen(this.tenNguoiDung, dsNguoiDung);
@@ -139,36 +161,33 @@ public class MuonTraTL {
         } else {
             System.out.println("Có nhiều người dùng với tên: " + this.tenNguoiDung);
             System.out.print("Vui lòng nhập mã giảng viên hoặc mã sinh viên: ");
-            String maNguoiDung = scanner.nextLine();
+            String maNguoiDung = checkLoi.checkMaSV(); // Giả sử người dùng là sinh viên hoặc giảng viên
             this.nguoiDung = timKiemNguoiDungTheoMa(maNguoiDung, dsNguoiDung);
         }
     }
-      public TaiLieu timKiemTaiLieu(String maTL, DsTaiLieu dsTaiLieu) {
-    for (int i = 0; i < dsTaiLieu.getSoluongTL(); i++) {
-        TaiLieu taiLieu = dsTaiLieu.getDsTL()[i];
-        if (taiLieu.getMaTL().equals(maTL)) {
-            return taiLieu; // Tìm thấy tài liệu
-        }
-    }
-    // Nếu không tìm thấy
-    System.out.println("Không tìm thấy tài liệu với mã: " + maTL);
-    return null;
+
     // Phương thức xuất thông tin
     public void xuat() {
         if (this.nguoiDung != null) {
-            System.out.println(this);
+            System.out.println("Thông tin mượn trả tài liệu:");
+            System.out.println("Mã tài liệu: " + this.maTL);
+            System.out.println("Ngày mượn: " + this.ngayMuon);
+            System.out.println("Ngày trả: " + this.ngayTra);
+            System.out.println("Số lượng: " + this.soLuong);
+            System.out.println("Tên người dùng: " + this.tenNguoiDung);
+            System.out.println("Thông tin người dùng: " + this.nguoiDung);
+            System.out.println("Trạng thái đã xóa: " + (this.daXoa ? "Đã xóa" : "Chưa xóa"));
         } else {
             System.out.println("Thông tin người dùng không hợp lệ. Không thể xuất thông tin mượn trả tài liệu.");
         }
     }
-      
-}
+
     @Override
     public String toString() {
         return "MuonTraTL{" +
                 "maTL='" + maTL + '\'' +
-                ", ngayMuon='" + ngayMuon + '\'' +
-                ", ngayTra='" + ngayTra + '\'' +
+                ", ngayMuon=" + ngayMuon +
+                ", ngayTra=" + ngayTra +
                 ", soLuong=" + soLuong +
                 ", nguoiDung=" + nguoiDung +
                 ", daXoa=" + daXoa +
