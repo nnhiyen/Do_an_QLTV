@@ -1,7 +1,5 @@
 package DoAn_QLTV_main.src.sourcecode;
 
-package eclip;
-
 import java.util.Scanner;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -127,17 +125,16 @@ import java.io.IOException;
          System.out.println("+---------------------------------------------------------+");
          System.out.println("|                 Thể Loại Đã Xóa Tạm Thời               |");
          System.out.println("+---------------------------------------------------------+");
-         System.out.println("|    Mã thể loại    |         Tên          |    Tài liệu   |");
+         System.out.println("|         Mã thể loại          |          Tên          |");
          System.out.println("+---------------------------------------------------------+");
 
          boolean hasDeleted = false;
          for (int i = 0; i < soluongTLoai; i++) {
              if (dsTLoai[i].isDeleted()) {
                  hasDeleted = true;
-                 System.out.printf("| %-16s | %-20s | %-12s |\n",
+                 System.out.printf("| %-16s | %-20s | %-20s |\n",
                          dsTLoai[i].getMaTLoai(),
-                         dsTLoai[i].getTenTLoai(),
-                         dsTLoai[i].getTenTL());
+                         dsTLoai[i].getTenTLoai());
              }
          }
 
@@ -154,12 +151,11 @@ import java.io.IOException;
                  System.out.println("+---------------------------------------------------------+");
                  System.out.println("|                    Thông Tin Thể loại                  |");
                  System.out.println("+---------------------------------------------------------+");
-                 System.out.println("|    Mã thể loại    |         Tên          |    Tài liệu   |");
+                 System.out.println("|          Mã thể loại          |          Tên          |");
                  System.out.println("+---------------------------------------------------------+");
-                 System.out.printf("| %-16s | %-20s | %-12s |\n",
+                 System.out.printf("| %-16s | %-20s | %-20s |\n",
                          dsTLoai[i].getMaTLoai(),
-                         dsTLoai[i].getTenTLoai(),
-                         dsTLoai[i].getTenTL());
+                         dsTLoai[i].getTenTLoai());
                  System.out.println("+---------------------------------------------------------+");
                  found = true;
                  break;
@@ -183,16 +179,14 @@ import java.io.IOException;
          System.out.println("+---------------------------------------------------------+");
          System.out.println("|                    Thông Tin Thể Loại                 |");
          System.out.println("+---------------------------------------------------------+");
-         System.out.println("|    Mã Thể Loại    |         Tên          |    Tác Giả   |    Tài Liệu   |");
+         System.out.println("|          Mã Thể Loại          |          Tên          |");
          System.out.println("+---------------------------------------------------------+");
 
          for (int i = 0; i < soluongTLoai; i++) {
              if (!dsTLoai[i].isDeleted()) {
-                 System.out.printf("| %-16s | %-20s | %-12s | %-18s |\n",
+                 System.out.printf("| %-16s | %-20s |\n",
                          dsTLoai[i].getMaTLoai(),
-                         dsTLoai[i].getTenTLoai(),
-                         dsTLoai[i].getTenTG(),
-                         dsTLoai[i].getTenTL());
+                         dsTLoai[i].getTenTLoai());
              }
          }
          System.out.println("+---------------------------------------------------------+");
@@ -220,19 +214,15 @@ import java.io.IOException;
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(", ");
-                if (parts.length >= 4) { // Bao gồm các trường dữ liệu và trạng thái isDeleted
+                if (parts.length >= 2) { // Bao gồm các trường dữ liệu và trạng thái isDeleted
                     String maTLoai = parts[0].split(": ")[1];
                     String tenTLoai = parts[1].split(": ")[1];
-                    String tenTG = parts[2].split(": ")[1];
-                    String tenTL = parts[3].split(": ")[1];
-                    boolean isDeleted = Boolean.parseBoolean(parts[4].split(": ")[1]);
+                    boolean isDeleted = Boolean.parseBoolean(parts[2].split(": ")[1]);
 
                     // Tạo đối tượng TaiLieu
                     TheLoai tl = new TheLoai();
                     tl.setMaTLoai(maTLoai);
                     tl.setTenTLoai(tenTLoai);
-                    tl.setTenTG(tenTG);
-                    tl.setTenTL(tenTL);
                     tl.setDeleted(isDeleted);
 
                     // Thêm vào danh sách
