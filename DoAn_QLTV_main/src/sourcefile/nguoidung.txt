@@ -1,0 +1,2 @@
+Tên: a, Khoa: b, Năm sinh: 2003, Mã sinh viên: SV001, Trạng thái xóa: false
+Tên: a, Khoa: c, Năm sinh: 2004, Mã sinh viên: SV002, Trạng thái xóa: false

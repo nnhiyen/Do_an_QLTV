@@ -1,0 +1,2 @@
+Mã tài liệu: TL003, Tên tài liệu: ABC, Tên tác giả: ABC, Tên thể loại: ABC, Tên nhà xuất bản: ABC, Trạng thái xóa: false
+Mã tài liệu: TL002, Tên tài liệu: ABC, Tên tác giả: ABC, Tên thể loại: ABC, Tên nhà xuất bản: ABC, Trạng thái xóa: false
