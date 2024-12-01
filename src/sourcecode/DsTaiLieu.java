@@ -151,7 +151,7 @@ public class DsTaiLieu{
         return soluongTL;
     }
     
-    private void ghiDuLieuRaFile(String tenFile){
+    public void ghiDuLieuRaFile(String tenFile){
     	if (soluongTL == 0) {
             System.out.println("Không có dữ liệu để ghi.");
             return;
