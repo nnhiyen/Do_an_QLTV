@@ -33,7 +33,7 @@ public class checkLoi {
         while(true){
             try {
                 input = Integer.parseInt(sc.nextLine().trim()); // ???
-                if(input >= 0 && input <= 2024){
+                if(input >= 0 && input <= 2018){
                     break;
                 } else{
                     System.out.println("Năm sinh phải từ 0 đến 2018. Vui lòng nhập lại.");
