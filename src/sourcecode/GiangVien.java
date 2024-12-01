@@ -39,8 +39,22 @@ public class GiangVien extends NguoiDung {
     System.out.format(sv_format, getMaGV(), getTen(), getKhoa(), getNamSinh());
     }
     
-    @Override
+   @Override
     public String toString() {
-    return "Tên: " + getTen() + ", Khoa: " + getKhoa() + ", Năm sinh: " + getNamSinh() + ", Mã giảng viên: " + getMaGV();
+    return "Tên: " + getTen() + ", Khoa: " + getKhoa() + ", Năm sinh: " + getNamSinh() + ", Mã sinh viên: " + maNguoiDung() + ", Trạng thái xóa: " + isDeleted;
     }
+// test
+    private boolean isDeleted; // Thêm thuộc tính này
+
+    // Constructor, getter, setter
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
+
 }
+s
