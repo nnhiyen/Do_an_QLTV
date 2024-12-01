@@ -30,10 +30,10 @@ public class checkLoi {
         while(true){
             try {
                 input = Integer.parseInt(sc.nextLine().trim()); // ???
-                if(input >= 0 && input <= 2018){
+                if(input >= 0){
                     break;
                 } else{
-                    System.out.println("Năm sinh phải từ 0 đến 2018. Vui lòng nhập lại.");
+                    System.out.println("Năm sinh phải lớn hơn 0. Vui lòng nhập lại.");
                 }
             }catch (NumberFormatException e){
                 System.out.println("Dữ liệu không hợp lệ. Vui lòng nhập một số nguyên.");
