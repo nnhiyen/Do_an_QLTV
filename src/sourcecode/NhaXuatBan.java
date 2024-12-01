@@ -1,13 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DoAn_QLTV_main.src.sourcecode;
-
-/**
- *
- * @author Luong Thanh Tuan
- */
 
 import java.util.Scanner;
 
@@ -38,7 +29,7 @@ public class NhaXuatBan {
         return tenNXB;
     }
 
-    public void setTenNCC(String tenNXB) {
+    public void setTenNXB(String tenNXB) {
         this.tenNXB = tenNXB;
     }
     public String getDiaChi() {
@@ -53,7 +44,7 @@ public class NhaXuatBan {
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Nhập mã nhà xuất bản: ");
-        maNXB = checkLoi.checkChuoiRong(); // Giả sử có hàm kiểm tra chuỗi rỗng
+        maNXB = checkLoi.checkMaNXB(); // Giả sử có hàm kiểm tra chuỗi rỗng
         System.out.print("Nhập tên nhà xuất bản: ");
         tenNXB = checkLoi.checkChuoiRong();
         System.out.print("Nhập địa chỉ nhà xuất bản: ");
@@ -64,4 +55,17 @@ public class NhaXuatBan {
     public String toString() {
         return "Mã NXB: " +maNXB + ", "+ "Tên NXB: " + tenNXB + "Địa chỉ: " + diaChi;
     }
+    public void xuatNXB() {
+        // Định dạng xuất thông tin ra màn hình
+        String format = "| %-12s | %-20s | %-30s |\n";
+        System.out.format("+----------------------------------------------------------+\n");
+        System.out.format("|                   Thông tin Nhà Xuất Bản                 |\n");
+        System.out.format("+----------------------------------------------------------+\n");
+        System.out.format("| Mã NXB    | Tên NXB               | Địa chỉ nhà xuất bản |\n");
+        System.out.format("+----------------------------------------------------------+\n");
+        System.out.format(format, maNXB, tenNXB, diaChi);
+        System.out.format("+----------------------------------------------------------+\n");
+    }
+
 }
+

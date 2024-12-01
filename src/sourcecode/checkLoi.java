@@ -4,10 +4,7 @@
  */
 package DoAn_QLTV_main.src.sourcecode;
 import java.util.Scanner;
-/**
- *
- * @author Luong Thanh Tuan
- */
+
 public class checkLoi {
     static Scanner sc = new Scanner(System.in);
     
@@ -94,7 +91,7 @@ public class checkLoi {
         while(true){
             input =sc.nextLine(); // bỏ đi khoảng trắng khi dùng String
             input = input.toUpperCase();
-            if(input.matches("CC" + "[0-9]{3}")){
+            if(input.matches("NXB" + "[0-9]{3}")){
                 return input;
             }else {
                 System.err.println("Mã sai định dạng. Ví dụ: CC001");

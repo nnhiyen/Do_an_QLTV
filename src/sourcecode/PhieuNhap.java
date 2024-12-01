@@ -70,7 +70,7 @@ public class PhieuNhap {
     public void nhap(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhập mã phiếu nhập:");
-        maPN = checkLoi.checkMaNXB();
+        maPN = checkLoi.checkMaPN();
         System.out.print("Nhập ngày tạo phiếu nhập: ");
         ngayNhap = checkLoi.checkDate();
         System.out.print("Nhập mã nhà xuất bản:");

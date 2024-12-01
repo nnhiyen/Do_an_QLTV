@@ -66,7 +66,7 @@ public class DsNhaXuatBan {
         for (int i = 0; i < soLuong; i++) {
             if (dsNXB[i].getMaNXB().equals(maNXB)) {
                 System.out.println("Thông tin nhà xuất bản cần sửa:");
-                dsNXB[i].xuat();  // In ra thông tin nhà xuất bản cần sửa
+                dsNXB[i].xuatNXB();  // In ra thông tin nhà xuất bản cần sửa
 
                 boolean hopLe = false;
                 while (!hopLe) {
@@ -153,7 +153,7 @@ public class DsNhaXuatBan {
             System.out.println("Danh sách trống.");
         } else {
             for (int i = 0; i < soLuong; i++) {
-                dsNXB[i].xuat();
+                dsNXB[i].xuatNXB();
             }
         }
     }
