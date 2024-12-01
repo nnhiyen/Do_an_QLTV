@@ -49,31 +49,55 @@ public class DSPhieuNhap {
             System.out.println("Danh sách phiếu nhập đã đầy.");
         }
     }
-
-    // Kiểm tra sự tồn tại của phiếu nhập trong danh sách
-    private boolean tonTaiPhieuNhap(String maPN) {
-        for (int i = 0; i < soLuongPN; i++) {
-            if (dsPhieuNhap[i].getMaPN().equals(maPN)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // Sửa phiếu nhập
     public void suaPhieuNhap(String maPN) {
+        // Đọc lại dữ liệu từ file để cập nhật danh sách phiếu nhập mới nhất
+        docDuLieuTuFile("phieunhap.txt");
+    
+        // Duyệt qua danh sách phiếu nhập
         for (int i = 0; i < soLuongPN; i++) {
+            // Nếu tìm thấy phiếu nhập với mã maPN
             if (dsPhieuNhap[i].getMaPN().equals(maPN)) {
-                System.out.println("Sửa thông tin phiếu nhập:");
-                dsPhieuNhap[i].nhap(); // Gọi phương thức nhập để cập nhật thông tin
-                ghiDuLieuRaFile("phieunhap.txt"); // Ghi lại thông tin vào file
-                System.out.println("Thông tin phiếu nhập đã được sửa và lưu vào file.");
+                System.out.println("Thông tin phiếu nhập cần sửa:");
+                dsPhieuNhap[i].xuat();  // In ra thông tin phiếu nhập cần sửa
+    
+                boolean hopLe = false;
+                // Nếu mã phiếu nhập trùng với mã trong danh sách, yêu cầu nhập lại mã
+                while (!hopLe) {
+                    // Nhập lại thông tin phiếu nhập
+                    System.out.println("Nhập lại thông tin phiếu nhập: ");
+                    dsPhieuNhap[i].nhap();  // Gọi phương thức nhập để cập nhật thông tin mới
+    
+                    // Lấy mã phiếu nhập sau khi sửa
+                    String maMoi = dsPhieuNhap[i].getMaPN();
+    
+                    // Kiểm tra trùng mã với phiếu nhập khác trong danh sách
+                    boolean maTrung = false;
+                    for (int j = 0; j < soLuongPN; j++) {
+                        if (i != j && dsPhieuNhap[j].getMaPN().equals(maMoi)) {  // Không kiểm tra chính nó
+                            maTrung = true;
+                            break;
+                        }
+                    }
+    
+                    // Nếu mã trùng, yêu cầu nhập lại
+                    if (maTrung) {
+                        System.out.println("Mã phiếu nhập đã tồn tại, vui lòng nhập lại.");
+                    } else {
+                        hopLe = true;  // Mã hợp lệ, thoát khỏi vòng lặp
+                    }
+                }
+    
+                // Cập nhật lại dữ liệu vào file sau khi sửa
+                ghiDuLieuRaFile("phieunhap.txt");
+                System.out.println("Sửa phiếu nhập thành công và lưu vào file.");
                 return;
             }
         }
+    
+        // Nếu không tìm thấy phiếu nhập với mã maPN
         System.out.println("Không tìm thấy phiếu nhập với mã: " + maPN);
     }
-
+    
     // Xem danh sách phiếu nhập
     public void xemDanhSachPhieuNhap() {
         if (soLuongPN == 0) {
@@ -85,7 +109,7 @@ public class DSPhieuNhap {
         System.out.println("| Ma phieu nhap |  ID nha xuat ban  |   Ngay nhap  |");
         System.out.println("+--------------------------------------------------+");
         for (int i = 0; i < soLuongPN; i++) {
-            System.out.println("| " + dsPhieuNhap[i].getMaPN() + "          | " + dsPhieuNhap[i].getMaNXB() + "           | " + dsPhieuNhap[i].getNgayNhap());
+            System.out.println("| " + dsPhieuNhap[i].getMaPN() + "| " + dsPhieuNhap[i].getMaNXB() + "| " + dsPhieuNhap[i].getNgayNhap());
         }
         System.out.println("+--------------------------------------------------+");
     }
@@ -125,21 +149,33 @@ public class DSPhieuNhap {
     }
     public void hienThiDanhSachXoa() {
         System.out.println("Danh sách phiếu nhập đã xóa tạm thời:");
-        System.out.printf("| %-12s | %-20s | %-12s | %-10s |\n", "Mã phiếu", "Mã NXB", "Ngày nhập", "Tổng tiền");
-        System.out.println("-------------------------------------------------------------");
-        boolean hasDeleted = false;
+        System.out.println("+---------------------------------------------------------+");
+        System.out.println("|                 Phiếu Nhập Đã Xóa Tạm Thời              |");
+        System.out.println("+---------------------------------------------------------+");
+        System.out.println("|    Mã phiếu  |    Mã NXB    |   Ngày nhập   | Tổng tiền |");
+        System.out.println("+---------------------------------------------------------+");
     
+        boolean hasDeleted = false;
+        
+        // Duyệt qua danh sách phiếu nhập
         for (int i = 0; i < soLuongPN; i++) {
             if (dsPhieuNhap[i].isDeleted()) {
                 hasDeleted = true;
-                System.out.printf("| %-12s | %-20s | %-12s | %-10.2f |\n", dsPhieuNhap[i].getMaPN(), dsPhieuNhap[i].getMaNXB(), dsPhieuNhap[i].getNgayNhap(), dsPhieuNhap[i].getTongTien());
+                // Hiển thị thông tin phiếu nhập đã xóa
+                System.out.printf("| %-12s | %-15s | %-12s | %-10.2f |\n", 
+                    dsPhieuNhap[i].getMaPN(),
+                    dsPhieuNhap[i].getMaNXB(),
+                    dsPhieuNhap[i].getNgayNhap(),
+                    dsPhieuNhap[i].getTongTien());
             }
         }
     
         if (!hasDeleted) {
-            System.out.println("Không có phiếu nhập nào đã xóa tạm thời.");
+            System.out.println("|                  Không có phiếu nhập nào               |");
         }
+        System.out.println("+---------------------------------------------------------+");
     }
+    
     
         
 
