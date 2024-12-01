@@ -136,7 +136,7 @@ public class DsTheLoai{
         }
     }
     
-    private void ghiDuLieuRaFile(String tenFile){
+    public void ghiDuLieuRaFile(String tenFile){
     	String duongDan = "C:\\\\Users\\\\Admin\\\\Documents\\\\NetBeansProjects\\\\DOAN\\\\src\\\\DoAn_QLTV_main\\\\src\\\\sourcefile\\\\" + tenFile;
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(duongDan))) {
             for (int i = 0; i < soluongTLoai; i++) {
@@ -148,7 +148,7 @@ public class DsTheLoai{
         }
     }
 
-    private void docDuLieuTuFile(String tenFile){
+    public void docDuLieuTuFile(String tenFile){
     	String duongDan = "C:\\\\Users\\\\Admin\\\\Documents\\\\NetBeansProjects\\\\DOAN\\\\src\\\\DoAn_QLTV_main\\\\src\\\\sourcefile\\\\" + tenFile;
         try (BufferedReader reader = new BufferedReader(new FileReader(duongDan))) {
             String line;
