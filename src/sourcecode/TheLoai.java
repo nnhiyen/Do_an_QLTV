@@ -1,7 +1,5 @@
 package DoAn_QLTV_main.src.sourcecode;
 
-import java.util.Scanner;
-
 public class TheLoai{
     private String tenTLoai;
     private String maTLoai;
