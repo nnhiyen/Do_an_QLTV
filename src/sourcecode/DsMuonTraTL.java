@@ -17,6 +17,18 @@ public class DsMuonTraTL {
         soLuongMuonTra = 0;
     }
 
+    public MuonTraTL[] getDsMT() {
+        return dsMT;
+    }
+
+    public int getSoLuongMuonTra() {
+        return soLuongMuonTra;
+    }
+
+    public Scanner getSc() {
+        return sc;
+    }
+
     public void themMT(MuonTraTL mt) {
         if (soLuongMuonTra < dsMT.length) {
             dsMT[soLuongMuonTra] = mt;
@@ -28,6 +40,19 @@ public class DsMuonTraTL {
         }
     }
 
+    public void setDsMT(MuonTraTL[] dsMT) {
+        this.dsMT = dsMT;
+    }
+
+    public void setSoLuongMuonTra(int soLuongMuonTra) {
+        this.soLuongMuonTra = soLuongMuonTra;
+    }
+
+    public void setSc(Scanner sc) {
+        this.sc = sc;
+    }
+
+    
     public void suaMuonTra(String maTL) {
         // Đọc lại dữ liệu từ file để cập nhật danh sách mượn trả mới nhất
         docDuLieuTuFile("muontra.txt");
