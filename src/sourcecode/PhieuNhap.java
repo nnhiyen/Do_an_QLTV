@@ -11,11 +11,18 @@ public class PhieuNhap {
     
     Scanner sc = new Scanner(System.in);
     
+    // Contructor mặc định
+    public PhieuNhap(){   }
+
+
     // Constructor
-    public PhieuNhap(String maNXB, double tongTien, date ngayNhap) {
+    public PhieuNhap(String maPN, String maNXB, double tongTien, date ngayNhap){
         this.maNXB = maNXB;
-        this.tongTien = tongTien;
-        this.ngayNhap = ngayNhap;
+        this.maPN= maPN;
+        this.tongTien= tongTien;
+        this.ngayNhap= ngayNhap;
+        this.isDeleted = false; // Mặc định là chưa bị xóa
+
     
         if (maPN == null || maPN.isEmpty()) {
             if (cntmaPN < 10) {
@@ -30,13 +37,6 @@ public class PhieuNhap {
     }
     
     
-    // Contructor property
-    public PhieuNhap(String maPN, String maNXB, double tongTien, date ngayNhap){
-        this.maNXB = maNXB;
-        this.maPN= maPN;
-        this.tongTien= tongTien;
-        this.ngayNhap= ngayNhap;
-    }
     public boolean isDeleted() {
         return isDeleted;
     }
@@ -80,10 +80,11 @@ public class PhieuNhap {
     }
     
     public void nhap(){
+        Scanner sc = new Scanner(System.in);
         System.out.print("Nhập ngày tạo phiếu nhập: ");
-        ngayNhap.nhap();
+        ngayNhap = checkLoi.checkDate();
         System.out.print("Nhập mã nhà xuất bản:");
-       maNXB = checkLoi.checkMaNXB();
+        maNXB = checkLoi.checkMaNXB();
     }
     
     public void xuatPN() {
