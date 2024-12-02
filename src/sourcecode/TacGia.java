@@ -10,7 +10,7 @@ public class TacGia{
     
     public TacGia(){}
 
-    public TacGia(String tenTG,  String maTG, date namSinh, String diaChi){
+    public TacGia(String tenTG,  String maTG, date namSinh){
         this.tenTG = tenTG;
         this.maTG = maTG;
         this.namSinh = namSinh;
