@@ -46,13 +46,13 @@ public class TacGia{
     public void nhap(){
         Scanner sc = new Scanner(System.in);
         
-        System.out.printf("Nhap ten tac gia: ");
+        System.out.printf("Nhập tên tác giả: ");
         tenTG = checkLoi.checkChuoiRong();
         
-        System.out.print("Nhap ma tac gia: ");
+        System.out.print("Nhập mã tác giả: ");
         maTG = checkLoi.checkMaTG();
 
-        System.out.print("Nhap ngay-thang-nam sinh tac gia (dd-MM-yyyy): ");
+        System.out.print("Nhập năm sinh tác giả: ");
         namSinh.nhap();
     }
 
