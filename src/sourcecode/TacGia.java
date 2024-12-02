@@ -52,7 +52,7 @@ public class TacGia{
         System.out.print("Nhập mã tác giả: ");
         maTG = checkLoi.checkMaTG();
 
-        System.out.print("Nhập năm sinh tác giả: ");
+        System.out.print("Nhập ngày-tháng-năm sinh tác giả: ");
         namSinh.nhap();
     }
 
