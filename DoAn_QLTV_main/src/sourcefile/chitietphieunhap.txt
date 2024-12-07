@@ -1,0 +1,7 @@
+Mã phiếu nhập: PN001, Mã tài liệu: TL001, Số lượng: 2, Giá tiền: 123.0, Thành tiền: 246.0, Trạng thái xóa: false
+Mã phiếu nhập: PN002, Mã tài liệu: TL002, Số lượng: 2, Giá tiền: 123.0, Thành tiền: 246.0, Trạng thái xóa: false
+Mã phiếu nhập: PN003, Mã tài liệu: TL003, Số lượng: 2, Giá tiền: 123.0, Thành tiền: 246.0, Trạng thái xóa: false
+Mã phiếu nhập: PN004, Mã tài liệu: TL004, Số lượng: 2, Giá tiền: 123.0, Thành tiền: 246.0, Trạng thái xóa: false
+Mã phiếu nhập: PN005, Mã tài liệu: TL005, Số lượng: 2, Giá tiền: 123.0, Thành tiền: 246.0, Trạng thái xóa: false
+Mã phiếu nhập: PN006, Mã tài liệu: TL006, Số lượng: 2, Giá tiền: 123.0, Thành tiền: 246.0, Trạng thái xóa: false
+Mã phiếu nhập: PN007, Mã tài liệu: TL001, Số lượng: 12, Giá tiền: 200.0, Thành tiền: 2400.0, Trạng thái xóa: false
