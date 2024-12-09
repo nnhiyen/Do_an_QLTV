@@ -1,0 +1,11 @@
+Mã phiếu nhập: PN001, Mã NXB: NXB001, Ngày nhập: 2/12/2024, Tổng tiền: 0.0, Đã xóa: false
+Mã phiếu nhập: PN002, Mã NXB: NXB002, Ngày nhập: 2/12/2024, Tổng tiền: 0.0, Đã xóa: false
+Mã phiếu nhập: PN003, Mã NXB: NXB003, Ngày nhập: 2/12/2024, Tổng tiền: 0.0, Đã xóa: false
+Mã phiếu nhập: PN004, Mã NXB: NXB004, Ngày nhập: 2/12/2024, Tổng tiền: 0.0, Đã xóa: false
+Mã phiếu nhập: PN005, Mã NXB: NXB005, Ngày nhập: 2/12/2024, Tổng tiền: 0.0, Đã xóa: false
+Mã phiếu nhập: PN006, Mã NXB: NXB006, Ngày nhập: 2/12/2024, Tổng tiền: 0.0, Đã xóa: false
+Mã phiếu nhập: PN007, Mã NXB: NXB007, Ngày nhập: 2/12/2024, Tổng tiền: 0.0, Đã xóa: false
+Mã phiếu nhập: PN008, Mã NXB: NXB008, Ngày nhập: 2/12/2024, Tổng tiền: 0.0, Đã xóa: false
+Mã phiếu nhập: PN009, Mã NXB: NXB009, Ngày nhập: 2/12/2024, Tổng tiền: 0.0, Đã xóa: false
+Mã phiếu nhập: PN010, Mã NXB: NXB010, Ngày nhập: 2/12/2024, Tổng tiền: 0.0, Đã xóa: false
+

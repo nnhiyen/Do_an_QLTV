@@ -1,0 +1,11 @@
+Mã tài liệu: TL001, Tên tài liệu: Cho Tôi Một Vé Đi Tuổi Thơ, Tên tác giả: Nguyễn Nhật Ánh, Tên thể loại: Văn học thiếu nhi, Tên nhà xuất bản: NXB Trẻ, Trạng thái xóa: false
+Mã tài liệu: TL002, Tên tài liệu: Harry Potter và Hòn Đá Phù Thủy, Tên tác giả: J.K. Rowling, Tên thể loại: Tiểu thuyết phiêu lưu, Tên nhà xuất bản: NXB Bloomsbury, Trạng thái xóa: false
+Mã tài liệu: TL003, Tên tài liệu: Những Người Khốn Khổ, Tên tác giả: Victor Hugo, Tên thể loại: Tiểu thuyết cổ điển, Tên nhà xuất bản: NXB Văn Học, Trạng thái xóa: false
+Mã tài liệu: TL004, Tên tài liệu: Trại Súc Vật, Tên tác giả: George Orwell, Tên thể loại: Chính trị - Xã hội, Tên nhà xuất bản: NXB Penguin, Trạng thái xóa: false
+Mã tài liệu: TL005, Tên tài liệu: Nhật Ký Trong Tù, Tên tác giả: Hồ Chí Minh, Tên thể loại: Văn học cách mạng, Tên nhà xuất bản: NXB Chính Trị Quốc Gia, Trạng thái xóa: false
+Mã tài liệu: TL006, Tên tài liệu: Mật Mã Da Vinci, Tên tác giả: Dan Brown, Tên thể loại: Trinh thám, Tên nhà xuất bản: NXB Doubleday, Trạng thái xóa: false
+Mã tài liệu: TL007, Tên tài liệu: Chiến Tranh và Hòa Bình, Tên tác giả: Lev Tolstoy, Tên thể loại: Tiểu thuyết lịch sử, Tên nhà xuất bản: NXB Văn Học, Trạng thái xóa: false
+Mã tài liệu: TL008, Tên tài liệu: Truyện Kiều, Tên tác giả: Nguyễn Du, Tên thể loại: Thơ ca, Tên nhà xuất bản: NXB Văn Học Cổ Điển, Trạng thái xóa: false
+Mã tài liệu: TL009, Tên tài liệu: Đắc Nhân Tâm, Tên tác giả: Dale Carnegie, Tên thể loại: Phát triển bản thân, Tên nhà xuất bản: NXB Tổng Hợp TP.HCM, Trạng thái xóa: false
+Mã tài liệu: TL010, Tên tài liệu: Rừng Na Uy, Tên tác giả: Haruki Murakami, Tên thể loại: Tiểu thuyết đương đại, Tên nhà xuất bản: NXB Shinchosha, Trạng thái xóa: false
+

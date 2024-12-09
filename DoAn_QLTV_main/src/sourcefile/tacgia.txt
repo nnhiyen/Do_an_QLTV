@@ -1,0 +1,10 @@
+Mã tác giả: TG001, Tên tác giả: Nguyễn Nhật Ánh, Năm sinh: 1955, Địa chỉ tác giả: Đo Đo_Bình Quế_Thăng Bình_Quảng Nam, Trạng thái xóa: false
+Mã tác giả: TG002, Tên tác giả: J.K. Rowling, Năm sinh: 1965, Địa chỉ tác giả: Yate_United Kingdom, Trạng thái xóa: false
+Mã tác giả: TG003, Tên tác giả: Victor Hugo, Năm sinh: 1802, Địa chỉ tác giả: Besançon_France, Trạng thái xóa: false
+Mã tác giả: TG004, Tên tác giả: George Orwell, Năm sinh: 1903, Địa chỉ tác giả: London_United Kingdom, Trạng thái xóa: false
+Mã tác giả: TG005, Tên tác giả: Hồ Chí Minh, Năm sinh: 1890, Địa chỉ tác giả: Làng Kim Liên_Nam Liên_Nam Đàn_Nghệ An, Trạng thái xóa: false
+Mã tác giả: TG006, Tên tác giả: Dan Brown, Năm sinh: 1964, Địa chỉ tác giả: Hampshire_United States, Trạng thái xóa: false
+Mã tác giả: TG007, Tên tác giả: Lev Tolstoy, Năm sinh: 1828, Địa chỉ tác giả: Polyana_Russia, Trạng thái xóa: false
+Mã tác giả: TG008, Tên tác giả: Nguyễn Du, Năm sinh: 1765, Địa chỉ tác giả: Làng Tiên Điền_Nghi Xuân_Hà Tĩnh, Trạng thái xóa: false
+Mã tác giả: TG009, Tên tác giả: Dale Carnegie, Năm sinh: 1888, Địa chỉ tác giả: Missouri_United States, Trạng thái xóa: false
+Mã tác giả: TG010, Tên tác giả: Haruki Murakami, Năm sinh: 1949, Địa chỉ tác giả: Kyoto_Japan, Trạng thái xóa: false

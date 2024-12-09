@@ -1,0 +1,10 @@
+Mã: TL001, Tên: Văn học thiếu nhi, IsDeleted: false
+Mã: TL002, Tên: Tiểu thuyết phiêu lưu, IsDeleted: false
+Mã: TL003, Tên: Tiểu thuyết cổ điển, IsDeleted: false
+Mã: TL004, Tên: Chính trị - Xã hội, IsDeleted: false
+Mã: TL005, Tên: Văn học cách mạng, IsDeleted: false
+Mã: TL006, Tên: Trinh thám, IsDeleted: false
+Mã: TL007, Tên: Tiểu thuyết lịch sử, IsDeleted: false
+Mã: TL008, Tên: Thơ ca, IsDeleted: false
+Mã: TL009, Tên: Phát triển bản thân, IsDeleted: false
+Mã: TL010, Tên: Tiểu thuyết đương đại, IsDeleted: false

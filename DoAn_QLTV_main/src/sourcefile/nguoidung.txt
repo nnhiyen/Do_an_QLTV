@@ -1,0 +1,10 @@
+Tên: Lương Thanh Tuấn, Khoa: CNTT, Năm sinh: 2003, Mã sinh viên: SV001, Trạng thái xóa: false
+Tên: Hồ Bảo Trâm, Khoa: CNTT, Năm sinh: 2004, Mã sinh viên: GV001, Trạng thái xóa: false
+Tên: Nguyễn Thị Như Quỳnh, Khoa: CNTT, Năm sinh: 202, Mã sinh viên: SV002, Trạng thái xóa: false
+Tên: Nguyễn Ngọc Tuấn, Khoa: CNTT, Năm sinh: 2001, Mã sinh viên: GV002, Trạng thái xóa: false
+Tên: Hồ Gia Hòa, Khoa: CNTT, Năm sinh: 2006, Mã sinh viên: SV003, Trạng thái xóa: false
+Tên: Phạm Minh Tâm, Khoa: TNMT, Năm sinh: 2004, Mã sinh viên: GV003, Trạng thái xóa: false
+Tên: Hoàng Văn Dũng, Khoa: CNTT, Năm sinh: 2003, Mã sinh viên: SV004, Trạng thái xóa: false
+Tên: Nguyễn Thị Mỹ Phượng, Khoa: CNTT, Năm sinh: 2004, Mã sinh viên: GV004, Trạng thái xóa: false
+Tên: Hồ Bảo Đại, Khoa: CNTT, Năm sinh: 2005, Mã sinh viên: SV005, Trạng thái xóa: false
+Tên: Lâm Chấn Khang, Khoa: CNTT, Năm sinh: 2004, Mã sinh viên: GV005, Trạng thái xóa: false
