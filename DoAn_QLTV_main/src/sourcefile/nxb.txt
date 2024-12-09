@@ -1,9 +1,9 @@
-Mã NXB: NXB002, Tên NXB: NXB Bloomsbury, Địa chỉ: 50 Bedford Square_London_WC1B 3DP_Vương quốc Anh, Trạng thái xóa: false
-Mã NXB: NXB003, Tên NXB: NXB Văn Học, Địa chỉ: 65 Nguyễn Du_Quận Hai Bà Trưng_Hà Nội_Việt Nam: false
-Mã NXB: NXB004, Tên NXB: NXB Penguin, Địa chỉ: 20 Vauxhall Bridge Road_London_SW1V 2SA_Vương quốc Anh, Trạng thái xóa: false
-Mã NXB: NXB005, Tên NXB: NXB Chính Trị Quốc Gia, Địa chỉ: 24 Quang Trung_Quận Hoàn Kiếm_Hà Nội_Việt Nam, Trạng thái xóa: false
-Mã NXB: NXB006, Tên NXB: NXB Doubleday, Địa chỉ: 1745 Broadway_New York_NY 10019_Hoa Kỳ, Trạng thái xóa: false
-Mã NXB: NXB007, Tên NXB: NXB Văn Học, Địa chỉ: 65 Nguyễn Du_Quận Hai Bà Trưng_Hà Nội_Việt Nam, Trạng thái xóa: false
-Mã NXB: NXB008, Tên NXB: NXB Văn Học Cổ Điển, Địa chỉ: 65 Nguyễn Du_Quận Hai Bà Trưng_Hà Nội_Việt Nam, Trạng thái xóa: false
-Mã NXB: NXB009, Tên NXB: NXB Tổng Hợp TP.HCM, Địa chỉ: 62 Nguyễn Thị Minh Khai_Phường Đa Kao_Quận 1_TP.HCM_Việt Nam, Trạng thái xóa: false
-Mã NXB: NXB010, Tên NXB: NXB Shinchosha, Địa chỉ: 71 Yaraicho_Shinjuku_Tokyo 162-8711_Nhật Bản, Trạng thái xóa: false
+Mã NXB: NXB002, Tên NXB: NXB Tr?, Địa chỉ: 297 An Duong Vuong phu?ng 5 qu?n 5, Trạng thái xóa: false, Đã xóa: false
+Mã NXB: NXB003, Tên NXB: NXB Văn Học, Địa chỉ: 65 Nguyễn Du_Quận Hai Bà Trưng_Hà Nội_Việt Nam, Trạng thái xóa: false, Đã xóa: false
+Mã NXB: NXB004, Tên NXB: NXB Penguin, Địa chỉ: 20 Vauxhall Bridge Road_London_SW1V 2SA_Vương quốc Anh, Trạng thái xóa: false, Đã xóa: false
+Mã NXB: NXB005, Tên NXB: NXB Chính Trị Quốc Gia, Địa chỉ: 24 Quang Trung_Quận Hoàn Kiếm_Hà Nội_Việt Nam, Trạng thái xóa: false, Đã xóa: false
+Mã NXB: NXB006, Tên NXB: NXB Doubleday, Địa chỉ: 1745 Broadway_New York_NY 10019_Hoa Kỳ, Trạng thái xóa: false, Đã xóa: false
+Mã NXB: NXB007, Tên NXB: NXB Văn Học, Địa chỉ: 65 Nguyễn Du_Quận Hai Bà Trưng_Hà Nội_Việt Nam, Trạng thái xóa: false, Đã xóa: false
+Mã NXB: NXB008, Tên NXB: NXB Văn Học Cổ Điển, Địa chỉ: 65 Nguyễn Du_Quận Hai Bà Trưng_Hà Nội_Việt Nam, Trạng thái xóa: false, Đã xóa: false
+Mã NXB: NXB009, Tên NXB: NXB Tổng Hợp TP.HCM, Địa chỉ: 62 Nguyễn Thị Minh Khai_Phường Đa Kao_Quận 1_TP.HCM_Việt Nam, Trạng thái xóa: false, Đã xóa: false
+Mã NXB: NXB010, Tên NXB: NXB Shinchosha, Địa chỉ: 71 Yaraicho_Shinjuku_Tokyo 162-8711_Nhật Bản, Trạng thái xóa: false, Đã xóa: false

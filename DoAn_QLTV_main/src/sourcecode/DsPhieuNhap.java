@@ -29,7 +29,7 @@ public class DsPhieuNhap {
         return false; // Nếu không tìm thấy mã phiếu nhập
     }
     public boolean kiemTraMaPN(String maPN) {
-    try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Admin\\Documents\\NetBeansProjects\\HelloAll\\src\\DoAn_QLTV_main\\src\\sourcefile\\phieunhap.txt"))) {
+    try (BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\thon\\Desktop\\New folder (6)\\Do_an_QLTV\\DoAn_QLTV_main\\src\\sourcefile\\phieunhap.txt"))) {
         String line;
         while ((line = br.readLine()) != null) {
             if (line.contains("Mã phiếu nhập: " + maPN + ",")) {
@@ -226,7 +226,7 @@ public class DsPhieuNhap {
 
     // Ghi dữ liệu ra file
     public void ghiDuLieuRaFile(String tenFile) {
-    String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\HelloAll\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+    String duongDan = "C:\\Users\\nthon\\Desktop\\New folder (6)\\Do_an_QLTV\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
 
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(duongDan))) {
         for (int i = 0; i < soLuongPN; i++) {
@@ -249,7 +249,7 @@ public class DsPhieuNhap {
 }
 
     public void docDuLieuTuFile(String tenFile) {
-    String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\HelloAll\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+    String duongDan = "C:\\Users\\nthon\\Desktop\\New folder (6)\\Do_an_QLTV\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
     soLuongPN = 0;
 
     try (BufferedReader reader = new BufferedReader(new FileReader(duongDan))) {

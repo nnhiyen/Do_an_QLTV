@@ -198,7 +198,7 @@ public class DsTacGia{
      }
     
      public void ghiDuLieuRaFile(String tenFile) {
-         String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\HelloAll\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+         String duongDan = "C:\\Users\\nthon\\Desktop\\New folder (6)\\Do_an_QLTV\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
 
          try (BufferedWriter writer = new BufferedWriter(new FileWriter(duongDan))) {
              for (int i = 0; i < soluongTG; i++) {
@@ -212,7 +212,7 @@ public class DsTacGia{
      }
 
     public void docDuLieuTuFile(String tenFile){
-    	String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\HelloAll\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+    	String duongDan = "C:\\Users\\nthon\\Desktop\\New folder (6)\\Do_an_QLTV\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
     	soluongTG = 0;
     	
     	try (BufferedReader reader = new BufferedReader(new FileReader(duongDan))) {

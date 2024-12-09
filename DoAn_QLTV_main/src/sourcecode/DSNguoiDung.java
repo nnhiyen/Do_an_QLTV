@@ -4,13 +4,11 @@
  */
 package DoAn_QLTV_main.src.sourcecode;
 import java.io.BufferedReader;
-import java.util.Scanner;
-import java.util.Arrays;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Date;
+import java.util.Scanner;
 /**
  *
  * @author Luong Thanh Tuan
@@ -361,7 +359,7 @@ public void khoiPhucNguoiDung(String ma) {
 
     
     public void ghiDuLieuRaFile(String tenFile) {
-    String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\HelloAll\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+    String duongDan = "C:\\Users\\nthon\\Desktop\\New folder (6)\\Do_an_QLTV\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
 
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(duongDan))) {
         for (int i = 0; i < soLuong; i++) {
@@ -376,7 +374,7 @@ public void khoiPhucNguoiDung(String ma) {
 
 
 public void docDuLieuTuFile(String tenFile) {
-    String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\HelloAll\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+    String duongDan = "C:\\Users\\nthon\\Desktop\\New folder (6)\\Do_an_QLTV\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
     soLuong = 0; // Đặt lại số lượng người dùng trước khi đọc
 
     try (BufferedReader reader = new BufferedReader(new FileReader(duongDan))) {

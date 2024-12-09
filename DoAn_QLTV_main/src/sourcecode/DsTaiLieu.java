@@ -1,11 +1,11 @@
 package DoAn_QLTV_main.src.sourcecode;
 
-import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class DsTaiLieu {
     private TaiLieu[] dsTL;
@@ -219,7 +219,7 @@ public void timKiemTL(String maTL) {
 
 
     public void ghiDuLieuRaFile(String tenFile) {
-        String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\HelloAll\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+        String duongDan = "C:\\Users\\nthon\\Desktop\\New folder (6)\\Do_an_QLTV\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(duongDan))) {
             for (int i = 0; i < soluongTL; i++) {
@@ -233,7 +233,7 @@ public void timKiemTL(String maTL) {
     }
 
     public void docDuLieuTuFile(String tenFile) {
-        String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\HelloAll\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+        String duongDan = "C:\\Users\\nthon\\Desktop\\New folder (6)\\Do_an_QLTV\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
         soluongTL = 0; // Đặt lại số lượng tài liệu trước khi đọc
 
         try (BufferedReader reader = new BufferedReader(new FileReader(duongDan))) {

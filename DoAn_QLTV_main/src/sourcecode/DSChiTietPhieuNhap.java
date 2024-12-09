@@ -211,8 +211,7 @@ public class DSChiTietPhieuNhap {
 //    }
 //    
     public void ghiDuLieuRaFile(String tenFile) {
-        String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\HelloAll\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
-    
+        String duongDan = "C:\\Users\\nthon\\Desktop\\New folder (6)\\Do_an_QLTV\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(duongDan))) {
             for (int i = 0; i < soLuongCTPN; i++) {
                 writer.write(dsChiTiet[i].toString()); // Gọi phương thức toString() của ChiTietPhieuNhap
@@ -224,7 +223,7 @@ public class DSChiTietPhieuNhap {
         }
     }
     public void docDuLieuTuFile(String tenFile) {
-        String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\HelloAll\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+        String duongDan = "C:\\Users\\nthon\\Desktop\\New folder (6)\\Do_an_QLTV\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
         soLuongCTPN = 0; // Đặt lại số lượng chi tiết phiếu nhập trước khi đọc
     
         try (BufferedReader reader = new BufferedReader(new FileReader(duongDan))) {

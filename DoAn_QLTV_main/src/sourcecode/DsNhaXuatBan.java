@@ -228,28 +228,26 @@ public void hienThiDanhSach() {
 
 // Ghi dữ liệu ra file
 public void ghiDuLieuRaFile(String tenFile) {
-    String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\HelloAll\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+    String duongDan = "C:\\Users\\nthon\\Desktop\\New folder (6)\\Do_an_QLTV\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
 
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(duongDan))) {
         for (int i = 0; i < soLuong; i++) {
-            // Ghi chỉ những nhà xuất bản chưa bị xóa
-            if (!dsNXB[i].isDeleted()) {
-                writer.write(dsNXB[i].toString());  // Ghi nhà xuất bản
-                writer.newLine();
-            }
+            // Ghi tất cả các nhà xuất bản bao gồm cả nhà xuất bản đã xóa
+            writer.write(dsNXB[i].toString() + ", Đã xóa: " + dsNXB[i].isDeleted()); // Ghi nhà xuất bản và trạng thái xóa
+            writer.newLine();
         }
         System.out.println("Ghi dữ liệu thành công vào file " + duongDan);
     } catch (IOException e) {
         System.out.println("Lỗi khi ghi dữ liệu vào file: " + e.getMessage());
     }
 }
-    
 
+    
 
 
 // Đọc dữ liệu từ file
 public void docDuLieuTuFile(String tenFile) {
-    String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\HelloAll\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+    String duongDan = "C:\\Users\\nthon\\Desktop\\New folder (6)\\Do_an_QLTV\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
     soLuong = 0;  // Đặt lại số lượng nhà xuất bản trước khi đọc
 
     try (BufferedReader reader = new BufferedReader(new FileReader(duongDan))) {
@@ -257,17 +255,17 @@ public void docDuLieuTuFile(String tenFile) {
         while ((line = reader.readLine()) != null) {
             try {
                 String[] parts = line.split(",");
-                if (parts.length >= 3) {
+                if (parts.length >= 4) {
                     String maNXB = parts[0].split(":")[1].trim();
                     String tenNXB = parts[1].split(":")[1].trim();
                     String diaChi = parts[2].split(":")[1].trim();
+                    boolean daXoa = Boolean.parseBoolean(parts[3].split(":")[1].trim());
 
                     // Tạo đối tượng NhaXuatBan và thêm vào danh sách
                     NhaXuatBan nxb = new NhaXuatBan(maNXB, tenNXB, diaChi);
-                    // Kiểm tra nếu nhà xuất bản chưa bị xóa mới thêm vào
-                    if (!nxb.isDeleted()) {
-                        dsNXB[soLuong++] = nxb;  // Thêm vào mảng dsNXB
-                    }
+                    nxb.setDeleted(daXoa);  // Khôi phục trạng thái xóa
+
+                    dsNXB[soLuong++] = nxb;  // Thêm vào mảng dsNXB
                 } else {
                     System.out.println("Dòng không hợp lệ (không đủ dữ liệu): " + line);
                 }
@@ -281,8 +279,4 @@ public void docDuLieuTuFile(String tenFile) {
         System.out.println("Lỗi khi đọc dữ liệu từ file: " + e.getMessage());
     }
 }
-
-
 }
-
-    

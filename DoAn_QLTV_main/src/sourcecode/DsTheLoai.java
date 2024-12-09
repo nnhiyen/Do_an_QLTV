@@ -1,6 +1,5 @@
 package DoAn_QLTV_main.src.sourcecode;
 
-import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -190,7 +189,7 @@ import java.io.IOException;
      }
     
    public void ghiDuLieuRaFile(String tenFile) {
-    String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\HelloAll\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+    String duongDan = "C:\\Users\\nthon\\Desktop\\New folder (6)\\Do_an_QLTV\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
 
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(duongDan))) {
         // Ghi lại tất cả các thể loại trong dsTLoai vào file
@@ -206,7 +205,7 @@ import java.io.IOException;
 
 
 public void docDuLieuTuFile(String tenFile) {
-    String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\HelloAll\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+    String duongDan = "C:\\Users\\nthon\\Desktop\\New folder (6)\\Do_an_QLTV\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
     soluongTLoai = 0;
 
     try (BufferedReader reader = new BufferedReader(new FileReader(duongDan))) {

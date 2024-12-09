@@ -304,7 +304,7 @@ public class DsMuonTraTL {
 
 
    public void ghiDuLieuRaFile(String tenFile) {
-    String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\HelloAll\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+    String duongDan = "C:\\Users\\nthon\\Desktop\\New folder (6)\\Do_an_QLTV\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
 
     try (BufferedWriter writer = new BufferedWriter(new FileWriter(duongDan))) {
         for (int i = 0; i < soLuongMuonTra; i++) {
@@ -337,7 +337,7 @@ private String formatDate(date ngay) {
     
 
  public void docDuLieuTuFile(String tenFile) {
-    String duongDan = "C:\\Users\\Admin\\Documents\\NetBeansProjects\\HelloAll\\src\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+    String duongDan = "C:\\Users\\nthon\\Desktop\\New folder (6)\\Do_an_QLTV\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
     soLuongMuonTra = 0;
 
     try (BufferedReader reader = new BufferedReader(new FileReader(duongDan))) {
