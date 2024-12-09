@@ -484,7 +484,7 @@ public void menuQLPN() {
                 break;
 
             case 8:
-                
+                dsPhieuNhap.hienThiDanhSachXoa();
                 break;
             case 0:
                 System.out.println("Thoát chương trình.");

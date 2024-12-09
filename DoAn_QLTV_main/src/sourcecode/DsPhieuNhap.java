@@ -120,8 +120,8 @@ public class DsPhieuNhap {
 }
 
     
-    // Xem danh sách phiếu nhập
-    public void xemDanhSachPhieuNhap() {
+// Xem danh sách phiếu nhập
+public void xemDanhSachPhieuNhap() {
     if (soLuongPN == 0) {
         System.out.println("Danh sách phiếu nhập rỗng.");
         return;
@@ -132,13 +132,17 @@ public class DsPhieuNhap {
     System.out.println("+---------------------------------------------------+");
 
     for (int i = 0; i < soLuongPN; i++) {
-        PhieuNhap pn = dsPhieuNhap[i];
-        String ngayNhapStr = pn.getNgayNhap().getNgay() + "/" + pn.getNgayNhap().getThang() + "/" + pn.getNgayNhap().getNam();
-        System.out.printf("| %-13s | %-17s | %-13s |\n", pn.getMaPN(), pn.getMaNXB(), ngayNhapStr);
+        // Chỉ hiển thị các phiếu nhập chưa bị xóa
+        if (!dsPhieuNhap[i].isDeleted()) {
+            PhieuNhap pn = dsPhieuNhap[i];
+            String ngayNhapStr = pn.getNgayNhap().getNgay() + "/" + pn.getNgayNhap().getThang() + "/" + pn.getNgayNhap().getNam();
+            System.out.printf("| %-13s | %-17s | %-13s |\n", pn.getMaPN(), pn.getMaNXB(), ngayNhapStr);
+        }
     }
 
     System.out.println("+---------------------------------------------------+");
 }
+
 
     // Tìm phiếu nhập theo mã và hiển thị thông tin
     public void timPhieuNhap(String maPN) {
@@ -206,90 +210,92 @@ public class DsPhieuNhap {
         System.out.println("+---------------------------------------------------+");
         System.out.println("| Ma phieu nhap |  ID nha xuat ban  | Ngay nhap     |");
         System.out.println("+---------------------------------------------------+");
+    
         boolean hasDeleted = false;
         for (int i = 0; i < soLuongPN; i++) {
             if (dsPhieuNhap[i].isDeleted()) {
                 hasDeleted = true;
-                System.out.printf("| %-12s | %-40s | %-30s |\n",
-                        dsPhieuNhap[i].getMaPN(),
-                        dsPhieuNhap[i].getMaNXB(),
-                        dsPhieuNhap[i].getNgayNhap());
+                PhieuNhap pn = dsPhieuNhap[i];
+                String ngayNhapStr = pn.getNgayNhap().getNgay() + "/" + pn.getNgayNhap().getThang() + "/" + pn.getNgayNhap().getNam();
+                System.out.printf("| %-13s | %-17s | %-13s |\n", pn.getMaPN(), pn.getMaNXB(), ngayNhapStr);
             }
         }
-
+    
         if (!hasDeleted) {
             System.out.println("|            Không có phiếu nhập nào             |");
         }
         System.out.println("+----------------------------------------------------+");
     }
     
+    
 
     // Ghi dữ liệu ra file
     public void ghiDuLieuRaFile(String tenFile) {
-    String duongDan = "C:\\Users\\nthon\\Desktop\\New folder (6)\\Do_an_QLTV\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
-
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter(duongDan))) {
-        for (int i = 0; i < soLuongPN; i++) {
-            PhieuNhap pn = dsPhieuNhap[i];
-            writer.write(
-                "Mã phiếu nhập: " + pn.getMaPN() + ", " +
-                "Mã NXB: " + pn.getMaNXB() + ", " +
-                "Ngày nhập: " + pn.getNgayNhap().getNgay() + "/" +
-                pn.getNgayNhap().getThang() + "/" +
-                pn.getNgayNhap().getNam() + ", " +
-                "Tổng tiền: " + pn.getTongTien() + ", " +
-                "Đã xóa: " + pn.isDeleted()
-            );
-            writer.newLine();
-        }
-        System.out.println("Ghi dữ liệu thành công vào file " + duongDan);
-    } catch (IOException e) {
-        System.out.println("Lỗi khi ghi dữ liệu vào file: " + e.getMessage());
-    }
-}
-
-    public void docDuLieuTuFile(String tenFile) {
-    String duongDan = "C:\\Users\\nthon\\Desktop\\New folder (6)\\Do_an_QLTV\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
-    soLuongPN = 0;
-
-    try (BufferedReader reader = new BufferedReader(new FileReader(duongDan))) {
-        String line;
-        while ((line = reader.readLine()) != null) {
-            // Loại bỏ chú thích trước khi xử lý
-            line = line.replace("Mã phiếu nhập: ", "")
-                       .replace("Mã NXB: ", "")
-                       .replace("Ngày nhập: ", "")
-                       .replace("Tổng tiền: ", "")
-                       .replace("Đã xóa: ", "");
-
-            String[] parts = line.split(", ");
-            if (parts.length == 5) {
-                String maPN = parts[0].trim();
-                String maNXB = parts[1].trim();
-
-                String[] ngayThangNam = parts[2].trim().split("/");
-                int ngay = Integer.parseInt(ngayThangNam[0]);
-                int thang = Integer.parseInt(ngayThangNam[1]);
-                int nam = Integer.parseInt(ngayThangNam[2]);
-                date ngayNhap = new date(ngay, thang, nam);
-
-                double tongTien = Double.parseDouble(parts[3].trim());
-                boolean isDeleted = Boolean.parseBoolean(parts[4].trim());
-
-                PhieuNhap pn = new PhieuNhap(maPN, maNXB, tongTien, ngayNhap);
-                pn.setDeleted(isDeleted);
-
-                dsPhieuNhap[soLuongPN++] = pn;
-            } else {
-                System.out.println("Dòng dữ liệu không hợp lệ: " + line);
+        String duongDan = "C:\\Users\\nthon\\Desktop\\New folder (6)\\Do_an_QLTV\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+    
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(duongDan))) {
+            for (int i = 0; i < soLuongPN; i++) {
+                PhieuNhap pn = dsPhieuNhap[i];
+                writer.write(
+                    "Mã phiếu nhập: " + pn.getMaPN() + ", " +
+                    "Mã NXB: " + pn.getMaNXB() + ", " +
+                    "Ngày nhập: " + pn.getNgayNhap().getNgay() + "/" +
+                    pn.getNgayNhap().getThang() + "/" +
+                    pn.getNgayNhap().getNam() + ", " +
+                    "Tổng tiền: " + pn.getTongTien() + ", " +
+                    "Đã xóa: " + pn.isDeleted()
+                );
+                writer.newLine();
             }
+            System.out.println("Ghi dữ liệu thành công vào file " + duongDan);
+        } catch (IOException e) {
+            System.out.println("Lỗi khi ghi dữ liệu vào file: " + e.getMessage());
         }
-        System.out.println("Đọc dữ liệu thành công từ file " + duongDan);
-    } catch (IOException e) {
-        System.out.println("Lỗi khi đọc dữ liệu từ file: " + e.getMessage());
-    } catch (NumberFormatException e) {
-        System.out.println("Lỗi định dạng số trong dữ liệu: " + e.getMessage());
     }
-}
+    
+    public void docDuLieuTuFile(String tenFile) {
+        String duongDan = "C:\\Users\\nthon\\Desktop\\New folder (6)\\Do_an_QLTV\\DoAn_QLTV_main\\src\\sourcefile\\" + tenFile;
+        soLuongPN = 0;
+    
+        try (BufferedReader reader = new BufferedReader(new FileReader(duongDan))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // Loại bỏ chú thích trước khi xử lý
+                line = line.replace("Mã phiếu nhập: ", "")
+                           .replace("Mã NXB: ", "")
+                           .replace("Ngày nhập: ", "")
+                           .replace("Tổng tiền: ", "")
+                           .replace("Đã xóa: ", "");
+    
+                String[] parts = line.split(", ");
+                if (parts.length == 5) {
+                    String maPN = parts[0].trim();
+                    String maNXB = parts[1].trim();
+    
+                    String[] ngayThangNam = parts[2].trim().split("/");
+                    int ngay = Integer.parseInt(ngayThangNam[0]);
+                    int thang = Integer.parseInt(ngayThangNam[1]);
+                    int nam = Integer.parseInt(ngayThangNam[2]);
+                    date ngayNhap = new date(ngay, thang, nam);
+    
+                    double tongTien = Double.parseDouble(parts[3].trim());
+                    boolean isDeleted = Boolean.parseBoolean(parts[4].trim());
+    
+                    PhieuNhap pn = new PhieuNhap(maPN, maNXB, tongTien, ngayNhap);
+                    pn.setDeleted(isDeleted);
+    
+                    dsPhieuNhap[soLuongPN++] = pn;
+                } else {
+                    System.out.println("Dòng dữ liệu không hợp lệ: " + line);
+                }
+            }
+            System.out.println("Đọc dữ liệu thành công từ file " + duongDan);
+        } catch (IOException e) {
+            System.out.println("Lỗi khi đọc dữ liệu từ file: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.out.println("Lỗi định dạng số trong dữ liệu: " + e.getMessage());
+        }
+    }
+    
 
 }
