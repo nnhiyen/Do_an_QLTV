@@ -1,3 +1,0 @@
-TL001,Lương Thanh Tuấn,Ngày mượn: 02/12/2024,Ngày trả: 04/12/2024,Số lượng: 2,false
-TL001,Trần Nhật Khoa,Ngày mượn: 02/12/2024,Ngày trả: 04/12/2024,Số lượng: 2,false
-TL002,Lương Thanh Tuấn,Ngày mượn: 02/12/2024,Ngày trả: 03/12/2024,Số lượng: 2,false
